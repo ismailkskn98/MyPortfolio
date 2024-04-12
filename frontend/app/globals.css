@@ -1,0 +1,43 @@
+/* Ubuntu */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
+/* ibm-plex Mono */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* Genel Yazı Tipi */
+  .font-ubuntu {
+    font-family: 'Ubuntu', sans-serif;
+  }
+  .font-ibm-plex-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  /* Ubuntu Yazı Tipi Stillleri */
+  .font-ubuntu .regular {
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .font-ubuntu .light {
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .font-ubuntu .medium {
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  /* IBM Plex Mono Yazı Tipi Stillleri */
+  .font-ibm-plex-mono .medium {
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .font-ibm-plex-mono .regular {
+    font-weight: 400;
+    font-style: normal;
+  }
+}
