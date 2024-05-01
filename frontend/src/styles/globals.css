@@ -17,25 +17,36 @@
 
 @layer utilities {
   /* Ubuntu */
-  .bg-text-u, .h1-u, .h2-u, .button-u, .article-u, .para-u, .Label-u-m, .Label-u-l {
-    font-family: "Ubuntu", sans-serif;
+  .bg-text-u, .h1-u, .h2-u, .button-u {
+    font-family: var(--font-ubuntu-reguler);
     font-style: normal;
   }
-  .bg-text-u, .h1-u, .h2-u, .button-u { font-weight: 400; }
   .bg-text-u { font-size: 117px; line-height: 134px; }
   .h1-u { font-size: 64px; line-height: 72px; }
   .h2-u { font-size: 32px; line-height: 36px; }
   .button-u { font-size: 20px; line-height: 24px; }
-  .article-u, .para-u, .Label-u-l { font-weight: 300; }
+  .article-u, .para-u, .Label-u-l { 
+    font-family: var(--font-ubuntu-light);
+    font-style: normal;
+  }
   .article-u { font-size: 16px; line-height: 32px; }
   .para-u { font-size: 16px; line-height: 18px; }
-  .Label-u-m { font-weight: 500; font-size: 14px; line-height: 16px; }
+  .Label-u-m { 
+    font-family: var(--font-ubuntu-medium);
+    font-size: 14px; 
+    line-height: 16px;
+  }
   .Label-u-l { font-size: 14px; line-height: 16px }
 
   /* IBM Plex Mono */
-  .number-m, .h2-m, .logo-m, .menu-m, .media-m, .para-m, .code-m { font-family: "IBM Plex Mono", monospace; font-style: normal; }
-  .number-m, .h2-m, .logo-m { font-weight: 500; }
-  .menu-m, .media-m, .para-m, .code-m { font-weight: 400; }
+  .number-m, .h2-m, .logo-m { 
+    font-family: var(--font-plexMono-medium);
+    font-style: normal;
+  }
+  .menu-m, .media-m, .para-m, .code-m {
+    font-family: var(--font-plexMono-reguler);
+    font-style: normal;
+  }
   .number-m { font-size: 48px; line-height: 62px; }
   .h2-m, .logo-m { font-size: 32px; line-height: 42px; }
   .menu-m { font-size: 24px; line-height: 32px; }

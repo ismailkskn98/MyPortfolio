@@ -3,6 +3,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoSearchSharp } from "react-icons/io5";
 
 const Search = () => {
+  console.log('Search');
   return (
     <>
         <div className='relative hidden lg:block'>

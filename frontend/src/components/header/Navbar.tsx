@@ -3,7 +3,8 @@ import React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 const Navbar = () => {
-    const pathname = usePathname()
+    const pathname = usePathname();
+    console.log('Navbar');
     return (
         <nav className='flex items-center gap-8 media-m lg:menu-m'>
             <Link href={'/'} className={`${pathname == '/' ? 'text-Brand1' : 'text-White'}`}>Home</Link>

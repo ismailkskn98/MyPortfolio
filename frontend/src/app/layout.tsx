@@ -1,10 +1,10 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import * as fonts from '@/fonts/index';
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly <{ children: React.ReactNode; }> ) {
   return (
     <html lang="tr">
-      <body className={`${inter.className} bg-BG1`}>
+      <body className={`${fonts.ubuntuLight.variable} ${fonts.ubuntuReguler.variable} ${fonts.ubuntuMedium.variable} ${fonts.plexMonoMedium.variable} ${fonts.plexMonoReguler.variable} bg-BG1`}>
         <Header />
         <main>{children}</main>
         <Footer />

@@ -1,10 +1,11 @@
 import React from 'react'
-import Navbar from './navbar';
+import Navbar from './Navbar';
 import Search from './Search';
 import SocialMedia from './SocialMedia';
 import Logo from './Logo';
 
 const Header = () => {
+  console.log('Header');
   return (
     <header className='w-full'>
       <div className="container h-[68px] sm:h-[80px] lg:h-[170px] flex items-center justify-between">
