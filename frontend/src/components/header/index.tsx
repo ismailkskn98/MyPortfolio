@@ -1,25 +1,24 @@
-import React from 'react'
-import Navbar from './Navbar';
-import Search from './Search';
-import SocialMedia from './SocialMedia';
-import Logo from './Logo';
+import React from "react";
+import Navbar from "./Navbar";
+import Search from "./Search";
+import SocialMedia from "./SocialMedia";
+import Logo from "./Logo";
 
 const Header = () => {
-  console.log('Header');
   return (
-    <header className='w-full'>
-      <div className="container h-[68px] sm:h-[80px] lg:h-[170px] flex items-center justify-between">
+    <header className="w-full px-32">
+      <div className="h-min py-16 flex items-center justify-between">
         <Logo />
-        <section className='flex items-center gap-16'>
+        <section className="flex items-center gap-16">
           <Navbar />
-          <div className='flex items-center gap-16'>
+          <div className="flex items-center gap-16">
             <Search />
             <SocialMedia />
           </div>
         </section>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

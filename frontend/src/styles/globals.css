@@ -20,6 +20,7 @@
   .bg-text-u, .h1-u, .h2-u, .button-u {
     font-family: var(--font-ubuntu-reguler);
     font-style: normal;
+    font-weight: 400;
   }
   .bg-text-u { font-size: 117px; line-height: 134px; }
   .h1-u { font-size: 64px; line-height: 72px; }
@@ -28,6 +29,7 @@
   .article-u, .para-u, .Label-u-l { 
     font-family: var(--font-ubuntu-light);
     font-style: normal;
+    font-weight: 300;
   }
   .article-u { font-size: 16px; line-height: 32px; }
   .para-u { font-size: 16px; line-height: 18px; }
@@ -35,6 +37,7 @@
     font-family: var(--font-ubuntu-medium);
     font-size: 14px; 
     line-height: 16px;
+    font-weight: 500;
   }
   .Label-u-l { font-size: 14px; line-height: 16px }
 
@@ -42,10 +45,12 @@
   .number-m, .h2-m, .logo-m { 
     font-family: var(--font-plexMono-medium);
     font-style: normal;
+    font-weight: 500;
   }
   .menu-m, .media-m, .para-m, .code-m {
     font-family: var(--font-plexMono-reguler);
     font-style: normal;
+    font-weight: 400;
   }
   .number-m { font-size: 48px; line-height: 62px; }
   .h2-m, .logo-m { font-size: 32px; line-height: 42px; }
