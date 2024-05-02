@@ -16,7 +16,7 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use('/admin', authRoutes); // authentication
 app.use('/admin', adminRoutes); // dashboard
-app.use('/', userRoutes); // client
+app.use('/api', userRoutes); // client
 
 app.listen(port, () => {
     console.log(`Sunucu ${port} altında çalışıyor.`);

@@ -13,16 +13,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       subtitle: {
-        type: Sequelize.STRING
-      },
-      tags: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(145)
       },
       description: {
-        type: Sequelize.STRING
-      },
-      date: {
-        type: Sequelize.DATE
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
