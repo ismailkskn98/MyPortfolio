@@ -11,7 +11,7 @@ const Header = () => {
         <Logo />
         <section className="flex items-center gap-16">
           <Navbar />
-          <div className="flex items-center gap-16">
+          <div id="right" className="flex items-center gap-16">
             <Search />
             <SocialMedia />
           </div>

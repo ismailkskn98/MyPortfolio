@@ -17,7 +17,7 @@
 
 @layer utilities {
   /* Ubuntu */
-  .bg-text-u, .h1-u, .h2-u, .button-u {
+  .bg-text-u, .h1-u, .h2-u, .button-u, .search-u, .search-list-h3-u, .search-list-p-u {
     font-family: var(--font-ubuntu-reguler);
     font-style: normal;
     font-weight: 400;
@@ -26,6 +26,9 @@
   .h1-u { font-size: 64px; line-height: 72px; }
   .h2-u { font-size: 32px; line-height: 36px; }
   .button-u { font-size: 20px; line-height: 24px; }
+  .search-u {font-size: 16px;}
+  .search-list-h3-u {font-size: 15px;}
+  .search-list-p-u {font-size: 13px;}
   .article-u, .para-u, .Label-u-l { 
     font-family: var(--font-ubuntu-light);
     font-style: normal;
@@ -57,4 +60,26 @@
   .menu-m { font-size: 24px; line-height: 32px; }
   .para-m, .media-m { font-size: 16px; line-height: 20px; }
   .code-m { font-size: 14px; line-height: 18px; }
+}
+
+.searchTime {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #1A1E23;
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #12F7D6; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #12F7D6; 
 }

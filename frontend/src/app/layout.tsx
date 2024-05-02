@@ -15,7 +15,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body
         className={`${fonts.ubuntuLight.variable} ${fonts.ubuntuReguler.variable} ${fonts.ubuntuMedium.variable} ${fonts.plexMonoMedium.variable} ${fonts.plexMonoReguler.variable} bg-BG1`}
       >
-        {/* <Header /> */}
+        <Header />
         <main className="w-full h-full">{children}</main>
         <Footer />
       </body>

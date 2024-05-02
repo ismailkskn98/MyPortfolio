@@ -1,21 +1,31 @@
-import React from "react";
-import { IoSearchOutline } from "react-icons/io5";
+"use client";
+import React, { useEffect, useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
+import OpenSearch from "./OpenSearch";
 
 const Search = () => {
+  const [openSearch, setOpenSearch] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!document.body.classList.contains("searchTime")) {
+      document.body.classList.add("searchTime");
+    } else {
+      document.body.classList.remove("searchTime");
+    }
+  }, [openSearch]);
+
+  const toggleSearch = (): void => {
+    setOpenSearch((prev) => !prev);
+  };
+
   return (
     <>
-      <div className="relative hidden lg:block">
-        <input
-          type="search"
-          name="search"
-          id="search"
-          className="outline-none rounded-3xl max-w-[204px] max-h-8 py-2 px-9"
+      <div>
+        <IoSearchSharp
+          onClick={toggleSearch}
+          className="text-White w-6 h-6 font-bold cursor-pointer"
         />
-        <IoSearchOutline className="absolute left-4 top-1/2 -translate-y-[50%] w-5 h-5" />
-      </div>
-      <div className="relative block lg:hidden">
-        <IoSearchSharp className="text-White w-5 h-5 font-bold cursor-pointer" />
+        <OpenSearch openSearch={openSearch} toggleSearch={toggleSearch} />
       </div>
     </>
   );
