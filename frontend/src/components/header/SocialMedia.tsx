@@ -6,7 +6,7 @@ import { FaGithub } from "react-icons/fa";
 
 const SocialMedia = () => {
   return (
-    <div className="items-center gap-8 media-m hidden sm:flex">
+    <div className="items-center gap-8 media-m hidden md:flex">
       <Link
         href={"https://www.instagram.com/h.ismailkeskin/"}
         className="flex items-center gap-2 group"

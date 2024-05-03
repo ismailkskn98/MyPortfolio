@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
   return (
-    <nav className="flex items-center gap-8 media-m lg:menu-m">
+    <nav className="flex items-center gap-4 sm:gap-8 media-m lg:menu-m">
       <Link
         href={"/"}
         className={`hover:text-Brand1 transition-colors ${

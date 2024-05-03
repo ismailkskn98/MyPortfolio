@@ -23,7 +23,7 @@ const Search = () => {
       <div>
         <IoSearchSharp
           onClick={toggleSearch}
-          className="text-White w-6 h-6 font-bold cursor-pointer"
+          className="text-White w-4 h-4 sm:w-6 sm:h-6 font-bold cursor-pointer"
         />
         <OpenSearch openSearch={openSearch} toggleSearch={toggleSearch} />
       </div>

@@ -9,9 +9,9 @@ type Props = {
 const HomeContainer: React.FC<Props> = async ({ blogs }) => {
   return (
     <div className="container">
-      {blogs?.map((blog: Blog, i: number) => (
+      {/* {blogs?.map((blog: Blog, i: number) => (
         <BlogColumn key={i} blog={blog} />
-      ))}
+      ))} */}
     </div>
   );
 };
