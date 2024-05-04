@@ -1,18 +1,12 @@
-import BlogColumn from "@/components/blogColumn";
-import { Blog } from "@/components/blogColumn/Content";
 import React from "react";
 
-type Props = {
-  blogs: Blog[];
-};
+type Props = {};
 
-const HomeContainer: React.FC<Props> = async ({ blogs }) => {
+const HomeContainer: React.FC<Props> = async () => {
   return (
-    <div className="container">
-      {/* {blogs?.map((blog: Blog, i: number) => (
-        <BlogColumn key={i} blog={blog} />
-      ))} */}
-    </div>
+    <>
+      <h1>Home Page</h1>
+    </>
   );
 };
 
