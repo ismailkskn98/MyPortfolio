@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
 import OpenSearch from "./OpenSearch";
+import { motion } from "framer-motion";
 
 const Search = () => {
   const [openSearch, setOpenSearch] = useState<boolean>(false);
@@ -20,13 +21,13 @@ const Search = () => {
 
   return (
     <>
-      <div>
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
         <IoSearchSharp
           onClick={toggleSearch}
           className="text-White w-4 h-4 sm:w-6 sm:h-6 font-bold cursor-pointer"
         />
         <OpenSearch openSearch={openSearch} toggleSearch={toggleSearch} />
-      </div>
+      </motion.div>
     </>
   );
 };

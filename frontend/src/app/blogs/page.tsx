@@ -7,7 +7,6 @@ const BASE_URL = process.env.BASE_URL;
 const getBlogs = async () => {
   try {
     const response = await fetch(`${BASE_URL}/api/blogs`, { method: "GET" });
-    console.log();
     if (!response.ok) {
       const errorMessage: { message: string } = await response.json();
       throw new Error(errorMessage.message);

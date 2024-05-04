@@ -1,8 +1,10 @@
+"use client";
 import Image from "next/image";
 import React from "react";
 import { LuMouse } from "react-icons/lu";
 import lineArrow from "@/../public/images/Line.png";
 import LineTitle from "@/../public/images/Line-title.png";
+import { motion } from "framer-motion";
 
 type Props = {
   description: string;
@@ -12,7 +14,12 @@ type Props = {
 
 const ModuleTitle: React.FC<Props> = ({ description, title, isHome }) => {
   return (
-    <article className={`flex flex-col items-center text-White ${isHome ? "gap-16" : "gap-0"}`}>
+    <motion.article
+      initial={{ opacity: 0, translateY: "-200px" }}
+      animate={{ opacity: 1, translateY: 0 }}
+      transition={{ duration: 0.4 }}
+      className={`flex flex-col items-center text-White ${isHome ? "gap-16" : "gap-0"}`}
+    >
       <div className={`flex-col items-center gap-4 max-h-[140px] ${isHome ? "flex" : "hidden"}`}>
         <LuMouse className="text-Brand1 w-8 h-11" />
         <Image src={lineArrow} alt="moduleTitle arrow" className="max-h-[80px]" />
@@ -24,7 +31,7 @@ const ModuleTitle: React.FC<Props> = ({ description, title, isHome }) => {
         </div>
         <p className="code-m md:para-m text-center">{description}</p>
       </div>
-    </article>
+    </motion.article>
   );
 };
 

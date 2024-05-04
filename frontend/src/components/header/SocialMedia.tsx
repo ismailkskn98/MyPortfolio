@@ -1,12 +1,19 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const SocialMedia = () => {
   return (
-    <div className="items-center gap-8 media-m hidden md:flex">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="items-center gap-8 media-m hidden md:flex"
+    >
       <Link
         href={"https://www.instagram.com/h.ismailkeskin/"}
         className="flex items-center gap-2 group"
@@ -37,7 +44,7 @@ const SocialMedia = () => {
           Github
         </p>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 
