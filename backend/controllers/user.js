@@ -22,3 +22,25 @@ exports.get_blogs = async (req, res) => {
         return res.status(500).send({ message: 'Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.' });
     }
 }
+
+exports.get_blog_by_slug = async (req, res) => {
+    const { slug } = req.params;
+    try {
+        const blog = await Blog.findOne({
+            where: { slug },
+            include: [{
+                    model: Category,
+                    attributes: ['name'],
+                }, {
+                    model: User,
+                }
+            ]
+        })
+        if(!blog) {
+            return res.status(404).send({ message: 'Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin.' });
+        }
+        return res.send(blog);
+    } catch (error) {
+        res.status(500).send({message: 'Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.'});
+    }
+}
