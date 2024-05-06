@@ -10,17 +10,17 @@ const FooterMedia = () => {
       id="footerMedia"
       className="flex-grow flex items-center justify-end gap-8 order-1 lg:order-2"
     >
-      <span className="p-2 rounded-full bg-Brand1">
+      <span className="p-2 rounded-full bg-Brand1 hover:bg-Brand2 transition-all">
         <Link href={"https://www.instagram.com/h.ismailkeskin/"}>
           <FaInstagram className="text-BG1" />
         </Link>
       </span>
-      <span className="p-2 rounded-full bg-Brand1">
+      <span className="p-2 rounded-full bg-Brand1 hover:bg-Brand2 transition-all">
         <Link href={"https://www.linkedin.com/in/ismail-keskin-556538242/"}>
           <FaLinkedin className="text-BG1" />
         </Link>
       </span>
-      <span className="p-2 rounded-full bg-Brand1">
+      <span className="p-2 rounded-full bg-Brand1 hover:bg-Brand2 transition-all">
         <Link href={"https://github.com/ismailkskn98"}>
           <FaGithub className="text-BG1" />
         </Link>
