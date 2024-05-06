@@ -1,5 +1,5 @@
 import { Blog } from "@/components/blogColumn/Content";
-import BlogContainer from "@/containers/blogContainer";
+import BlogsContainer from "@/containers/blogsContainer";
 import React from "react";
 
 const BASE_URL = process.env.BASE_URL;
@@ -23,7 +23,7 @@ const Blogs = async () => {
   if (typeof blogs === "string") {
     throw new Error(blogs);
   }
-  return <BlogContainer blogs={blogs} />;
+  return <BlogsContainer blogs={blogs} />;
 };
 
 export default Blogs;

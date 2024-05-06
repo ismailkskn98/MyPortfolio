@@ -1,3 +1,5 @@
+import BlogContent from "@/components/blogContent";
+import BlogContainer from "@/containers/blogContainer";
 import React from "react";
 
 const BASE_URL = process.env.BASE_URL;
@@ -19,8 +21,14 @@ const getBlog = async (slug: string) => {
 };
 
 const Blog = async ({ params }: { params: { slug: string } }) => {
-  await getBlog(params.slug);
-  return <div className="text-White">Blog: {params.slug}</div>;
+  const blog = await getBlog(params.slug);
+  return (
+    <div className="text-White">
+      <BlogContainer>
+        <BlogContent blog={blog} />
+      </BlogContainer>
+    </div>
+  );
 };
 
 export default Blog;
