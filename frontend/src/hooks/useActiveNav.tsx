@@ -6,7 +6,7 @@ type ActiveNav = {
 };
 
 export const useActiveNav = (): ActiveNav => {
-  const [sectionId, setSectionId] = useState<string>("hero");
+  const [sectionId, setSectionId] = useState<string>("anasayfa");
 
   // her scroll olduğunda çalışacak
   const handleScroll = (): void => {

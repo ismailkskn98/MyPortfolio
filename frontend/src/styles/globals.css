@@ -62,6 +62,10 @@
   .code-m { font-size: 14px; line-height: 18px; }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .searchTime {
   overflow: hidden;
 }
@@ -82,4 +86,11 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #12F7D6; 
+}
+
+.active-navigation {
+  background-color: white;
+  color: #292F36;
+  border-radius: 50%;
+  transition: all .3s ease;
 }

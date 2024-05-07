@@ -4,7 +4,7 @@ import React from "react";
 const Hero = ({ children }: { children: React.ReactNode }) => {
   return (
     <section
-      id="hero"
+      id="anasayfa"
       className="w-full px-0 md:px-32 pb-16 md:pb-32 pt-16 flex flex-col items-center gap-16"
     >
       <h1 className="bg-text-u text-Brand2 hidden md:block">Developer</h1>
