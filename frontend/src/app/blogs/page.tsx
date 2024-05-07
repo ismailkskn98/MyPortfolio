@@ -1,4 +1,4 @@
-import { Blog } from "@/components/blogColumn/Content";
+import { Blog } from "@/components/blog/blogColumn/Content";
 import BlogsContainer from "@/containers/blogsContainer";
 import React from "react";
 

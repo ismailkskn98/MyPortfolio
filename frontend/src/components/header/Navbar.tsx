@@ -4,6 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
+type NavItem = {
+  link: string;
+  name: string;
+};
+
+const navItems: NavItem[] = [
+  { link: "/", name: "Anasayfa" },
+  { link: "/blogs", name: "Blogs" },
+];
+
 const Navbar = () => {
   const pathname = usePathname();
   return (
@@ -13,22 +23,17 @@ const Navbar = () => {
       transition={{ duration: 0.4 }}
       className="flex items-center gap-4 sm:gap-8 media-m lg:menu-m"
     >
-      <Link
-        href={"/"}
-        className={`hover:text-Brand1 transition-colors ${
-          pathname == "/" ? "text-Brand1" : "text-White"
-        }`}
-      >
-        Home
-      </Link>
-      <Link
-        href={"/blogs"}
-        className={`hover:text-Brand1 transition-colors ${
-          pathname == "/blogs" ? "text-Brand1" : "text-White"
-        }`}
-      >
-        Blogs
-      </Link>
+      {navItems.map((item, i) => (
+        <Link
+          key={i}
+          href={item.link}
+          className={`hover:text-Brand1 transition-colors ${
+            pathname == item.link ? "text-Brand1" : "text-White"
+          }`}
+        >
+          {item.name}
+        </Link>
+      ))}
     </motion.nav>
   );
 };

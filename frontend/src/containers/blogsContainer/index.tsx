@@ -1,5 +1,5 @@
-import BlogColumn from "@/components/blogColumn";
-import Content, { Blog } from "@/components/blogColumn/Content";
+import BlogColumn from "@/components/blog/blogColumn";
+import Content, { Blog } from "@/components/blog/blogColumn/Content";
 import ModuleTitle from "@/components/moduleTitle";
 import React from "react";
 
