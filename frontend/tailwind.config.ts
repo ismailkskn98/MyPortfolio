@@ -11,7 +11,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {},
+      backgroundImage: {
+        'about-bg': "url('/images/about/bg.svg')",
+      }
     },
     colors: {
       'BG1': '#292F36',

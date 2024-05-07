@@ -17,25 +17,25 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { link: "/", sectionId: "anasayfa", icon: IoGridOutline },
-  { link: "/#hakkimda", sectionId: "hakkimda", hover: "Hakkımda", icon: FiUser },
-  { link: "/#beceriler", sectionId: "beceriler", hover: "Beceriler", icon: IoCode },
-  { link: "/#isler", sectionId: "isler", hover: "İşler", icon: RiComputerLine },
-  { link: "/#blogs", sectionId: "blogs", hover: "Blogs", icon: HiOutlinePencilAlt },
-  { link: "/#iletisim", sectionId: "iletisim", hover: "İletişim", icon: IoMailOutline },
+  { link: "#anasayfa", sectionId: "anasayfa", icon: IoGridOutline },
+  { link: "#hakkimda", sectionId: "hakkimda", hover: "Hakkımda", icon: FiUser },
+  { link: "#beceriler", sectionId: "beceriler", hover: "Beceriler", icon: IoCode },
+  { link: "#isler", sectionId: "isler", hover: "İşler", icon: RiComputerLine },
+  { link: "#blogs", sectionId: "blogs", hover: "Blogs", icon: HiOutlinePencilAlt },
+  { link: "#iletisim", sectionId: "iletisim", hover: "İletişim", icon: IoMailOutline },
 ];
 
 const NavigationBar = () => {
   const { handleNavLinkClick, sectionId } = useActiveNav();
 
   return (
-    <nav className="hidden xl:flex fixed top-56 left-12 2xl:left-16 flex-col items-center gap-6 px-3 py-2 rounded-[40px] bg-BG2/90">
+    <nav className="hidden xl:flex fixed z-50 top-56 left-12 2xl:left-16 flex-col items-center gap-6 px-3 py-2 rounded-[40px] bg-BG2/90 border border-solid border-White">
       {navItems.map((item, i) => (
         <Link
           key={i}
           href={item.link}
-          className={`relative w-10 h-10 flex items-center justify-center transition-all group ${
-            sectionId === item.sectionId && "active-navigation"
+          className={`relative w-10 h-10 flex items-center justify-center  rounded-full transition-all group ${
+            sectionId === item.sectionId ? "bg-White text-BG1" : "bg-BG2/90 text-White"
           }`}
           onClick={() => handleNavLinkClick(item.sectionId)}
         >

@@ -3,7 +3,7 @@ import { IoMailOutline } from "react-icons/io5";
 
 const RightDescription = () => {
   return (
-    <div id="rightDescription" className="max-w-80 md:max-w-[800px] flex flex-col gap-4">
+    <div id="rightDescription" className="w-full md:max-w-[800px] flex flex-col gap-4">
       <p className="code-m text-Brand2">{"<p>"}</p>
       <p className="px-6 text-White para-m">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore neque libero debitis

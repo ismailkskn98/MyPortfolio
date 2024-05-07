@@ -2,7 +2,7 @@ import React from "react";
 
 const RightTitle = () => {
   return (
-    <div id="rightTitle">
+    <div id="rightTitle" className="w-full">
       <p className="w-full code-m text-Brand2">{"<h1>"}</p>
       <div className="px-4">
         <p className="w-full h2-u md:h1-u text-White">Selam</p>
