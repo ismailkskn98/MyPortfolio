@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const BlogColumn = ({ children }: { children: React.ReactNode }) => {
   return (
-    <motion.section
+    <motion.main
       initial={{ opacity: 0, translateY: "200px" }}
       animate={{ opacity: 1, translateY: 0 }}
       transition={{ duration: 0.4 }}
@@ -15,7 +15,7 @@ const BlogColumn = ({ children }: { children: React.ReactNode }) => {
         {children}
         <div id="line" className="w-full absolute bottom-0 left-0 h-[1px] bg-[#848484]"></div>
       </article>
-    </motion.section>
+    </motion.main>
   );
 };
 

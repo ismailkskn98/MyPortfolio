@@ -15,7 +15,7 @@ const BlogsContainer: React.FC<Props> = ({ blogs }) => {
         description="Teknoloji ve iş dünyası hakkındaki düşüncelerim, takip edebilirsin"
         isHome={false}
       />
-      <section>
+      <main>
         {blogs?.map((blog: Blog, i: number) => (
           <BlogColumn key={i}>
             <Content
@@ -28,7 +28,7 @@ const BlogsContainer: React.FC<Props> = ({ blogs }) => {
             />
           </BlogColumn>
         ))}
-      </section>
+      </main>
     </div>
   );
 };
