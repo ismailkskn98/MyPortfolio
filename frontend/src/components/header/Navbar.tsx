@@ -21,7 +21,7 @@ const Navbar = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="flex items-center gap-4 sm:gap-8 media-m lg:menu-m"
+      className="flex items-center gap-4 sm:gap-8 nav-m lg:menu-m"
     >
       {navItems.map((item, i) => (
         <Link

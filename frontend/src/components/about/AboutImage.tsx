@@ -5,7 +5,7 @@ import image from "@/../public/images/about/Image.png";
 const AboutImage = () => {
   return (
     <span>
-      <Image src={image} alt="about resim" />
+      <Image src={image} alt="about resim" className="lg:min-w-[450px]" />
     </span>
   );
 };

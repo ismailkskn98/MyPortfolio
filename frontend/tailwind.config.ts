@@ -26,6 +26,8 @@ const config: Config = {
       'CSS': '#0C73B8',
       'JS': '#E7A020',
       'React': '#28A9E0',
+      'Express': '#292929',
+      'Mysql': '#00608C',
     }
   },
   plugins: [],

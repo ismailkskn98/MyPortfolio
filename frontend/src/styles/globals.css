@@ -50,7 +50,7 @@
     font-style: normal;
     font-weight: 500;
   }
-  .menu-m, .media-m, .para-m, .code-m {
+  .menu-m, .media-m, .para-m, .code-m, .nav-m {
     font-family: var(--font-plexMono-reguler);
     font-style: normal;
     font-weight: 400;
@@ -59,6 +59,7 @@
   .h2-m, .logo-m { font-size: 32px; line-height: 42px; }
   .menu-m { font-size: 24px; line-height: 32px; }
   .para-m, .media-m { font-size: 16px; line-height: 20px; }
+  .nav-m { font-size: 14px; line-height: 20px; }
   .code-m { font-size: 14px; line-height: 18px; }
 }
 

@@ -6,8 +6,8 @@ import Logo from "./Logo";
 
 const Header = () => {
   return (
-    <header className="w-full px-6 lg:px-8 xl:px-32">
-      <div className="h-min py-10 md:py-16 flex items-center justify-between">
+    <header className="w-full h-min px-6 lg:px-8 xl:px-32">
+      <div className="h-min py-10 md:py-16 flex items-center justify-between gap-1 sm:gap-0">
         <Logo />
         <main className="flex items-center gap-8 md:gap-16">
           <Navbar />
