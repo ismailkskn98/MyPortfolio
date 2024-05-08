@@ -14,7 +14,7 @@ export const useActiveNav = (): ActiveNav => {
     const sections = document.querySelectorAll("section");
     let currentSection: string;
     sections.forEach((section) => {
-      const sectionOffsetTop = section.offsetTop; // section'nın üst kenarı window üst kenardan olan uzaklığı
+      const sectionOffsetTop = section.offsetTop - 10; // section'nın üst kenarı window üst kenardan olan uzaklığı
       const sectionClientHight = section.clientHeight; // section'nın yüksekliği
       currentSection = section.id;
       if (
