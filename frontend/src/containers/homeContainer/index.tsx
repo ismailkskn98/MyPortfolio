@@ -5,6 +5,7 @@ import Right from "@/components/hero/right";
 import NavigationBar from "@/components/navigationBar";
 import About from "@/components/about";
 import Skills from "@/components/skills";
+import Works from "@/components/works";
 
 type Props = {};
 
@@ -18,6 +19,7 @@ const HomeContainer: React.FC<Props> = async () => {
       </Hero>
       <About />
       <Skills />
+      <Works />
     </>
   );
 };

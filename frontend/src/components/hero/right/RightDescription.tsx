@@ -6,8 +6,8 @@ const RightDescription = () => {
     <div id="rightDescription" className="w-full md:max-w-[800px] flex flex-col gap-4">
       <p className="code-m text-Brand2">{"<p>"}</p>
       <p className="px-6 text-White para-m">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore neque libero debitis
-        exercitationem at atque cupiditate, iste aperiam facere esse?
+        Harika web deneyimleri oluşturarak işletmelerin büyümesine yardımcı oluyorum. Eğer iş
+        bitirmeyi seven bir geliştirici arıyorsanız,
       </p>
       <p className="code-m text-Brand2">{"</p>"}</p>
       <div className="flex items-center gap-4 md:pl-6">

@@ -13,6 +13,8 @@ const config: Config = {
     extend: {
       backgroundImage: {
         'about-bg': "url('/images/about/bg.svg')",
+        'skills-bg': "url('/images/skills/skills-bg.webp')",
+        'works-bg': "url('/images/works/works-bg.webp')",
       }
     },
     colors: {
