@@ -25,7 +25,7 @@ const skillItems: SkillItem[] = [
 const SkillsContentSkills = () => {
   return (
     // flex items-center gap-32
-    <div className="grid grid-cols-2 grid-rows-6 lg:grid-cols-4 lg:grid-rows-2 gap-x-16 sm:gap-x-24 lg:gap-x-32 gap-y-8 lg:gap-y-16">
+    <div className="grid grid-cols-2 grid-rows-3 lg:grid-cols-4 lg:grid-rows-2 gap-x-16 sm:gap-x-24 lg:gap-x-32 gap-y-8 lg:gap-y-16">
       {skillItems.map((item, i) => (
         <div key={i} className="flex flex-col items-center gap-6">
           <span

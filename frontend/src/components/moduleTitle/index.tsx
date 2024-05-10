@@ -20,7 +20,11 @@ const ModuleTitle: React.FC<Props> = ({ description, title, isHome }) => {
       transition={{ duration: 0.4 }}
       className={`flex flex-col items-center text-White ${isHome ? "gap-16" : "gap-0"}`}
     >
-      <div className={`flex-col items-center gap-4 max-h-[140px] ${isHome ? "flex" : "hidden"}`}>
+      <div
+        className={`flex-col items-center gap-4 max-h-[140px] ${
+          isHome ? "hidden md:flex" : "hidden"
+        }`}
+      >
         <LuMouse className="text-Brand1 w-8 h-11" />
         <Image src={lineArrow} alt="moduleTitle arrow" className="max-h-[80px]" />
       </div>
