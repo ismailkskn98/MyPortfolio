@@ -1,6 +1,9 @@
 const Blog = require('../models').Blog;
 const Category = require('../models').Category;
 const User = require('../models').User;
+const path = require('path');
+const multer  = require('multer')
+const upload = multer({ dest: path.join(__dirname, '..' ,'public/images') })
 
 exports.get_blogs = async (req, res) => {
     try {
@@ -33,8 +36,10 @@ exports.get_blog_by_slug = async (req, res) => {
                     attributes: ['name'],
                 }, {
                     model: User,
+                    attributes: ['firstname', 'lastname']
                 }
-            ]
+            ],
+            attributes: ['title', 'slug', 'subtitle', 'description', 'createdAt']
         })
         if(!blog) {
             return res.status(404).send({ message: 'Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin.' });
