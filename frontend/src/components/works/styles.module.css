@@ -1,3 +1,19 @@
-.slider-link {
-    @apply absolute top-11 right-12 lg:top-16 lg:right-16 flex items-end gap-2 text-Brand1 media-m lg:menu-m underline underline-offset-8 decoration-White hover:text-Brand2 transition-colors;
+@tailwind components;
+
+@layer components {
+    .sliderBtnLeft {
+        @apply w-6 h-6 md:w-16 md:h-16 rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer;
+    }
+    .sliderBtnRight {
+        @apply w-6 h-6 md:w-16 md:h-16 rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer;
+    }
+    .sliderLink {
+        @apply absolute top-5 -right-3 md:top-11 md:right-12 lg:top-16 lg:right-16 flex items-end gap-1 md:gap-2 text-Brand1 underline underline-offset-8 decoration-White hover:text-Brand2 transition-colors;
+    }
+    .sliderVertical {
+        @apply absolute top-[25px] left-[22px] w-[87px] h-[128px] md:top-[42px] md:left-[40px] md:w-[158px] md:h-[205px] lg:top-[55px] lg:left-[55px] lg:w-[213px] lg:h-[280px];
+    }
+    .sliderHorizontal {
+        @apply absolute top-[60px] right-[19px] w-[121px] h-[79px] md:top-[97px] md:right-[35px] md:w-[222px] md:h-[125px] lg:top-[131px] lg:right-[49px] lg:w-[298px] lg:h-[171px];
+    }
 }

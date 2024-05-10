@@ -1,0 +1,49 @@
+@tailwind components;
+
+@layer components {
+  /* Ubuntu */
+  .bg-text-u, .h1-u, .h2-u, .button-u, .search-u, .search-list-h3-u, .search-list-p-u {
+    font-family: var(--font-ubuntu-reguler);
+    font-style: normal;
+    font-weight: 400;
+  }
+  .bg-text-u { font-size: 117px; line-height: 134px; }
+  .h1-u { font-size: 64px; line-height: 72px; }
+  .h2-u { font-size: 32px; line-height: 36px; }
+  .button-u { font-size: 20px; line-height: 24px; }
+  .search-u {font-size: 16px;}
+  .search-list-h3-u {font-size: 15px;}
+  .search-list-p-u {font-size: 13px;}
+  .article-u, .para-u, .Label-u-l { 
+    font-family: var(--font-ubuntu-light);
+    font-style: normal;
+    font-weight: 300;
+  }
+  .article-u { font-size: 16px; line-height: 32px; }
+  .para-u { font-size: 16px; line-height: 18px; }
+  .Label-u-m { 
+    font-family: var(--font-ubuntu-medium);
+    font-size: 14px; 
+    line-height: 16px;
+    font-weight: 500;
+  }
+  .Label-u-l { font-size: 14px; line-height: 16px }
+
+  /* IBM Plex Mono */
+  .number-m, .h2-m, .logo-m { 
+    font-family: var(--font-plexMono-medium);
+    font-style: normal;
+    font-weight: 500;
+  }
+  .menu-m, .media-m, .para-m, .code-m, .nav-m {
+    font-family: var(--font-plexMono-reguler);
+    font-style: normal;
+    font-weight: 400;
+  }
+  .number-m { font-size: 48px; line-height: 62px; }
+  .h2-m, .logo-m { font-size: 32px; line-height: 42px; }
+  .menu-m { font-size: 24px; line-height: 32px; }
+  .para-m, .media-m { font-size: 16px; line-height: 20px; }
+  .nav-m { font-size: 14px; line-height: 20px; }
+  .code-m { font-size: 14px; line-height: 18px; }
+}
