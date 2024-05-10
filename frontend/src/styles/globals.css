@@ -8,12 +8,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .container {
-  width: 94%;
-  max-width: 1660px;
-  margin-left: auto;
-  margin-right: auto;
-} */
+@import url('../../src/components/works/styles.module.css');
 
 @layer utilities {
   /* Ubuntu */

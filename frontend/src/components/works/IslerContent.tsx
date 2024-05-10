@@ -9,6 +9,7 @@ import tuzgoluHorizontal from "@/../public/images/works/tuzgolumotorhorizontal.p
 import tuzgoluVertical from "@/../public/images/works/tuzgolumotorvertical.png";
 import renatoHorizontal from "@/../public/images/works/renatohorizontal.png";
 import renatoVertical from "@/../public/images/works/renatovertical.png";
+import styles from "./styles.module.css";
 
 type SliderItem = {
   link: string;
@@ -41,13 +42,13 @@ const IslerContent = () => {
   };
 
   return (
-    <div id="islerContent" className="flex items-center gap-16">
+    <div id="islerContent" className="flex items-center gap-0 lg:gap-16">
       <div
         id="islerContentButtonLeft"
-        className="w-16 h-16 rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer"
+        className="w-6 h-6 md:w-16 md:h-16 rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer"
         onClick={handleClickLeft}
       >
-        <IoIosArrowBack className="w-8 h-8" />
+        <IoIosArrowBack className="w-3 h-3 md:w-10 md:h-10" />
       </div>
       <div id="islerContentSlider">
         <div className="relative">
@@ -55,7 +56,7 @@ const IslerContent = () => {
             <div key={i} className={`w-full absolute top-0 left-0`}>
               <Link
                 href={item.link}
-                className={`absolute top-16 right-16 flex items-end gap-2 text-Brand1 menu-m underline underline-offset-8 decoration-White hover:text-Brand2 transition-colors ${
+                className={`absolute top-5 -right-3 md:top-11 md:right-12 lg:top-16 lg:right-16 flex items-end gap-1 md:gap-2 text-Brand1 code-m lg:menu-m underline underline-offset-8 decoration-White hover:text-Brand2 transition-colors ${
                   i === currentIndex ? "block" : "hidden"
                 }`}
                 target="_blank"
@@ -63,7 +64,7 @@ const IslerContent = () => {
               >
                 Siteyi Görüntüle <RiExternalLinkLine className="w-4 h-4" />
               </Link>
-              <div className="absolute top-[55px] left-[55px] w-[213px] h-[280px]">
+              <div className="absolute top-[25px] left-[22px] w-[87px] h-[128px] md:top-[42px] md:left-[40px] md:w-[158px] md:h-[205px] lg:top-[55px] lg:left-[55px] lg:w-[213px] lg:h-[280px]">
                 <Image
                   src={item.verticalImage}
                   alt="image"
@@ -72,7 +73,7 @@ const IslerContent = () => {
                   }`}
                 />
               </div>
-              <div className="absolute top-[131px] right-[49px] w-[298px] h-[171px]">
+              <div className="absolute top-[60px] right-[19px] w-[121px] h-[79px] md:top-[97px] md:right-[35px] md:w-[222px] md:h-[125px] lg:top-[131px] lg:right-[49px] lg:w-[298px] lg:h-[171px]">
                 <Image
                   src={item.horizontalImage}
                   alt="image"
@@ -83,15 +84,19 @@ const IslerContent = () => {
               </div>
             </div>
           ))}
-          <Image src={dualScreen} alt="yapılan işler" />
+          <Image
+            src={dualScreen}
+            alt="yapılan işler"
+            className="w-[263px] h-[198px] md:w-[480px] md:h-[320px] lg:w-[650px] lg:h-[432px]"
+          />
         </div>
       </div>
       <div
         id="islerContentButtonRight"
-        className="w-[72px] h-[72px] rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer"
+        className="w-6 h-6 md:w-16 md:h-16 rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer"
         onClick={handleClickRight}
       >
-        <IoIosArrowForward className="w-10 h-10" />
+        <IoIosArrowForward className="w-3 h-3 md:w-10 md:h-10" />
       </div>
     </div>
   );
