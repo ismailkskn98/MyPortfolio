@@ -20,7 +20,7 @@ const WorksSlider: React.FC<Props> = ({ sliderItems, currentIndex }) => {
             <Link
               href={item.link}
               className={`${styles.sliderLink} code-m lg:menu-m ${
-                i === currentIndex ? "block" : "hidden"
+                i === currentIndex ? "flex" : "hidden"
               }`}
               target="_blank"
               rel="noopener noreferrer"

@@ -6,10 +6,13 @@ import NavigationBar from "@/components/navigationBar";
 import About from "@/components/about";
 import Skills from "@/components/skills";
 import Works from "@/components/works";
+import BlogColumn from "@/components/blog/blogColumn";
+import Content from "@/components/blog/blogColumn/Content";
+import type { Blog } from "@/components/blog/blogColumn/Content";
+import HomeBlog from "@/components/homeBlog";
+import ModuleTitle from "@/components/moduleTitle";
 
-type Props = {};
-
-const HomeContainer: React.FC<Props> = async () => {
+const HomeContainer = async ({ blog }: { blog: Blog }) => {
   return (
     <>
       <NavigationBar />
@@ -20,6 +23,23 @@ const HomeContainer: React.FC<Props> = async () => {
       <About />
       <Skills />
       <Works />
+      <HomeBlog>
+        <ModuleTitle
+          title="Blogs"
+          description="Teknoloji ve iş dünyası hakkındaki düşüncelerim, takip edebilirsiniz"
+          isHome={true}
+        />
+        <BlogColumn>
+          <Content
+            title={blog.title}
+            subtitle={blog.subtitle}
+            slug={blog.slug}
+            User={blog.User}
+            Categories={blog.Categories}
+            createdAt={blog.createdAt}
+          />
+        </BlogColumn>
+      </HomeBlog>
     </>
   );
 };

@@ -1,3 +1,4 @@
+import type { Blog } from "@/components/blog/blogColumn/Content";
 import BlogContent from "@/components/blog/blogContent";
 import BlogContainer from "@/containers/blogContainer";
 import React from "react";
@@ -21,7 +22,11 @@ const getBlog = async (slug: string) => {
 };
 
 const Blog = async ({ params }: { params: { slug: string } }) => {
-  const blog = await getBlog(params.slug);
+  const blog: Blog | string = await getBlog(params.slug);
+
+  if (typeof blog === "string") {
+    throw new Error(blog);
+  }
   return (
     <div className="text-White">
       <BlogContainer>

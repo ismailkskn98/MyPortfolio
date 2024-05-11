@@ -1,6 +1,6 @@
 import React from "react";
 
-type Props = {
+export type Blog = {
   blog: {
     title: string;
     slug: string;
@@ -12,12 +12,12 @@ type Props = {
     }[];
     User: {
       firstname: string;
-      lastname: string;
+      lastname?: string;
     };
   };
 };
 
-const BlogContent: React.FC<Props> = ({ blog }) => {
+const BlogContent: React.FC<Blog> = ({ blog }) => {
   return (
     <div className="flex flex-col items-center gap-8">
       <span>{blog.title}</span>

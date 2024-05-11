@@ -1,4 +1,4 @@
-import { Blog } from "@/components/blog/blogColumn/Content";
+import type { Blog } from "@/components/blog/blogColumn/Content";
 import BlogsContainer from "@/containers/blogsContainer";
 import React from "react";
 
@@ -13,8 +13,10 @@ const getBlogs = async () => {
     }
     const data = await response.json();
     return data;
-  } catch (error: any) {
-    return error.message;
+  } catch (error) {
+    if (error instanceof Error) {
+      return error.message;
+    }
   }
 };
 
