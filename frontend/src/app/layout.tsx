@@ -1,8 +1,6 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import * as fonts from "@/fonts/index";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,11 +11,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="tr">
       <body
-        className={`${fonts.ubuntuLight.variable} ${fonts.ubuntuReguler.variable} ${fonts.ubuntuMedium.variable} ${fonts.plexMonoMedium.variable} ${fonts.plexMonoReguler.variable} bg-BG1`}
+        className={`${fonts.ubuntuLight.variable} ${fonts.ubuntuReguler.variable} ${fonts.ubuntuMedium.variable} ${fonts.plexMonoMedium.variable} ${fonts.plexMonoReguler.variable}`}
       >
-        <Header />
-        <main className="w-full">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
