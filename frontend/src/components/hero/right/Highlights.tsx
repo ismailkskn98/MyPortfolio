@@ -9,22 +9,22 @@ const Highlights = () => {
       <div id="rightLanguage" className="flex items-center gap-4">
         <span className="number-m text-Brand1">4</span>
         <div className="flex flex-col para-m">
-          <p>Programming</p>
-          <p>Language</p>
+          <p>Programlama</p>
+          <p>Dilleri</p>
         </div>
       </div>
       <div id="rightTools" className="flex items-center gap-4">
         <span className="number-m text-Brand1">6</span>
         <div className="flex flex-col para-m">
-          <p>Development</p>
-          <p>Tools</p>
+          <p>Geliştirme</p>
+          <p>Araçları</p>
         </div>
       </div>
       <div id="rightExperience" className="flex items-center gap-4">
         <span className="number-m text-Brand1">8</span>
         <div className="flex flex-col para-m">
-          <p>Years of</p>
-          <p>Experience</p>
+          <p>Deneyim</p>
+          <p>Yılı</p>
         </div>
       </div>
     </div>

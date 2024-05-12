@@ -12,6 +12,8 @@ import type { Blog } from "@/components/blog/blogColumn/Content";
 import HomeBlog from "@/components/homeBlog";
 import ModuleTitle from "@/components/moduleTitle";
 import Contact from "@/components/contact";
+import ContactTitle from "@/components/contact/ContactTitle";
+import ContactForm from "@/components/contact/ContactForm";
 
 const HomeContainer = async ({ blog }: { blog: Blog }) => {
   return (
@@ -41,7 +43,10 @@ const HomeContainer = async ({ blog }: { blog: Blog }) => {
           />
         </BlogColumn>
       </HomeBlog>
-      <Contact />
+      <Contact>
+        <ContactTitle />
+        <ContactForm />
+      </Contact>
     </>
   );
 };
