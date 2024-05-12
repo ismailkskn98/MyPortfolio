@@ -15,6 +15,10 @@ const config: Config = {
         'about-bg': "url('/images/about/bg.svg')",
         'skills-bg': "url('/images/skills/skills-bg.webp')",
         'works-bg': "url('/images/works/works-bg.webp')",
+        'login-left-bg': "url('/images/login/login-left-bg.svg')",
+        'login-right-bg': "url('/images/login/login-right-bg.svg')",
+        'login-right-bg-mobil': "url('/images/login/login-right-bg-mobil.svg')",
+        'login-h1': "url('/images/login/login-h1.svg')",
       }
     },
     colors: {
