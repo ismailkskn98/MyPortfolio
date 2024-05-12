@@ -11,6 +11,7 @@ import Content from "@/components/blog/blogColumn/Content";
 import type { Blog } from "@/components/blog/blogColumn/Content";
 import HomeBlog from "@/components/homeBlog";
 import ModuleTitle from "@/components/moduleTitle";
+import Contact from "@/components/contact";
 
 const HomeContainer = async ({ blog }: { blog: Blog }) => {
   return (
@@ -40,6 +41,7 @@ const HomeContainer = async ({ blog }: { blog: Blog }) => {
           />
         </BlogColumn>
       </HomeBlog>
+      <Contact />
     </>
   );
 };
