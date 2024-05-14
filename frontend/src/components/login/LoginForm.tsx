@@ -17,6 +17,7 @@ const LoginForm = () => {
     e.preventDefault();
     const response = await fetch(`${BASE_URL}/admin/login`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

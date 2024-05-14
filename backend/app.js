@@ -18,8 +18,7 @@ dotenv.config({path: path.resolve(__dirname, envFile)});
 const port = process.env.PORT;
 
 app.use(cors({
-    // origin: ['http://localhost:3000'], // '*'
-    origin: '*',
+    origin: ["http://localhost:3000", "*"],
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // '*'
     credentials: true
 }))
