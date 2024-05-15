@@ -1,5 +1,4 @@
-"use client";
-import LoginContainer from "@/containers/loginContainer";
+import LoginContainer from "@/components/login";
 import React from "react";
 
 const Login = () => {

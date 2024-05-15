@@ -1,19 +1,20 @@
-import { jwtVerify } from 'jose';
+import { jwtVerify } from "jose";
 
-const getJwtSecretKey = () => {
-    const secretKey = process.env.JWT_SECRET_KEY;
-    
-    if(!secretKey) {
-        throw new Error('Jwt secret key bulunamadı.');
-    }
-    return new TextEncoder().encode(secretKey);
+export function getJwtSecretKey() {
+  const secret = process.env.JWT_SECRET_KEY;
+
+  if (!secret) {
+    throw new Error("JWT Secret key is not matched");
+  }
+
+  return new TextEncoder().encode(secret);
 }
 
 export async function verifyJwtToken(token: string) {
-    try {
-       const {payload} = await jwtVerify(token, getJwtSecretKey());
-       return payload;
-    } catch (error) {
-        return null;
-    }
+  try {
+    const { payload } = await jwtVerify(token, getJwtSecretKey());
+    return payload;
+  } catch (error) {
+    return null;
+  }
 }

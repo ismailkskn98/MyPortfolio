@@ -2,7 +2,7 @@ import React from "react";
 import LoginLeft from "./LoginLeft";
 import LoginRight from "./LoginRight";
 
-const Login = () => {
+const LoginContainer = () => {
   return (
     <main className="w-full h-screen flex flex-row items-center overflow-hidden">
       <LoginLeft />
@@ -11,4 +11,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginContainer;
