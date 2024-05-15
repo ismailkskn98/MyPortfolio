@@ -4,7 +4,6 @@ const User = require('../models').User;
 const Role = require('../models').Role;
 const jwt = require('jsonwebtoken');
 
-exports.get_login = (req, res) => {};
 
 exports.post_login = async (req, res) => {
     const {username, password} = req.body;
@@ -36,21 +35,18 @@ exports.post_login = async (req, res) => {
             lastname: user.lastname,
             email: user.email,
             role: user.Roles[0].rolename
-        }, process.env.JWT_SECRET_KEY)
+        }, process.env.JWT_SECRET_KEY, {expiresIn: '1h'})
         
         // Cookie'ye token kaydetme
         res.cookie('token', token, {
-            httpOnly: true, // Tokenı yalnızca sunucu tarafında erişilebilir
-            path:"/",
-            secure: false, // production = true
-            sameSite:'none', // production = 'strict'
-            maxAge: 1000 * 60 * 3, // 3 dk zamanlayıcı
+            httpOnly: true,
+            path: "/",
+            secure: false,
+            sameSite: 'Lax', // veya 'None' olarak ayarlayabilirsiniz
+            expires: new Date(Date.now() + 1000 * 60 * 60), // 1 saat sonra sona erecek
         });
         res.json({ message: "Giriş başarılı", success: true, error: false, token });
     } catch (error) {
         res.status(500).json({message: 'Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.', success: false, error: true});
     }
 };
-exports.get_signup = (req, res) => {};
-exports.post_signup = (req, res) => {};
-exports.logout = (req, res) => {};
