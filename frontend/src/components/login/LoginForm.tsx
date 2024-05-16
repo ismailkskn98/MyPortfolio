@@ -2,7 +2,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-// http://localhost:8995
+// http://localhost:7930/api
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const LoginForm = () => {
@@ -15,7 +15,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch(`${BASE_URL}/admin/login`, {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: {

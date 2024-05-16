@@ -1,6 +1,6 @@
-import BlogColumn from "@/components/blog/blogColumn";
-import Content, { Blog } from "@/components/blog/blogColumn/Content";
-import ModuleTitle from "@/components/moduleTitle";
+import BlogColumn from "@/components/site/blog/blogColumn";
+import Content, { Blog } from "@/components/site/blog/blogColumn/Content";
+import ModuleTitle from "@/components/site/moduleTitle";
 import React from "react";
 
 type Props = {

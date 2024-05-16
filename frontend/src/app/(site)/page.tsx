@@ -1,12 +1,13 @@
-import type { Blog } from "@/components/blog/blogColumn/Content";
+import type { Blog } from "@/components/site/blog/blogColumn/Content";
 import HomeContainer from "@/containers/homeContainer";
 import React from "react";
 
+// http://localhost:7930/api
 const BASE_URL = process.env.BASE_URL;
 
 const getLastBlog = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/api/blogs/lastblog`);
+    const response = await fetch(`${BASE_URL}/blogs/lastblog`);
     if (!response.ok) {
       const errorMessage = await response.json();
       throw new Error(errorMessage);

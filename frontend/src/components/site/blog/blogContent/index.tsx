@@ -1,23 +1,22 @@
 import React from "react";
 
 export type Blog = {
-  blog: {
-    title: string;
-    slug: string;
-    subtitle: String;
-    description: string;
-    Categories: {
-      name: string;
-      BlogCategory: { blogId: number; categoryId: number };
-    }[];
-    User: {
-      firstname: string;
-      lastname?: string;
-    };
+  title: string;
+  slug: string;
+  subtitle: string;
+  description: string;
+  createdAt: Date | string | number;
+  Categories: {
+    name: string;
+    BlogCategory: { blogId: number; categoryId: number };
+  }[];
+  User: {
+    firstname: string;
+    lastname?: string | undefined; // lastname alanı isteğe bağlı olmalıdır
   };
 };
 
-const BlogContent: React.FC<Blog> = ({ blog }) => {
+const BlogContent: React.FC<{ blog: Blog }> = ({ blog }) => {
   return (
     <div className="flex flex-col items-center gap-8">
       <span>{blog.title}</span>
@@ -30,7 +29,7 @@ const BlogContent: React.FC<Blog> = ({ blog }) => {
         ))}
       </span>
       <span>{blog.User.firstname}</span>
-      <span>{blog.User.lastname}</span>
+      {blog.User.lastname && <span>{blog.User.lastname}</span>}
     </div>
   );
 };

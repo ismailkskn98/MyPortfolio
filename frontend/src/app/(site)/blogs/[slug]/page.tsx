@@ -1,5 +1,5 @@
-import type { Blog } from "@/components/blog/blogColumn/Content";
-import BlogContent from "@/components/blog/blogContent";
+import BlogContent from "@/components/site/blog/blogContent";
+import type { Blog } from "@/components/site/blog/blogContent";
 import BlogContainer from "@/containers/blogContainer";
 import React from "react";
 
