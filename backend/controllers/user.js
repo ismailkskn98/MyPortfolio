@@ -1,74 +1,118 @@
-const Blog = require('../models').Blog;
-const Category = require('../models').Category;
-const User = require('../models').User;
-const path = require('path');
-const multer  = require('multer')
-const upload = multer({ dest: path.join(__dirname, '..' ,'public/images') })
+const Blog = require("../models").Blog;
+const Category = require("../models").Category;
+const User = require("../models").User;
+const path = require("path");
+const multer = require("multer");
 
+// Yüklenen dosyaların hedef dizini belirleme
+const upload = multer({ dest: path.join(__dirname, "..", "public/images") });
+
+// Tüm blogları getir
 exports.get_blogs = async (req, res) => {
-    try {
-        const blogs = await Blog.findAll({
-            include: [{
-                model: User,
-                attributes: ['firstname'],
-            }, {
-                model: Category,
-                attributes: ['name'],
-            }
-            ],
-        });
-        if (blogs.length === 0) {
-            return res.status(404).send({ message: 'Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin.' });
-        }
-        res.send(blogs);
-    } catch (error) {
-        return res.status(500).send({ message: 'Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.' });
-    }
-}
+  try {
+    // Tüm blogları veritabanından al
+    const blogs = await Blog.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ["firstname"],
+        },
+        {
+          model: Category,
+          attributes: ["name"],
+        },
+      ],
+    });
 
+    // Eğer hiç blog yoksa hata döndürür
+    if (blogs.length === 0) {
+      return res
+        .status(404)
+        .send({ message: "Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
+    }
+
+    // Blogları gönder
+    res.send(blogs);
+  } catch (error) {
+    // Sunucu hatası mesajı döndürme
+    return res.status(500).send({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+    });
+  }
+};
+
+// Slug'a göre blog getir
 exports.get_blog_by_slug = async (req, res) => {
-    const { slug } = req.params;
-    try {
-        const blog = await Blog.findOne({
-            where: { slug },
-            include: [{
-                    model: Category,
-                    attributes: ['name'],
-                }, {
-                    model: User,
-                    attributes: ['firstname', 'lastname']
-                }
-            ],
-            attributes: ['title', 'slug', 'subtitle', 'description', 'createdAt']
-        })
-        if(!blog) {
-            return res.status(404).send({ message: 'Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin.' });
-        }
-        return res.send(blog);
-    } catch (error) {
-        res.status(500).send({message: 'Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.'});
-    }
-}
+  const { slug } = req.params;
+  try {
+    // Slug'a göre blogu veritabanından alma
+    const blog = await Blog.findOne({
+      where: { slug },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+        },
+        {
+          model: User,
+          attributes: ["firstname", "lastname"],
+        },
+      ],
+      attributes: ["title", "slug", "subtitle", "description", "createdAt"],
+    });
 
-exports.get_last_blog = async (req, res) => {
-    try {
-        const lastBlog = await Blog.findOne({
-            order: [['id', 'DESC']],
-            attributes: ['title', 'subtitle', 'slug', 'createdAt'],
-            include: [{
-                    model: Category,
-                    attributes: ['name'],
-                }, {
-                    model: User,
-                    attributes: ['firstname'],
-                }
-            ]
-        })
-        if(!lastBlog) {
-          return res.status(404).json({message: 'blog bulunamadı. Lütfen daha sonra tekrar deneyin.'});
-        }
-        return res.json(lastBlog);
-    } catch (error) {
-        res.status(500).json({message: 'Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.'});
+    // Eğer blog bulunamazsa hata döndür
+    if (!blog) {
+      return res
+        .status(404)
+        .send({ message: "Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
     }
-} 
+
+    // Blogu yanıt olarak gönder
+    return res.send(blog);
+  } catch (error) {
+    // Sunucu hatası mesajı gönder
+    res.status(500).send({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+    });
+  }
+};
+
+// Son blogu getir
+exports.get_last_blog = async (req, res) => {
+  try {
+    // Son blogu veritabanından al
+    const lastBlog = await Blog.findOne({
+      order: [["id", "DESC"]],
+      attributes: ["title", "subtitle", "slug", "createdAt"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+        },
+        {
+          model: User,
+          attributes: ["firstname"],
+        },
+      ],
+    });
+
+    // Eğer son blog yoksa hata döndür
+    if (!lastBlog) {
+      return res
+        .status(404)
+        .json({ message: "blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
+    }
+
+    // Son blogu gönder
+    return res.json(lastBlog);
+  } catch (error) {
+    // Sunucu hatası mesajı gönder
+    res.status(500).json({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+    });
+  }
+};
