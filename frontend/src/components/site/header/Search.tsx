@@ -8,7 +8,7 @@ const Search = () => {
   const [openSearch, setOpenSearch] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!document.body.classList.contains("searchTime")) {
+    if (openSearch && !document.body.classList.contains("searchTime")) {
       document.body.classList.add("searchTime");
     } else {
       document.body.classList.remove("searchTime");

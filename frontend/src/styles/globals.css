@@ -1,8 +1,8 @@
 /* Ubuntu */
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap");
 /* IBM Plex Mono */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
-@import './reset.css';
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import "./reset.css";
 
 @tailwind base;
 @tailwind components;
@@ -22,21 +22,21 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #1A1E23;
-    border-radius: 10px;
+  background-color: #1a1e23;
+  border-radius: 10px;
 }
- 
+
 ::-webkit-scrollbar-thumb {
-  background: #12F7D6; 
+  background: #12f7d6;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #12F7D6; 
+  background: #12f7d6;
 }
 
 .active-navigation {
   background-color: white;
-  color: #292F36;
-  transition: all .2s ease;
+  color: #292f36;
+  transition: all 0.2s ease;
 }
