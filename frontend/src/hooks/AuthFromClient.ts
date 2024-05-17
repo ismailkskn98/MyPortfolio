@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 // http://localhost:7930/api
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-type Payload = {
+export type Payload = {
   username: string;
   firstname: string;
   lastname: string;
@@ -20,8 +20,8 @@ type ErrorMessage = {
 };
 
 // Client Components
-export const AuthFromClient = (): [Payload | null | string, string | null] => {
-  const [data, setData] = useState<Payload | null | string>(null);
+export const AuthFromClient = (): [Payload | null, string | null] => {
+  const [data, setData] = useState<Payload | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export const AuthFromClient = (): [Payload | null | string, string | null] => {
         }
 
         // payload alma
-        const payload: Payload | string = await response.json();
+        const payload: Payload = await response.json();
         return setData(payload);
       } catch (error) {
         if (error instanceof Error) {
