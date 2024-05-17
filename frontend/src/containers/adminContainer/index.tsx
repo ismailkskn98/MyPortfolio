@@ -1,7 +1,7 @@
 import React from "react";
 
 const AdminContainer = () => {
-  return <div>AdminContainer</div>;
+  return <div className="bg-React text-White h-full w-full">AdminContainer</div>;
 };
 
 export default AdminContainer;

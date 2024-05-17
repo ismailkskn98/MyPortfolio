@@ -1,7 +1,12 @@
 import React from "react";
+import styles from "@/app/(admin)/admin/styles.module.css";
 
 const Footer = () => {
-  return <footer>Footer</footer>;
+  return (
+    <footer id="adminFooter" className={`${styles.adminFooter} bg-BG1 text-White`}>
+      Footer
+    </footer>
+  );
 };
 
 export default Footer;

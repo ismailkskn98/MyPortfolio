@@ -1,12 +1,16 @@
 "use client";
 import { Payload } from "@/hooks/AuthFromClient";
 import React from "react";
+import styles from "@/app/(admin)/admin/styles.module.css";
 
 const Header = ({ payload }: { payload: Payload | null }) => {
   return (
-    <header className="w-full bg-BG2 text-White py-5 px-6">
-      <main className="flex items-center justify-between">
-        <div></div>
+    <header
+      id="adminHeader"
+      className={`${styles.adminHeader} flex items-center bg-BG2 text-White py-5 px-6`}
+    >
+      <main className="w-full flex items-center justify-between">
+        <div>asfasg</div>
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-1">
             <span>{payload?.firstname}</span>

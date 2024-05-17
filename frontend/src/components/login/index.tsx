@@ -4,10 +4,10 @@ import LoginRight from "./LoginRight";
 
 const LoginContainer = () => {
   return (
-    <main className="w-full h-screen flex flex-row items-center overflow-hidden">
+    <section className="w-full h-full flex flex-row items-center overflow-hidden ">
       <LoginLeft />
       <LoginRight />
-    </main>
+    </section>
   );
 };
 

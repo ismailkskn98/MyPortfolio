@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr">
+    <html lang="tr" className="w-full h-full">
       <body
-        className={`${fonts.ubuntuLight.variable} ${fonts.ubuntuReguler.variable} ${fonts.ubuntuMedium.variable} ${fonts.plexMonoMedium.variable} ${fonts.plexMonoReguler.variable}`}
+        className={`${fonts.ubuntuLight.variable} ${fonts.ubuntuReguler.variable} ${fonts.ubuntuMedium.variable} ${fonts.plexMonoMedium.variable} ${fonts.plexMonoReguler.variable} w-full h-full`}
       >
         {children}
       </body>

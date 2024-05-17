@@ -1,0 +1,49 @@
+.adminLayout {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(250px, 350px) 1fr;
+  grid-template-rows: 80px auto 72px;
+}
+.adminHeader {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+.adminAside {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+.adminMain {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+.adminFooter {
+  grid-column: 1 / 3;
+  grid-row: 3 / 4;
+}
+
+@media screen and (max-width: 1024px) {
+  .adminLayout {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 80px 1fr 2fr 72px;
+  }
+  .adminHeader {
+    grid-column: 1 / 1;
+    grid-row: 1 / 2;
+  }
+  .adminAside {
+    grid-column: 1 / 1;
+    grid-row: 2 / 3;
+  }
+  .adminMain {
+    grid-column: 1 / 1;
+    grid-row: 3 / 4;
+  }
+  .adminFooter {
+    grid-column: 1 / 1;
+    grid-row: 4 / 5;
+  }
+}
