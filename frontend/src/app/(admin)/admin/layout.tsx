@@ -14,7 +14,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <>
       <section id="adminLayout" className={styles.adminLayout}>
         <Header payload={payload} />
-        <Aside />
+        <Aside payload={payload} />
         <main id="adminMain" className={styles.adminMain}>
           {children}
         </main>

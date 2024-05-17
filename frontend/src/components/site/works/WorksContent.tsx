@@ -10,7 +10,7 @@ import styles from "./styles.module.css";
 import WorksSlider from "./WorksSlider";
 
 export type SliderItem = {
-  link: string;
+  href: string;
   verticalImage: StaticImageData;
   horizontalImage: StaticImageData;
 };
@@ -20,12 +20,12 @@ const WorksContent = () => {
 
   const sliderItems: SliderItem[] = [
     {
-      link: "https://www.tuzgolumotorluaraclar.com/",
+      href: "https://www.tuzgolumotorluaraclar.com/",
       verticalImage: tuzgoluVertical,
       horizontalImage: tuzgoluHorizontal,
     },
     {
-      link: "https://ryonetim-nuxtjs.vercel.app/",
+      href: "https://ryonetim-nuxtjs.vercel.app/",
       verticalImage: renatoVertical,
       horizontalImage: renatoHorizontal,
     },

@@ -1,9 +1,15 @@
 import React from "react";
 import styles from "@/app/(admin)/admin/styles.module.css";
-const Aside = () => {
+import Navbar from "./Navbar";
+import { Payload } from "@/hooks/AuthFromClient";
+
+const Aside = ({ payload }: { payload: Payload | null }) => {
   return (
-    <aside id="adminAside" className={`${styles.adminAside} bg-Html text-White`}>
-      Aside
+    <aside
+      id="adminAside"
+      className={`${styles.adminAside} bg-BG2 text-White flex items-center pt-20 pb-5`}
+    >
+      <Navbar />
     </aside>
   );
 };

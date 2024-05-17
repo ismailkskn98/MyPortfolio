@@ -3,7 +3,7 @@ import styles from "@/app/(admin)/admin/styles.module.css";
 
 const Footer = () => {
   return (
-    <footer id="adminFooter" className={`${styles.adminFooter} bg-BG1 text-White`}>
+    <footer id="adminFooter" className={`${styles.adminFooter} bg-BG2 text-White`}>
       Footer
     </footer>
   );

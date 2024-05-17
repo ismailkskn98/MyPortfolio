@@ -10,19 +10,19 @@ import { IoMailOutline } from "react-icons/io5";
 import { useActiveNav } from "@/hooks/useActiveNav";
 
 type NavItem = {
-  link: string;
+  href: string;
   sectionId: string;
   hover?: string;
   icon: React.ElementType;
 };
 
 const navItems: NavItem[] = [
-  { link: "#anasayfa", sectionId: "anasayfa", icon: IoGridOutline },
-  { link: "#hakkimda", sectionId: "hakkimda", hover: "Hakkımda", icon: FiUser },
-  { link: "#beceriler", sectionId: "beceriler", hover: "Beceriler", icon: IoCode },
-  { link: "#isler", sectionId: "isler", hover: "İşler", icon: RiComputerLine },
-  { link: "#blogs", sectionId: "blogs", hover: "Blogs", icon: HiOutlinePencilAlt },
-  { link: "#iletisim", sectionId: "iletisim", hover: "İletişim", icon: IoMailOutline },
+  { href: "#anasayfa", sectionId: "anasayfa", icon: IoGridOutline },
+  { href: "#hakkimda", sectionId: "hakkimda", hover: "Hakkımda", icon: FiUser },
+  { href: "#beceriler", sectionId: "beceriler", hover: "Beceriler", icon: IoCode },
+  { href: "#isler", sectionId: "isler", hover: "İşler", icon: RiComputerLine },
+  { href: "#blogs", sectionId: "blogs", hover: "Blogs", icon: HiOutlinePencilAlt },
+  { href: "#iletisim", sectionId: "iletisim", hover: "İletişim", icon: IoMailOutline },
 ];
 
 const NavigationBar = () => {
@@ -33,7 +33,7 @@ const NavigationBar = () => {
       {navItems.map((item, i) => (
         <Link
           key={i}
-          href={item.link}
+          href={item.href}
           className={`relative w-10 h-10 flex items-center justify-center  rounded-full transition-all group ${
             sectionId === item.sectionId ? "bg-White text-BG1" : "bg-BG2/90 text-White"
           }`}

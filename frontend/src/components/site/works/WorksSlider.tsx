@@ -18,7 +18,7 @@ const WorksSlider: React.FC<Props> = ({ sliderItems, currentIndex }) => {
         {sliderItems.map((item, i) => (
           <div key={i} className={`w-full absolute top-0 left-0`}>
             <Link
-              href={item.link}
+              href={item.href}
               className={`${styles.sliderLink} code-m lg:menu-m ${
                 i === currentIndex ? "flex" : "hidden"
               }`}

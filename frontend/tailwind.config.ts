@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
-
+const colors = require("tailwindcss/colors");
 const config: Config = {
-    corePlugins: {
+  corePlugins: {
     preflight: false,
   },
   content: [
@@ -12,29 +12,30 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'about-bg': "url('/images/about/bg.svg')",
-        'skills-bg': "url('/images/skills/skills-bg.webp')",
-        'works-bg': "url('/images/works/works-bg.webp')",
-        'login-left-bg': "url('/images/login/login-left-bg.svg')",
-        'login-right-bg': "url('/images/login/login-right-bg.svg')",
-        'login-right-bg-mobil': "url('/images/login/login-right-bg-mobil.svg')",
-        'login-h1': "url('/images/login/login-h1.svg')",
-      }
+        "about-bg": "url('/images/about/bg.svg')",
+        "skills-bg": "url('/images/skills/skills-bg.webp')",
+        "works-bg": "url('/images/works/works-bg.webp')",
+        "login-left-bg": "url('/images/login/login-left-bg.svg')",
+        "login-right-bg": "url('/images/login/login-right-bg.svg')",
+        "login-right-bg-mobil": "url('/images/login/login-right-bg-mobil.svg')",
+        "login-h1": "url('/images/login/login-h1.svg')",
+      },
     },
     colors: {
-      'BG1': '#292F36',
-      'BG2': '#1A1E23',
-      'Brand1': '#12F7D6',
-      'Brand2': '#98FAEC',
-      'Grey': '#43454D',
-      'White': '#FFFFFF',
-      'Html': '#E54F26',
-      'CSS': '#0C73B8',
-      'JS': '#E7A020',
-      'React': '#28A9E0',
-      'Express': '#292929',
-      'Mysql': '#00608C',
-    }
+      ...colors,
+      BG1: "#292F36",
+      BG2: "#1A1E23",
+      Brand1: "#12F7D6",
+      Brand2: "#98FAEC",
+      Grey: "#43454D",
+      White: "#FFFFFF",
+      Html: "#E54F26",
+      CSS: "#0C73B8",
+      JS: "#E7A020",
+      React: "#28A9E0",
+      Express: "#292929",
+      Mysql: "#00608C",
+    },
   },
   plugins: [],
 };
