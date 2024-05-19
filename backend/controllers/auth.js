@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 exports.login = async (req, res) => {
   // kullanıcı adı ve parola
   const { username, password } = req.body;
-
   try {
     // Veritabanında kullanıcıyı bulma
     const user = await User.findOne({
@@ -47,7 +46,6 @@ exports.login = async (req, res) => {
       process.env.JWT_SECRET_KEY,
       { expiresIn: "1h" }
     );
-
     // Token'ı Cookie'ye kaydetme
     res.cookie("token", token, {
       httpOnly: false, // client tarafında çerezi kullanabilmek için

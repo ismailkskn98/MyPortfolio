@@ -1,6 +1,7 @@
 const Blog = require("../models").Blog;
 const Category = require("../models").Category;
 const User = require("../models").User;
+const Hero = require("../models").Hero;
 const path = require("path");
 const multer = require("multer");
 
@@ -108,6 +109,30 @@ exports.get_last_blog = async (req, res) => {
 
     // Son blogu gönder
     return res.json(lastBlog);
+  } catch (error) {
+    // Sunucu hatası mesajı gönder
+    res.status(500).json({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+    });
+  }
+};
+
+// Hero'yu getir
+exports.get_hero = async (req, res) => {
+  try {
+    const hero = await Hero.findOne({
+      // Hero'yu veritabanından al
+      attributes: ["name", "job", "email", "freelancer", "location", "website"],
+      raw: true,
+    });
+
+    // Eğer hero yoksa hata döndür
+    if (!hero) {
+      res.status(401).json({ message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin." });
+    }
+    // hero varsa gönder
+    return res.json(hero);
   } catch (error) {
     // Sunucu hatası mesajı gönder
     res.status(500).json({

@@ -1,45 +1,41 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PersonalInfos', {
+    await queryInterface.createTable("Heros", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      firstname: {
+      name: {
         type: Sequelize.STRING,
-        allowNull: false
-      },
-      lastname: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      location: {
-        type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
       job: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
-      title: {
+      email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
-      description: {
+      freelancer: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
       },
-      about: {
-        type: Sequelize.TEXT,
-        allowNull: false
+      location: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      website: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('PersonalInfos');
-  }
+    await queryInterface.dropTable("Heros");
+  },
 };
