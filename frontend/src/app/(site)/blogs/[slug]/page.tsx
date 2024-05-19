@@ -7,16 +7,18 @@ const BASE_URL = process.env.BASE_URL;
 
 const getBlog = async (slug: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/api/blogs/${slug}`);
+    const response = await fetch(`${BASE_URL}/blogs/${slug}`);
     if (!response.ok) {
       const errorMessage = await response.json();
-      throw new Error(errorMessage);
+      throw new Error(errorMessage.messsage);
     }
     const data = await response.json();
     return data;
   } catch (error) {
     if (error instanceof Error) {
       return error.message;
+    } else {
+      return "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
     }
   }
 };

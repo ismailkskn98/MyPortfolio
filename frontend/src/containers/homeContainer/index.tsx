@@ -14,13 +14,21 @@ import ModuleTitle from "@/components/site/moduleTitle";
 import Contact from "@/components/site/contact";
 import ContactTitle from "@/components/site/contact/ContactTitle";
 import ContactForm from "@/components/site/contact/ContactForm";
+import type { Hero as HeroType } from "@/app/(admin)/admin/hero/page";
+import ImageName from "@/components/site/hero/left/ImageName";
+import CardInfo from "@/components/site/hero/left/CardInfo";
+import CvButton from "@/components/site/hero/left/CvButton";
 
-const HomeContainer = async ({ blog }: { blog: Blog }) => {
+const HomeContainer = async ({ blog, hero }: { blog: Blog; hero: HeroType }) => {
   return (
     <>
       <NavigationBar />
       <Hero>
-        <Left />
+        <Left>
+          <ImageName />
+          <CardInfo hero={hero} />
+          <CvButton />
+        </Left>
         <Right />
       </Hero>
       <About />
@@ -32,16 +40,18 @@ const HomeContainer = async ({ blog }: { blog: Blog }) => {
           description="Teknoloji ve iş dünyası hakkındaki düşüncelerim, takip edebilirsiniz"
           isHome={true}
         />
-        <BlogColumn>
+        {/* <BlogColumn>
           <Content
             title={blog.title}
             subtitle={blog.subtitle}
             slug={blog.slug}
             User={blog.User}
+            description={blog.description}
             Categories={blog.Categories}
             createdAt={blog.createdAt}
+            updatedAt={blog.updatedAt}
           />
-        </BlogColumn>
+        </BlogColumn> */}
       </HomeBlog>
       <Contact>
         <ContactTitle />

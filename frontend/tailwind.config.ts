@@ -7,6 +7,9 @@ const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/containers/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/lib/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/styles/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -22,7 +25,6 @@ const config: Config = {
       },
     },
     colors: {
-      ...colors,
       BG1: "#292F36",
       BG2: "#1A1E23",
       Brand1: "#12F7D6",
@@ -35,6 +37,7 @@ const config: Config = {
       React: "#28A9E0",
       Express: "#292929",
       Mysql: "#00608C",
+      ...colors,
     },
   },
   plugins: [],

@@ -6,6 +6,7 @@ export type Blog = {
   subtitle: string;
   description: string;
   createdAt: Date | string | number;
+  updatedAt: Date | string | number;
   Categories: {
     name: string;
     BlogCategory: { blogId: number; categoryId: number };

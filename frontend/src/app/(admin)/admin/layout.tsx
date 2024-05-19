@@ -18,7 +18,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="adminMain" className={styles.adminMain}>
           {children}
         </main>
-        <Footer />
       </section>
     </>
   );

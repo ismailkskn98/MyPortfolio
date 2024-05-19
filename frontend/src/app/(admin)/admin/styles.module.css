@@ -3,24 +3,30 @@
   height: 100%;
   display: grid;
   grid-template-columns: minmax(200px, 300px) 1fr;
-  grid-template-rows: 80px auto 72px;
+  grid-template-rows: 80px auto;
+  row-gap: 10px;
+  column-gap: 10px;
   transition: all 0.2s ease-in;
+  padding: 10px;
 }
+
+.adminHeader,
+.adminAside,
+.adminMain {
+  border-radius: 6px;
+}
+
 .adminHeader {
-  grid-column: 2 / 3;
+  grid-column: 1 / 3;
   grid-row: 1 / 2;
 }
 .adminAside {
   grid-column: 1 / 2;
-  grid-row: 1 / 4;
+  grid-row: 2 / 3;
 }
 .adminMain {
   grid-column: 2 / 3;
-  grid-row: 2 / 4;
-}
-.adminFooter {
-  grid-column: 2 / 3;
-  grid-row: 3 / 4;
+  grid-row: 2 / 3;
 }
 
 @media screen and (max-width: 1280px) {
@@ -44,10 +50,6 @@
     grid-column: 2 / 3;
     grid-row: 2 / 4;
   }
-  .adminFooter {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-  }
 }
 @media screen and (max-width: 768px) {
   .adminLayout {
@@ -68,9 +70,5 @@
   .adminMain {
     grid-column: 1 / 1;
     grid-row: 3 / 4;
-  }
-  .adminFooter {
-    grid-column: 1 / 1;
-    grid-row: 4 / 5;
   }
 }

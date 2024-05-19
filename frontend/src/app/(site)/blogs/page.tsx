@@ -17,6 +17,8 @@ const getBlogs = async () => {
   } catch (error) {
     if (error instanceof Error) {
       return error.message;
+    } else {
+      return "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
     }
   }
 };

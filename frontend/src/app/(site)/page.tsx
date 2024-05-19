@@ -10,24 +10,48 @@ const getLastBlog = async () => {
     const response = await fetch(`${BASE_URL}/blogs/lastblog`);
     if (!response.ok) {
       const errorMessage = await response.json();
-      throw new Error(errorMessage);
+      throw new Error(errorMessage.message);
     }
     const data = await response.json();
     return data;
   } catch (error) {
     if (error instanceof Error) {
       return error.message;
+    } else {
+      return "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
+    }
+  }
+};
+
+const getHero = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/hero`);
+    if (!response.ok) {
+      const errorMessage = await response.json();
+      throw new Error(errorMessage.message);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      return error.message;
+    } else {
+      return "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
     }
   }
 };
 
 const Home = async () => {
-  const data: Blog | string = await getLastBlog();
+  // const data: Blog | string = await getLastBlog();
 
-  if (typeof data === "string") {
-    throw new Error(data);
+  const [resultLastBlog, resultHero] = await Promise.all([getLastBlog(), getHero()]);
+
+  if (typeof resultLastBlog === "string" || typeof resultHero === "string") {
+    throw new Error(resultLastBlog);
   }
-  return <HomeContainer blog={data} />;
+  console.log(resultLastBlog);
+  console.log(resultHero);
+  return <HomeContainer blog={resultLastBlog} hero={resultHero} />;
 };
 
 export default Home;

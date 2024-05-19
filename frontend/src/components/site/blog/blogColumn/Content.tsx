@@ -10,6 +10,9 @@ export type Blog = {
   title: string;
   subtitle: string;
   slug: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
   User: {
     firstname: string;
   };
@@ -18,7 +21,6 @@ export type Blog = {
       name: string;
     }
   ];
-  createdAt: string;
 };
 
 const Content: React.FC<Blog> = ({ title, subtitle, slug, createdAt, Categories, User }) => {

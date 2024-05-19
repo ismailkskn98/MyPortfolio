@@ -3,9 +3,10 @@ import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import { LuLink } from "react-icons/lu";
 import { MdOutlineHomeWork } from "react-icons/md";
 import CardSkills from "./CardSkills";
+import { Hero } from "@/app/(admin)/admin/hero/page";
 
 type CardInfoItem = {
-  name: string;
+  name: string | number;
   icon: React.ElementType;
 };
 
@@ -16,7 +17,13 @@ const CardInfoItems: CardInfoItem[] = [
   { name: "www.ismailkeskin.net", icon: LuLink },
 ];
 
-const CardInfo = () => {
+const CardInfo = ({ hero }: { hero: Hero }) => {
+  const CardInfoItems: CardInfoItem[] = [
+    { name: hero.email, icon: IoMailOutline },
+    { name: `Türkiye / ${hero.location}`, icon: IoLocationOutline },
+    { name: hero.freelancer, icon: MdOutlineHomeWork },
+    { name: hero.website, icon: LuLink },
+  ];
   return (
     <div id="cardInfo" className="w-full flex flex-col items-start gap-4 code-m">
       <div className="text-White flex flex-col gap-4">
