@@ -42,15 +42,11 @@ const getHero = async () => {
 };
 
 const Home = async () => {
-  // const data: Blog | string = await getLastBlog();
-
   const [resultLastBlog, resultHero] = await Promise.all([getLastBlog(), getHero()]);
 
   if (typeof resultLastBlog === "string" || typeof resultHero === "string") {
     throw new Error(resultLastBlog);
   }
-  console.log(resultLastBlog);
-  console.log(resultHero);
   return <HomeContainer blog={resultLastBlog} hero={resultHero} />;
 };
 

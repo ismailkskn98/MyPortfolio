@@ -3,9 +3,7 @@ import React from "react";
 import SolidButton from "../buttons/SolidButton";
 
 const HomeBlog = ({ children }: { children: React.ReactNode }) => {
-  const viewMore = (): void => {
-    console.log("ahjahaha");
-  };
+  const viewMore = (): void => {};
 
   return (
     <section id="blogs" className="bg-BG1">
