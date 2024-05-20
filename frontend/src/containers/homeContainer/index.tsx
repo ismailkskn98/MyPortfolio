@@ -40,7 +40,7 @@ const HomeContainer = async ({ blog, hero }: { blog: Blog; hero: HeroType }) => 
           description="Teknoloji ve iş dünyası hakkındaki düşüncelerim, takip edebilirsiniz"
           isHome={true}
         />
-        {/* <BlogColumn>
+        <BlogColumn>
           <Content
             title={blog.title}
             subtitle={blog.subtitle}
@@ -51,7 +51,7 @@ const HomeContainer = async ({ blog, hero }: { blog: Blog; hero: HeroType }) => 
             createdAt={blog.createdAt}
             updatedAt={blog.updatedAt}
           />
-        </BlogColumn> */}
+        </BlogColumn>
       </HomeBlog>
       <Contact>
         <ContactTitle />

@@ -1,6 +1,5 @@
 "use client";
 import Aside from "@/components/admin/aside";
-import Footer from "@/components/admin/footer";
 import Header from "@/components/admin/header";
 import { AuthFromClient } from "@/hooks/AuthFromClient";
 import type { Payload } from "@/hooks/AuthFromClient";

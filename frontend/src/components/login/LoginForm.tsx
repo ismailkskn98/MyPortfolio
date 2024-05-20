@@ -5,6 +5,13 @@ import React, { useState } from "react";
 // http://localhost:7930/api
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+type LoginResponse = {
+  message: string;
+  error: boolean;
+  success: boolean;
+  token?: string;
+};
+
 const LoginForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -12,6 +19,12 @@ const LoginForm = () => {
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<LoginResponse>({
+    message: "",
+    error: false,
+    success: false,
+  });
+  const [success, setSuccess] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,13 +39,13 @@ const LoginForm = () => {
         password,
       }),
     });
-    const data = await response.json();
-    if (data.success) {
-      console.log(data);
-      router.push(next ?? "/admin");
-    } else {
-      console.error("Login failed:", data.message);
+    const data: LoginResponse = await response.json();
+
+    if (data.error) {
+      return setErrorMessage(data);
     }
+    setSuccess(true);
+    return router.replace(next ?? "/admin");
   };
 
   return (
@@ -41,6 +54,11 @@ const LoginForm = () => {
       method="POST"
       className="max-w-[550px] w-full flex flex-col items-center gap-8"
     >
+      {errorMessage.error && (
+        <p className="w-full px-2 py-3 -mb-5 flex items-center justify-center font-semibold rounded bg-red-500 text-red-900">
+          {errorMessage.message}
+        </p>
+      )}
       <div className="w-full flex flex-col gap-1 article-u">
         <label htmlFor="username" className="font-semibold">
           Kullanıcı Adı
@@ -68,7 +86,7 @@ const LoginForm = () => {
         />
       </div>
       <button className="px-7 py-2 rounded-sm search-u bg-[#FBAE3C] text-BG1 outline-none border border-solid border-[#FBAE3C] cursor-pointer uppercase font-semibold">
-        Giriş Yap
+        {success ? "Giriş yapılıyor..." : "Giriş Yap"}
       </button>
     </form>
   );
