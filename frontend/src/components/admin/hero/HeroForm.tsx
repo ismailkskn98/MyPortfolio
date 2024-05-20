@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { Hero as HeroType } from "@/app/(admin)/admin/hero/page";
 
 // http://localhost:7930/api
@@ -41,9 +41,9 @@ const HeroForm = ({ data }: { data: HeroType }) => {
       });
       const data: ResponseData = await response.json();
       if (data.error) {
-        setErrorMessage(data.message);
+        return setErrorMessage(data.message);
       }
-      setSuccessMessage(data.message);
+      return setSuccessMessage(data.message);
     } catch (error) {
       if (error instanceof Error) {
         return setErrorMessage(error.message);
@@ -53,11 +53,27 @@ const HeroForm = ({ data }: { data: HeroType }) => {
     }
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setErrorMessage("");
+      setSuccessMessage("");
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [errorMessage, successMessage]);
+
   return (
     <form onSubmit={handleSubmit} className="basis-1/4 flex flex-col items-start mx-auto gap-5">
       <input type="hidden" value={id} />
-      {errorMessage}
-      {successMessage}
+      {errorMessage.length > 0 && (
+        <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
+          {errorMessage}
+        </p>
+      )}
+      {successMessage.length > 0 && (
+        <p className="w-full px-4 py-4 bg-green-500 text-green-900 rounded flex items-center justify-center">
+          {successMessage}
+        </p>
+      )}
       <div className="w-full flex flex-col gap-1">
         <label htmlFor="name">İsim</label>
         <input

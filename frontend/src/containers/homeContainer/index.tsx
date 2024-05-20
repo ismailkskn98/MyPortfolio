@@ -25,7 +25,7 @@ const HomeContainer = async ({ blog, hero }: { blog: Blog; hero: HeroType }) => 
       <NavigationBar />
       <Hero>
         <Left>
-          <ImageName />
+          <ImageName hero={hero} />
           <CardInfo hero={hero} />
           <CvButton />
         </Left>
