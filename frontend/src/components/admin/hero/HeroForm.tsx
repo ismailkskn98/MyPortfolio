@@ -40,8 +40,6 @@ const HeroForm = ({ data }: { data: HeroType }) => {
   };
 
   const handleSubmit = async (values: InitialValues, actions: FormikHelpers<InitialValues>) => {
-    console.log(values);
-
     try {
       const response = await fetch(`${BASE_URL}/admin/hero/${id}`, {
         method: "PUT",
@@ -73,8 +71,13 @@ const HeroForm = ({ data }: { data: HeroType }) => {
   }, [errorMessage, successMessage]);
 
   return (
-    <Formik initialValues={initialValues} validationSchema={heroSchema} onSubmit={handleSubmit}>
-      {({ isSubmitting }) => (
+    <Formik
+      initialValues={initialValues}
+      validationSchema={heroSchema}
+      onSubmit={handleSubmit}
+      validateOnMount={true}
+    >
+      {({ isSubmitting, isValid }) => (
         <Form className="basis-1/4 flex flex-col items-start mx-auto gap-5">
           {errorMessage.length > 0 && (
             <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
@@ -94,7 +97,8 @@ const HeroForm = ({ data }: { data: HeroType }) => {
           <CustomSelect labelText="Şehir" input={{ id: "city", name: "city" }} />
           <button
             type="submit"
-            className="px-4 py-2 rounded border-none outline-none bg-BG2 text-white self-end font-semibold hover:bg-BG1 cursor-pointer transition-all"
+            className={`px-4 py-2 rounded border-none outline-none bg-BG2 text-white self-end font-semibold hover:bg-BG1 cursor-pointer transition-all disabled:bg-gray-600 disabled:text-white disabled:cursor-not-allowed`}
+            disabled={!isValid || isSubmitting}
           >
             {isSubmitting ? "Güncelleniyor..." : "Güncelle"}
           </button>
