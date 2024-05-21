@@ -5,11 +5,17 @@ import React from "react";
 // http://localhost:7930/api
 const BASE_URL = process.env.BASE_URL;
 
+export type ErrorMessage = {
+  message: string;
+  error: boolean;
+  success: boolean;
+};
+
 const getLastBlog = async () => {
   try {
     const response = await fetch(`${BASE_URL}/blogs/lastblog`);
     if (!response.ok) {
-      const errorMessage = await response.json();
+      const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);
     }
     const data = await response.json();
@@ -27,7 +33,7 @@ const getHero = async () => {
   try {
     const response = await fetch(`${BASE_URL}/hero`);
     if (!response.ok) {
-      const errorMessage = await response.json();
+      const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);
     }
     const data = await response.json();

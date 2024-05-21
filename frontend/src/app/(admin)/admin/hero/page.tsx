@@ -1,3 +1,4 @@
+import type { ErrorMessage } from "@/app/(site)/page";
 import HeroContainer from "@/containers/heroContainer";
 import React from "react";
 
@@ -18,7 +19,7 @@ const getHero = async () => {
   try {
     const response = await fetch(`${BASE_URL}/admin/hero/1`, { method: "GET" });
     if (!response.ok) {
-      const errorMessage = await response.json();
+      const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);
     }
     const data = await response.json();
@@ -34,7 +35,6 @@ const getHero = async () => {
 
 const Hero = async () => {
   const data: Hero | string = await getHero();
-
   if (typeof data === "string") {
     throw new Error(data);
   }

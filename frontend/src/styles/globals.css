@@ -40,3 +40,7 @@ html {
   color: #292f36;
   transition: all 0.2s ease;
 }
+
+.ProseMirror-focused {
+  outline: none !important;
+}

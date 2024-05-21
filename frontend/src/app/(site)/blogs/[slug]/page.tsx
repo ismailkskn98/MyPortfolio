@@ -2,6 +2,7 @@ import BlogContent from "@/components/site/blog/blogContent";
 import type { Blog } from "@/components/site/blog/blogContent";
 import BlogContainer from "@/containers/blogContainer";
 import React from "react";
+import type { ErrorMessage } from "../../page";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -9,7 +10,7 @@ const getBlog = async (slug: string) => {
   try {
     const response = await fetch(`${BASE_URL}/blogs/${slug}`);
     if (!response.ok) {
-      const errorMessage = await response.json();
+      const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.messsage);
     }
     const data = await response.json();
