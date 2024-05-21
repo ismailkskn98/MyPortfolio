@@ -10,7 +10,7 @@ module.exports = {
         email: "hamdismail@gmail.com",
         website: "www.hamdi.com.tr",
         freelancer: "Freelancer",
-        location: "Ankara",
+        city: "Ankara",
       },
     ]);
   },

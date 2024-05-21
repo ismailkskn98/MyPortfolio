@@ -22,7 +22,9 @@ exports.login = async (req, res) => {
 
     // Kullanıcı yoksa hata döndür
     if (!user) {
-      return res.status(400).json({ message: "Hatalı email ya da parola" });
+      return res
+        .status(400)
+        .json({ message: "Hatalı email ya da parola", success: false, error: true });
     }
 
     // Parola kontrolü

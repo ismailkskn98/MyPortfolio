@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       job: DataTypes.STRING,
       email: DataTypes.STRING,
       freelancer: DataTypes.STRING,
-      location: DataTypes.STRING,
+      city: DataTypes.STRING,
       website: DataTypes.STRING,
     },
     {
