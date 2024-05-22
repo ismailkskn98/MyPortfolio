@@ -1,10 +1,32 @@
 import { Editor } from "@tiptap/react";
 import React from "react";
-import { BiBold, BiItalic } from "react-icons/bi";
+import { BiFontFamily } from "react-icons/bi";
+import { GrRedo, GrUndo } from "react-icons/gr";
+import {
+  LuBold,
+  LuCode,
+  LuHeading2,
+  LuHeading3,
+  LuHeading4,
+  LuItalic,
+  LuList,
+  LuListOrdered,
+  LuQuote,
+  LuStrikethrough,
+  LuUnderline,
+} from "react-icons/lu";
+import { TfiParagraph } from "react-icons/tfi";
 
 type ToolbarProps = {
   content: string;
   editor: Editor | null;
+};
+
+type ToolbarItem = {
+  icon: React.ElementType | string;
+  tooltip: string;
+  action: () => void;
+  isActive: string | [string, { [key: string]: number | string }];
 };
 
 const Toolbar: React.FC<ToolbarProps> = ({ content, editor }) => {
@@ -12,32 +34,143 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, editor }) => {
     return null;
   }
 
-  const handleBoldClick = () => {
-    editor.chain().focus().toggleBold().run();
-  };
-
-  const handleItalicClick = () => {
-    editor.chain().focus().toggleItalic().run();
-  };
+  const toolbarItems: ToolbarItem[] = [
+    {
+      icon: GrUndo,
+      tooltip: "Geri Al",
+      action: () => editor.chain().focus().undo().run(),
+      isActive: "undo",
+    },
+    {
+      icon: GrRedo,
+      tooltip: "İleri Al",
+      action: () => editor.chain().focus().redo().run(),
+      isActive: "redo",
+    },
+    {
+      icon: "Inter",
+      tooltip: "Font Family Inter",
+      action: () => editor.chain().focus().setFontFamily("Inter").run(),
+      isActive: ["fontFamily", { fontFamily: "Inter" }],
+    },
+    {
+      icon: "monospace",
+      tooltip: "Font Family monospace",
+      action: () => editor.chain().focus().setFontFamily("monospace").run(),
+      isActive: ["fontFamily", { fontFamily: "monospace" }],
+    },
+    {
+      icon: LuHeading2,
+      tooltip: "Başlık 2",
+      action: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
+      isActive: ["heading", { level: 2 }],
+    },
+    {
+      icon: LuHeading3,
+      tooltip: "Başlık 3",
+      action: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
+      isActive: ["heading", { level: 3 }],
+    },
+    {
+      icon: LuHeading4,
+      tooltip: "Başlık 4",
+      action: () => editor.chain().focus().toggleHeading({ level: 4 }).run(),
+      isActive: ["heading", { level: 4 }],
+    },
+    {
+      icon: LuBold,
+      tooltip: "Kalın",
+      action: () => editor.chain().focus().toggleBold().run(),
+      isActive: "bold",
+    },
+    {
+      icon: LuItalic,
+      tooltip: "Italic",
+      action: () => editor.chain().focus().toggleItalic().run(),
+      isActive: "italic",
+    },
+    {
+      icon: LuUnderline,
+      tooltip: "Altı Çizili",
+      action: () => editor.chain().focus().toggleUnderline().run(),
+      isActive: "underline",
+    },
+    {
+      icon: LuStrikethrough,
+      tooltip: "Üstü Çizili",
+      action: () => editor.chain().focus().toggleStrike().run(),
+      isActive: "strike",
+    },
+    {
+      icon: LuList,
+      tooltip: "Nokta Listesi",
+      action: () => editor.chain().focus().toggleBulletList().run(),
+      isActive: "bulletList",
+    },
+    {
+      icon: LuListOrdered,
+      tooltip: "Numara Listesi",
+      action: () => editor.chain().focus().toggleOrderedList().run(),
+      isActive: "orderedList",
+    },
+    {
+      icon: LuQuote,
+      tooltip: "Alıntı",
+      action: () => editor.chain().focus().toggleBlockquote().run(),
+      isActive: "blockquote",
+    },
+    {
+      icon: LuCode,
+      tooltip: "Kod",
+      action: () => editor.chain().focus().toggleCode().run(),
+      isActive: "code",
+    },
+    {
+      icon: TfiParagraph,
+      tooltip: "Paragraf",
+      action: () => editor.chain().focus().setParagraph().run(),
+      isActive: "paragraph",
+    },
+    {
+      icon: "Brand1",
+      tooltip: "Brand1 Color",
+      action: () => editor.chain().focus().setColor("#12F7D6").run(),
+      isActive: ["textStyle", { color: "#12F7D6" }],
+    },
+    {
+      icon: "Brand2",
+      tooltip: "Brand2 Color",
+      action: () => editor.chain().focus().setColor("#98FAEC").run(),
+      isActive: ["textStyle", { color: "#98FAEC" }],
+    },
+  ];
 
   return (
-    <section id="buttons" className="flex items-center gap-2 mb-1">
-      <button
-        onClick={handleBoldClick}
-        className={`${
-          editor.isActive("bold") && "bg-red-600 text-white"
-        } border-none outline-none px-2 py-1`}
-      >
-        <BiBold className="w-5 h-5" />
-      </button>
-      <button
-        onClick={handleItalicClick}
-        className={`${
-          editor.isActive("italic") && "bg-red-600 text-white"
-        } border-none outline-none px-2 py-1`}
-      >
-        <BiItalic className="w-5 h-5" />
-      </button>
+    <section id="buttons" className="w-full flex items-center gap-2 p-2">
+      {toolbarItems.map((item: ToolbarItem, i) => {
+        const isActive: boolean = Array.isArray(item.isActive)
+          ? editor.isActive(item.isActive[0], item.isActive[1])
+          : editor.isActive(item.isActive);
+        const icon = typeof item.icon === "string" ? item.icon : <item.icon className="w-6 h-6" />;
+        return (
+          <button
+            key={i}
+            onClick={item.action}
+            className={`${
+              isActive ? "bg-BG1 text-Brand1" : "bg-BG2 text-White"
+            } border-none outline-none px-2 py-1 rounded-sm cursor-pointer hover:bg-gray-400`}
+          >
+            {icon}
+          </button>
+        );
+      })}
+      <input
+        type="color"
+        onInput={(event) => {
+          const target = event.target as HTMLInputElement;
+          editor.chain().focus().setColor(target.value).run();
+        }}
+      />
     </section>
   );
 };

@@ -48,12 +48,14 @@ const getHero = async () => {
 };
 
 const Home = async () => {
-  const [resultLastBlog, resultHero] = await Promise.all([getLastBlog(), getHero()]);
+  const [resultLastBlog, resultGetHero] = await Promise.all([getLastBlog(), getHero()]);
 
-  if (typeof resultLastBlog === "string" || typeof resultHero === "string") {
-    throw new Error(resultLastBlog);
+  if (typeof resultLastBlog === "string" || typeof resultGetHero === "string") {
+    throw new Error(
+      "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun."
+    );
   }
-  return <HomeContainer blog={resultLastBlog} hero={resultHero} />;
+  return <HomeContainer blog={resultLastBlog} hero={resultGetHero} />;
 };
 
 export default Home;

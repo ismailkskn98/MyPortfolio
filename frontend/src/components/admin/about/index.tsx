@@ -42,19 +42,22 @@ const About = ({ data }: { data: AboutType }) => {
   }, [errorMessage, successMessage]);
 
   return (
-    <>
-      {errorMessage.length > 0 && (
-        <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
-          {errorMessage}
-        </p>
-      )}
-      {successMessage.length > 0 && (
-        <p className="w-full px-4 py-4 bg-green-500 text-green-900 rounded flex items-center justify-center">
-          {successMessage}
-        </p>
-      )}
-      <Tiptap initialContent={initialContent} onSave={handleSave} />
-    </>
+    <main className="w-full px-6 flex flex-col gap-5 shadow-md py-8">
+      <h1 className="w-full flex items-center justify-center text-4xl">Hakkımda Düzenle</h1>
+      <section>
+        {errorMessage.length > 0 && (
+          <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
+            {errorMessage}
+          </p>
+        )}
+        {successMessage.length > 0 && (
+          <p className="w-full px-4 py-4 bg-green-500 text-green-900 rounded flex items-center justify-center">
+            {successMessage}
+          </p>
+        )}
+        <Tiptap initialContent={initialContent} onSave={handleSave} />
+      </section>
+    </main>
   );
 };
 
