@@ -123,19 +123,20 @@ exports.get_hero = async (req, res) => {
   try {
     const hero = await Hero.findOne({
       // Hero'yu veritabanından al
-      attributes: ["name", "job", "email", "freelancer", "location", "website"],
+      order: [["id", "DESC"]],
+      attributes: ["name", "job", "email", "freelancer", "city", "website"],
       raw: true,
     });
 
     // Eğer hero yoksa hata döndür
     if (!hero) {
-      res.status(401).json({ message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin." });
+      res.status(401).send({ message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin." });
     }
     // hero varsa gönder
-    return res.json(hero);
+    return res.send(hero);
   } catch (error) {
     // Sunucu hatası mesajı gönder
-    res.status(500).json({
+    res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
     });
