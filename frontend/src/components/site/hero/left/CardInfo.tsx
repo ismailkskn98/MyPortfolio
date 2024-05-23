@@ -10,13 +10,6 @@ type CardInfoItem = {
   icon: React.ElementType;
 };
 
-const CardInfoItems: CardInfoItem[] = [
-  { name: "hamdismailkskn@gmail.com", icon: IoMailOutline },
-  { name: "Türkiye", icon: IoLocationOutline },
-  { name: "Full Time / Freelancer", icon: MdOutlineHomeWork },
-  { name: "www.ismailkeskin.net", icon: LuLink },
-];
-
 const CardInfo = ({ hero }: { hero: Hero }) => {
   const CardInfoItems: CardInfoItem[] = [
     { name: hero.email, icon: IoMailOutline },
