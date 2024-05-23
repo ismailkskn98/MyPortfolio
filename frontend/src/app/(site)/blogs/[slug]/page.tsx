@@ -4,14 +4,14 @@ import BlogContainer from "@/containers/blogContainer";
 import React from "react";
 import type { ErrorMessage } from "../../page";
 
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL_API = process.env.BASE_URL_API;
 
 const getBlog = async (slug: string) => {
   try {
-    const response = await fetch(`${BASE_URL}/blogs/${slug}`);
+    const response = await fetch(`${BASE_URL_API}/blogs/${slug}`);
     if (!response.ok) {
       const errorMessage: ErrorMessage = await response.json();
-      throw new Error(errorMessage.messsage);
+      throw new Error(errorMessage.message);
     }
     const data = await response.json();
     return data;

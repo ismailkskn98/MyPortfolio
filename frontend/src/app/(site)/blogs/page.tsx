@@ -4,11 +4,11 @@ import React from "react";
 import type { ErrorMessage } from "../page";
 
 // http://localhost:7930/api
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL_API = process.env.BASE_URL_API;
 
 const getBlogs = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/blogs`, { method: "GET" });
+    const response = await fetch(`${BASE_URL_API}/blogs`, { method: "GET" });
     if (!response.ok) {
       const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);

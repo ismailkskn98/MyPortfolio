@@ -7,7 +7,7 @@ import { LoginFormItem, loginFormItems } from "./LoginFormItems";
 import CustomInput from "./CustomInput";
 
 // http://localhost:7930/api
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL;
 
 type LoginResponse = {
   message: string;
@@ -37,7 +37,7 @@ const LoginForm = () => {
   });
 
   const handleSubmit = async (values: InitialValues) => {
-    const response = await fetch(`${BASE_URL}/auth/login`, {
+    const response = await fetch(`${BASE_URL_API}/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: {

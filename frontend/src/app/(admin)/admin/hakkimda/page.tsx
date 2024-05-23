@@ -3,7 +3,7 @@ import AboutContainer from "@/containers/aboutContainer";
 import React from "react";
 
 // http://localhost:7930/api
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL_API = process.env.BASE_URL_API;
 
 export type AboutType = {
   about: string;
@@ -11,7 +11,7 @@ export type AboutType = {
 
 const getAbout = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/admin/about`, { method: "GET" });
+    const response = await fetch(`${BASE_URL_API}/admin/about`, { method: "GET" });
     if (!response.ok) {
       const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);

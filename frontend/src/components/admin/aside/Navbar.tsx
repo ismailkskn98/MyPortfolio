@@ -3,6 +3,11 @@ import Link from "next/link";
 import React from "react";
 import { FaHome } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { IoGitNetworkSharp, IoPersonSharp } from "react-icons/io5";
+import { TbArrowRoundaboutLeft } from "react-icons/tb";
+import { GiSkills } from "react-icons/gi";
+import { RiMessage2Fill } from "react-icons/ri";
+import { BiLogoBlogger } from "react-icons/bi";
 
 type NavItem = {
   name: string;
@@ -15,13 +20,14 @@ const Navbar = () => {
 
   const navItems: NavItem[] = [
     { name: "Anasayfa", href: "/admin", icon: FaHome },
-    { name: "Hero", href: "/admin/hero", icon: FaHome },
-    { name: "Hakkımda", href: "/admin/hakkimda", icon: FaHome },
-    { name: "Yetenekler", href: "/admin/yetenekler", icon: FaHome },
-    { name: "İşler", href: "/admin/isler", icon: FaHome },
-    { name: "Bloglarım", href: "/admin/bloglarim", icon: FaHome },
-    { name: "Blog Ekle", href: "/admin/blog-ekle", icon: FaHome },
-    { name: "Mesajlar", href: "/admin/mesajlar", icon: FaHome },
+    { name: "Hero", href: "/admin/hero", icon: IoPersonSharp },
+    { name: "Hakkımda", href: "/admin/hakkimda", icon: TbArrowRoundaboutLeft },
+    { name: "Yetenekler", href: "/admin/yetenekler", icon: GiSkills },
+    { name: "Yetenek Ekle", href: "/admin/yetenek-ekle", icon: GiSkills },
+    { name: "İşler", href: "/admin/isler", icon: IoGitNetworkSharp },
+    { name: "Bloglarım", href: "/admin/bloglarim", icon: BiLogoBlogger },
+    { name: "Blog Ekle", href: "/admin/blog-ekle", icon: BiLogoBlogger },
+    { name: "Mesajlar", href: "/admin/mesajlar", icon: RiMessage2Fill },
   ];
 
   return (

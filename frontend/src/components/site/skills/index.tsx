@@ -8,7 +8,7 @@ const Skills = () => {
       <main className="flex flex-col items-center bg-skills-bg bg-right bg-no-repeat bg-cover gap-16 px-6 py-16 sm:p-16 lg:p-32">
         <ModuleTitle
           description="Öğrenmeyi ve gelişmeyi asla bırakmamaya çalışıyorum"
-          title="Beceriler"
+          title="Yetenekler"
           isHome={true}
         />
         <SkillsContent />

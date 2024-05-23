@@ -1,0 +1,23 @@
+.table,
+.table td,
+.table th {
+  border: 2px solid #dddddd;
+  text-align: center;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 50%;
+}
+
+.th {
+  font-weight: 600;
+  background: #1a1e23;
+  color: white;
+}
+
+.th,
+.td {
+  padding: 0.5rem 1rem;
+  text-transform: capitalize;
+}

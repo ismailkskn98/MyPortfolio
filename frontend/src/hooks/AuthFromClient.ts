@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 
 // http://localhost:7930/api
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL;
 
 export type Payload = {
   username: string;
@@ -35,7 +35,7 @@ export const AuthFromClient = (): [Payload | null, string | null] => {
 
       try {
         // token'ı server'a gönderme
-        const response: Response = await fetch(`${BASE_URL}/auth/verify-token`, {
+        const response: Response = await fetch(`${BASE_URL_API}/auth/verify-token`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

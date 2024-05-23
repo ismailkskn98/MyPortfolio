@@ -2,7 +2,7 @@ import HomeContainer from "@/containers/homeContainer";
 import React from "react";
 
 // http://localhost:7930/api
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL_API = process.env.BASE_URL_API;
 
 export type ErrorMessage = {
   message: string;
@@ -12,7 +12,7 @@ export type ErrorMessage = {
 
 const getLastBlog = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/blogs/lastblog`);
+    const response = await fetch(`${BASE_URL_API}/blogs/lastblog`);
     if (!response.ok) {
       const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);
@@ -30,7 +30,7 @@ const getLastBlog = async () => {
 
 const getHero = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/hero`);
+    const response = await fetch(`${BASE_URL_API}/hero`);
     if (!response.ok) {
       const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);
@@ -48,7 +48,7 @@ const getHero = async () => {
 
 const getAbout = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/about`);
+    const response = await fetch(`${BASE_URL_API}/about`);
     if (!response.ok) {
       const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);

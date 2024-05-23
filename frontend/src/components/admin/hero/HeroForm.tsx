@@ -8,7 +8,7 @@ import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
 
 // http://localhost:7930/api
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL;
 
 type ResponseData = {
   message: string;
@@ -41,7 +41,7 @@ const HeroForm = ({ data }: { data: HeroType }) => {
 
   const handleSubmit = async (values: InitialValues, actions: FormikHelpers<InitialValues>) => {
     try {
-      const response = await fetch(`${BASE_URL}/admin/hero/${id}`, {
+      const response = await fetch(`${BASE_URL_API}/admin/hero/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
