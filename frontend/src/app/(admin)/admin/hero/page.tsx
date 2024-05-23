@@ -12,12 +12,12 @@ export type Hero = {
   email: string;
   freelancer: string;
   website: string;
-  location: string;
+  city: string;
 };
 
 const getHero = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/admin/hero/1`, { method: "GET" });
+    const response = await fetch(`${BASE_URL}/admin/hero`, { method: "GET" });
     if (!response.ok) {
       const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);

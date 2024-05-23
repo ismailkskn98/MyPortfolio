@@ -1,25 +1,31 @@
-import Hero from "@/components/site/hero";
 import React from "react";
+import Hero from "@/components/site/hero";
 import Left from "@/components/site/hero/left";
 import Right from "@/components/site/hero/right";
 import NavigationBar from "@/components/site/navigationBar";
 import About from "@/components/site/about";
 import Skills from "@/components/site/skills";
 import Works from "@/components/site/works";
-import BlogColumn from "@/components/site/blog/blogColumn";
-import Content from "@/components/site/blog/blogColumn/Content";
-import type { Blog } from "@/components/site/blog/blogColumn/Content";
 import HomeBlog from "@/components/site/homeBlog";
 import ModuleTitle from "@/components/site/moduleTitle";
 import Contact from "@/components/site/contact";
 import ContactTitle from "@/components/site/contact/ContactTitle";
 import ContactForm from "@/components/site/contact/ContactForm";
-import type { Hero as HeroType } from "@/app/(admin)/admin/hero/page";
+import BlogColumn from "@/components/site/blog/blogColumn";
+import Content from "@/components/site/blog/blogColumn/Content";
 import ImageName from "@/components/site/hero/left/ImageName";
 import CardInfo from "@/components/site/hero/left/CardInfo";
 import CvButton from "@/components/site/hero/left/CvButton";
+import MouseArrow from "@/components/site/about/MouseArrow";
+import AboutContent from "@/components/site/about/AboutContent";
+import AboutTitle from "@/components/site/about/AboutTitle";
+import AboutText from "@/components/site/about/AboutText";
+// type
+import type { Blog } from "@/components/site/blog/blogColumn/Content";
+import type { Hero as HeroType } from "@/app/(admin)/admin/hero/page";
+import type { AboutType } from "@/app/(admin)/admin/hakkimda/page";
 
-const HomeContainer = async ({ blog, hero }: { blog: Blog; hero: HeroType }) => {
+const HomeContainer = ({ blog, hero, about }: { blog: Blog; hero: HeroType; about: AboutType }) => {
   return (
     <>
       <NavigationBar />
@@ -31,7 +37,13 @@ const HomeContainer = async ({ blog, hero }: { blog: Blog; hero: HeroType }) => 
         </Left>
         <Right />
       </Hero>
-      <About />
+      <About>
+        <MouseArrow />
+        <AboutContent>
+          <AboutTitle />
+          <AboutText about={about} />
+        </AboutContent>
+      </About>
       <Skills />
       <Works />
       <HomeBlog>

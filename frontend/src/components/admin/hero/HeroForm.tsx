@@ -35,7 +35,7 @@ const HeroForm = ({ data }: { data: HeroType }) => {
     job: data.job,
     email: data.email,
     freelancer: data.freelancer,
-    city: data.location,
+    city: data.city,
     website: data.website,
   };
 

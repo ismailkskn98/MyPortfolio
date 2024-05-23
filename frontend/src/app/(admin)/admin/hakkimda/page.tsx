@@ -11,7 +11,7 @@ export type AboutType = {
 
 const getAbout = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/admin/about/1`, { method: "GET" });
+    const response = await fetch(`${BASE_URL}/admin/about`, { method: "GET" });
     if (!response.ok) {
       const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);

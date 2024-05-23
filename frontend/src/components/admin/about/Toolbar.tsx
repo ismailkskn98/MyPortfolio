@@ -1,6 +1,5 @@
 import { Editor } from "@tiptap/react";
 import React from "react";
-import { BiFontFamily } from "react-icons/bi";
 import { GrRedo, GrUndo } from "react-icons/gr";
 import {
   LuBold,
@@ -46,18 +45,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, editor }) => {
       tooltip: "İleri Al",
       action: () => editor.chain().focus().redo().run(),
       isActive: "redo",
-    },
-    {
-      icon: "Inter",
-      tooltip: "Font Family Inter",
-      action: () => editor.chain().focus().setFontFamily("Inter").run(),
-      isActive: ["fontFamily", { fontFamily: "Inter" }],
-    },
-    {
-      icon: "monospace",
-      tooltip: "Font Family monospace",
-      action: () => editor.chain().focus().setFontFamily("monospace").run(),
-      isActive: ["fontFamily", { fontFamily: "monospace" }],
     },
     {
       icon: LuHeading2,

@@ -1,4 +1,3 @@
-import type { Blog } from "@/components/site/blog/blogColumn/Content";
 import HomeContainer from "@/containers/homeContainer";
 import React from "react";
 
@@ -47,15 +46,41 @@ const getHero = async () => {
   }
 };
 
-const Home = async () => {
-  const [resultLastBlog, resultGetHero] = await Promise.all([getLastBlog(), getHero()]);
+const getAbout = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/about`);
+    if (!response.ok) {
+      const errorMessage: ErrorMessage = await response.json();
+      throw new Error(errorMessage.message);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    if (error instanceof Error) {
+      return error.message;
+    } else {
+      return "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
+    }
+  }
+};
 
-  if (typeof resultLastBlog === "string" || typeof resultGetHero === "string") {
+const Home = async () => {
+  const [resultLastBlog, resultGetHero, resultGetAbout] = await Promise.all([
+    getLastBlog(),
+    getHero(),
+    getAbout(),
+  ]);
+
+  if (
+    typeof resultLastBlog === "string" ||
+    typeof resultGetHero === "string" ||
+    typeof resultGetAbout === "string"
+  ) {
     throw new Error(
       "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun."
     );
   }
-  return <HomeContainer blog={resultLastBlog} hero={resultGetHero} />;
+  return <HomeContainer blog={resultLastBlog} hero={resultGetHero} about={resultGetAbout} />;
 };
 
 export default Home;

@@ -20,7 +20,7 @@ const CardInfoItems: CardInfoItem[] = [
 const CardInfo = ({ hero }: { hero: Hero }) => {
   const CardInfoItems: CardInfoItem[] = [
     { name: hero.email, icon: IoMailOutline },
-    { name: `Türkiye / ${hero.location}`, icon: IoLocationOutline },
+    { name: `Türkiye / ${hero.city}`, icon: IoLocationOutline },
     { name: hero.freelancer, icon: MdOutlineHomeWork },
     { name: hero.website, icon: LuLink },
   ];
