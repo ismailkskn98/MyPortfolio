@@ -3,11 +3,6 @@ const Category = require("../models").Category;
 const User = require("../models").User;
 const Hero = require("../models").Hero;
 const About = require("../models").About;
-const path = require("path");
-const multer = require("multer");
-
-// Yüklenen dosyaların hedef dizini belirleme
-const upload = multer({ dest: path.join(__dirname, "..", "public/images") });
 
 // Tüm blogları getir
 exports.get_blogs = async (req, res) => {

@@ -1,5 +1,6 @@
 const Hero = require("../models").Hero;
 const About = require("../models").About;
+const Skill = require("../models").Skill;
 
 exports.get_hero = async (req, res) => {
   try {
@@ -104,6 +105,64 @@ exports.put_about = async (req, res) => {
     res.status(500).json({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      success: false,
+      error: true,
+    });
+  }
+};
+
+exports.get_skills = async (req, res) => {
+  try {
+    // veritabanından yetenekleri al
+    const skills = await Skill.findAll({
+      attributes: ["id", "name", "image"],
+      raw: true,
+    });
+
+    // eğer bulamazsak hata döndürelim
+    if (!skills) {
+      res.status(401).send({
+        message: "Yetenekler bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+
+    // veritabanında bulunduysa
+    res.send(skills);
+  } catch (error) {
+    // sunucu hatası
+    res.status(500).json({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      success: false,
+      error: true,
+    });
+  }
+};
+exports.post_skills = async (req, res) => {
+  const image = req.file.filename;
+
+  const name = req.body.name;
+  const editImage = "images/" + image;
+  try {
+    // veritabanına yeni yeteneği ekle
+    const skill = await Skill.create({ name, image: editImage });
+    // eklemede bir sorun oluştuysa
+    if (!skill) {
+      res.status(401).send({
+        message: "Yetenek eklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+    // ekleme başarılı ise
+    res.send({ message: "Yetenek başarıyla eklendi.", success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    res.status(500).send({
+      message:
+        "Sunucuda bir hata oluştu. ütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
       error: true,
     });
