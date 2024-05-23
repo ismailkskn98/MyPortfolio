@@ -2,6 +2,7 @@ const Blog = require("../models").Blog;
 const Category = require("../models").Category;
 const User = require("../models").User;
 const Hero = require("../models").Hero;
+const About = require("../models").About;
 const path = require("path");
 const multer = require("multer");
 
@@ -139,6 +140,36 @@ exports.get_hero = async (req, res) => {
     res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+    });
+  }
+};
+
+// About'u getir
+exports.get_about = async (req, res) => {
+  try {
+    // about veritabanından al
+    const about = await About.findOne({
+      order: [["id", "DESC"]],
+      attributes: ["about"],
+      raw: true,
+    });
+
+    // veritabanında bulunadıysa hata mesajı
+    if (!about) {
+      res.status(401).send({
+        message: "Hakkımda bulunamadı, Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+    // about var ise
+    res.send(about);
+  } catch (error) {
+    res.status(500).json({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      success: false,
+      error: true,
     });
   }
 };

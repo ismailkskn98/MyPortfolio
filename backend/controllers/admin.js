@@ -2,11 +2,9 @@ const Hero = require("../models").Hero;
 const About = require("../models").About;
 
 exports.get_hero = async (req, res) => {
-  const { id } = req.params;
-
   try {
     // Hero'yu veritabanından ıd'ye göre al
-    const hero = await Hero.findByPk(id, { raw: true });
+    const hero = await Hero.findOne({ order: [["id", "DESC"]], raw: true });
     // Eğer hero yoksa hata döndür
     if (!hero) {
       res.status(401).json({
@@ -61,10 +59,12 @@ exports.put_hero = async (req, res) => {
 };
 
 exports.get_about = async (req, res) => {
-  const { id } = req.params;
   try {
     // about veritabanından al
-    const about = await About.findByPk(id, { attributes: ["about"], raw: true });
+    const about = await About.findOne({
+      order: [["id", "DESC"]],
+      raw: true,
+    });
 
     // veritabanında bulunadıysa hata mesajı
     if (!about) {
