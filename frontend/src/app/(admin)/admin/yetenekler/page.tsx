@@ -14,7 +14,6 @@ export type SkillsType = {
 const getSkills = async () => {
   try {
     const response = await fetch(`${BASE_URL_API}/admin/skills`, { method: "GET" });
-
     if (!response.ok) {
       const errorMessage: ErrorMessage = await response.json();
       throw new Error(errorMessage.message);
@@ -32,7 +31,6 @@ const getSkills = async () => {
 
 const Yetenekler = async () => {
   const data: SkillsType[] | string = await getSkills();
-
   if (typeof data === "string") {
     throw new Error(data);
   }

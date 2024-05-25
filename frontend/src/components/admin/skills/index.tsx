@@ -8,7 +8,7 @@ const BASE_URL = process.env.BASE_URL;
 
 const Skills = ({ data }: { data: SkillsType[] }) => {
   return (
-    <main className="w-full px-6 flex flex-col gap-5 shadow-md py-8">
+    <main className="w-full px-6 flex flex-col gap-5 shadow-md py-8 bg-BG2 text-white">
       <h1 className="w-full flex items-center justify-center text-4xl">Yetenekler</h1>
       <section className="w-full flex justify-center items-center">
         <table className={styles.table}>

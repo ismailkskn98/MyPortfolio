@@ -70,7 +70,6 @@ const Home = async () => {
     getHero(),
     getAbout(),
   ]);
-
   if (
     typeof resultLastBlog === "string" ||
     typeof resultGetHero === "string" ||
