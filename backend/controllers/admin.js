@@ -2,6 +2,7 @@ const Hero = require("../models").Hero;
 const About = require("../models").About;
 const Skill = require("../models").Skill;
 
+// Hero - Kişisel Bilgiler
 exports.get_hero = async (req, res) => {
   try {
     // Hero'yu veritabanından ıd'ye göre al
@@ -59,6 +60,7 @@ exports.put_hero = async (req, res) => {
   }
 };
 
+// About - Hakkimda
 exports.get_about = async (req, res) => {
   try {
     // about veritabanından al
@@ -111,6 +113,7 @@ exports.put_about = async (req, res) => {
   }
 };
 
+// Skills - Yetenekler
 exports.get_skills = async (req, res) => {
   try {
     // veritabanından yetenekleri al
@@ -162,9 +165,66 @@ exports.post_skills = async (req, res) => {
     // sunucu hatası
     return res.status(500).send({
       message:
-        "Sunucuda bir hata oluştu. ütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
       error: true,
+    });
+  }
+};
+exports.put_skillById = async (req, res) => {
+  const { id } = req.params;
+  const image = req.file.filename;
+  const name = req.body.name;
+  try {
+    // veritabanında ıd'ye göre image ve name alanlarını güncelle
+    const skill = await Skill.update(
+      { image, name },
+      {
+        where: { id },
+      }
+    );
+    // skill yoksa
+    if (!skill) {
+      return res.status(401).send({
+        message: "Yetenek bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+    // skill var ise
+    return res.send({ message: "Yetenek başarıyla güncellendi.", success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
+    });
+  }
+};
+exports.delete_skillById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // veritabanında id'ye göre yeteneği sil
+    const skill = await Skill.destroy({
+      where: { id },
+    });
+
+    // skill yok ise
+    if (!skill) {
+      return res.status(401).send({
+        message: "Yetenek bulunmadı. Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+    // skill var ise
+    return res.send({ message: "Yetenek başarıyla silindi.", success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
     });
   }
 };
