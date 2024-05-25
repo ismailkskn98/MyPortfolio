@@ -29,7 +29,7 @@ exports.get_blogs = async (req, res) => {
     }
 
     // Blogları gönder
-    res.send(blogs);
+    return res.send(blogs);
   } catch (error) {
     // Sunucu hatası mesajı döndürme
     return res.status(500).send({
@@ -100,14 +100,14 @@ exports.get_last_blog = async (req, res) => {
     if (!lastBlog) {
       return res
         .status(404)
-        .json({ message: "blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
+        .send({ message: "blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
     }
 
     // Son blogu gönder
-    return res.json(lastBlog);
+    return res.send(lastBlog);
   } catch (error) {
     // Sunucu hatası mesajı gönder
-    res.status(500).json({
+    res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
     });
@@ -126,13 +126,15 @@ exports.get_hero = async (req, res) => {
 
     // Eğer hero yoksa hata döndür
     if (!hero) {
-      res.status(401).send({ message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin." });
+      return res
+        .status(401)
+        .send({ message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin." });
     }
     // hero varsa gönder
     return res.send(hero);
   } catch (error) {
     // Sunucu hatası mesajı gönder
-    res.status(500).send({
+    return res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
     });
@@ -151,16 +153,16 @@ exports.get_about = async (req, res) => {
 
     // veritabanında bulunadıysa hata mesajı
     if (!about) {
-      res.status(401).send({
+      return res.status(401).send({
         message: "Hakkımda bulunamadı, Lütfen daha sonra tekrar deneyiniz.",
         success: false,
         error: true,
       });
     }
     // about var ise
-    res.send(about);
+    return res.send(about);
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,

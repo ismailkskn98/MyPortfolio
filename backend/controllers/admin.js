@@ -8,17 +8,17 @@ exports.get_hero = async (req, res) => {
     const hero = await Hero.findOne({ order: [["id", "DESC"]], raw: true });
     // Eğer hero yoksa hata döndür
     if (!hero) {
-      res.status(401).json({
+      return res.status(401).send({
         message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin.",
         success: false,
         error: true,
       });
     }
     // hero varsa gönder
-    return res.json(hero);
+    return res.send(hero);
   } catch (error) {
     // Sunucu hatası mesajı gönder
-    res.status(500).json({
+    return res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
@@ -41,16 +41,16 @@ exports.put_hero = async (req, res) => {
 
     // güncellemede bir hata olduysa
     if (!hero) {
-      res
+      return res
         .status(401)
-        .json({ message: "Güncelleme sırasında bir hata oluştu.", success: false, error: true });
+        .send({ message: "Güncelleme sırasında bir hata oluştu.", success: false, error: true });
     }
 
     // başarılı
-    res.json({ message: "Kullanıcı başarıyla güncellendi.", success: true, error: false });
+    return res.send({ message: "Kullanıcı başarıyla güncellendi.", success: true, error: false });
   } catch (error) {
     // Sunucu hatası mesajı gönder
-    res.status(500).json({
+    return res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
@@ -69,16 +69,16 @@ exports.get_about = async (req, res) => {
 
     // veritabanında bulunadıysa hata mesajı
     if (!about) {
-      res.status(401).send({
+      return res.status(401).send({
         message: "Hakkımda bulunamadı, Lütfen daha sonra tekrar deneyiniz.",
         success: false,
         error: true,
       });
     }
     // about var ise
-    res.send(about);
+    return res.send(about);
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
@@ -95,14 +95,14 @@ exports.put_about = async (req, res) => {
 
     // güncellemede bir hata olduysa
     if (!aboutResponse) {
-      res
+      return res
         .status(401)
-        .json({ message: "Güncelleme sırasında bir hata oluştu.", success: false, error: true });
+        .send({ message: "Güncelleme sırasında bir hata oluştu.", success: false, error: true });
     }
     // başarılı
-    res.json({ message: "Hakkımda başarıyla güncellendi.", success: true, error: false });
+    return res.send({ message: "Hakkımda başarıyla güncellendi.", success: true, error: false });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
@@ -121,7 +121,7 @@ exports.get_skills = async (req, res) => {
 
     // eğer bulamazsak hata döndürelim
     if (!skills) {
-      res.status(401).send({
+      return res.status(401).send({
         message: "Yetenekler bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
         success: false,
         error: true,
@@ -129,10 +129,10 @@ exports.get_skills = async (req, res) => {
     }
 
     // veritabanında bulunduysa
-    res.send(skills);
+    return res.send(skills);
   } catch (error) {
     // sunucu hatası
-    res.status(500).json({
+    return res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
@@ -150,17 +150,17 @@ exports.post_skills = async (req, res) => {
     const skill = await Skill.create({ name, image: editImage });
     // eklemede bir sorun oluştuysa
     if (!skill) {
-      res.status(401).send({
+      return res.status(401).send({
         message: "Yetenek eklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
         success: false,
         error: true,
       });
     }
     // ekleme başarılı ise
-    res.send({ message: "Yetenek başarıyla eklendi.", success: true, error: false });
+    return res.send({ message: "Yetenek başarıyla eklendi.", success: true, error: false });
   } catch (error) {
     // sunucu hatası
-    res.status(500).send({
+    return res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. ütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,

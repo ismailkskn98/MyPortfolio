@@ -24,7 +24,7 @@ exports.login = async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ message: "Hatalı email ya da parola", success: false, error: true });
+        .send({ message: "Hatalı email ya da parola", success: false, error: true });
     }
 
     // Parola kontrolü
@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
       // şifre eşleşmiyorsa
       return res
         .status(400)
-        .json({ message: "Hatalı email ya da parola", success: false, error: true });
+        .send({ message: "Hatalı email ya da parola", success: false, error: true });
     }
 
     // JWT token oluşturma
@@ -58,10 +58,10 @@ exports.login = async (req, res) => {
     });
 
     // Başarılı giriş mesajını ve token'i döndürme
-    res.json({ message: "Giriş başarılı", success: true, error: false, token });
+    return res.json({ message: "Giriş başarılı", success: true, error: false, token });
   } catch (error) {
     // Sunucu hatası mesajı döndürme
-    res.status(500).json({
+    return res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
@@ -73,5 +73,5 @@ exports.login = async (req, res) => {
 // Token doğrulama
 exports.verifyToken = async (req, res) => {
   // Doğrulanmış kullanıcı bilgileri
-  res.json(req.user);
+  return res.json(req.user);
 };
