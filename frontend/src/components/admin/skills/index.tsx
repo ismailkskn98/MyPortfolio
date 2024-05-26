@@ -2,6 +2,7 @@ import type { SkillsType } from "@/app/(admin)/admin/yetenekler/page";
 import Image from "next/image";
 import React from "react";
 import styles from "./styles.module.css";
+import Link from "next/link";
 
 // http://localhost:5029
 const BASE_URL = process.env.BASE_URL;
@@ -33,12 +34,18 @@ const Skills = ({ data }: { data: SkillsType[] }) => {
                     />
                   </td>
                   <td className={`${styles.td}`}>
-                    <button className="mr-4 px-2 py-1 border-none outline-none rounded bg-JS text-white cursor-pointer hover:opacity-70">
+                    <Link
+                      href={`/admin/yetenekler/${item.id}`}
+                      className="mr-4 px-2 py-1 border-none outline-none rounded bg-JS text-white cursor-pointer hover:opacity-70"
+                    >
                       Güncelle
-                    </button>
-                    <button className=" px-2 py-1 border-none outline-none rounded bg-red-600 text-white cursor-pointer hover:opacity-70">
+                    </Link>
+                    <Link
+                      href={`/admin/yetenekler/${item.id}`}
+                      className=" px-2 py-1 border-none outline-none rounded bg-red-600 text-white cursor-pointer hover:opacity-70"
+                    >
                       Sil
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               );
