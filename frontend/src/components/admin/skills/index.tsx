@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 
 // http://localhost:5029
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Skills = ({ data }: { data: SkillsType[] }) => {
   return (

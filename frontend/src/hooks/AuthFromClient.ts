@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 
 // http://localhost:7930/api
-const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 export type Payload = {
   username: string;

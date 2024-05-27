@@ -8,7 +8,7 @@ import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
 
 // http://localhost:7930/api
-const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 type ResponseData = {
   message: string;

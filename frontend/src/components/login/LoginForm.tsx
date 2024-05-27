@@ -7,7 +7,7 @@ import { LoginFormItem, loginFormItems } from "./LoginFormItems";
 import CustomInput from "./CustomInput";
 
 // http://localhost:7930/api
-const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 type LoginResponse = {
   message: string;

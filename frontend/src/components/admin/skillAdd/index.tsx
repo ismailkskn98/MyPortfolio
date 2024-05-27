@@ -1,10 +1,10 @@
 "use client";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
+import React, { useEffect, useRef, useState } from "react";
 import { SkillSchema } from "./SkillSchema";
 
 // http://localhost:7930/api
-const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 type FetchMessageType = {
   message: string;
@@ -26,8 +26,12 @@ const SkillAdd = () => {
   const [fileControl, setFileControl] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSubmit = async (values: InitialValues) => {
+  const handleSubmit = async (
+    values: InitialValues,
+    { resetForm }: FormikHelpers<InitialValues>
+  ) => {
     const formData = new FormData();
     if (values.image) {
       formData.append("name", values.name);
@@ -44,6 +48,11 @@ const SkillAdd = () => {
       const data: FetchMessageType = await response.json();
       if (data.error) {
         return setErrorMessage(data.message);
+      }
+      resetForm();
+      setFileControl(false);
+      if (fileInputRef && fileInputRef.current) {
+        fileInputRef.current.value = "";
       }
       return setSuccessMessage(data.message);
     } catch (error) {
@@ -104,6 +113,7 @@ const SkillAdd = () => {
                   type="file"
                   name="image"
                   id="image"
+                  ref={fileInputRef}
                   className="border border-solid rounded-sm px-3 py-2 focus:outline focus:outline-1 border-gray-400 focus:outline-gray-500"
                   onChange={(event) => {
                     if (event.currentTarget.files) {

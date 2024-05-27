@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Tiptap from "../tiptap/Tiptap";
 
 // http://localhost:7930/api
-const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 const About = ({ data }: { data: AboutType }) => {
   const [initialContent, setInitialContent] = useState<string>(data.about);

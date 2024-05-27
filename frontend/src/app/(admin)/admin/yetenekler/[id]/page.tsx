@@ -8,7 +8,7 @@ const BASE_URL_API = process.env.BASE_URL_API;
 export type Skill = {
   id: string | number;
   name: string;
-  image: File;
+  image: string;
 };
 
 const getSkillById = async (id: string) => {

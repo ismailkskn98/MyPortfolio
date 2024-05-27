@@ -5,19 +5,21 @@ import { SkillSchema } from "../skillAdd/SkillSchema";
 import { Skill } from "@/app/(admin)/admin/yetenekler/[id]/page";
 import Image from "next/image";
 import type { ErrorMessage as errMsg } from "@/app/(site)/page";
+import { useRouter } from "next/navigation";
 
 // http://localhost:7930/api
-const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 // http://localhost:5029
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 type InitialValues = {
   name: string;
   image: File | null;
-  currentImage: File;
+  currentImage: string;
 };
 
 const SkillById = ({ data }: { data: Skill }) => {
+  const router = useRouter();
   const [fileControl, setFileControl] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
@@ -39,10 +41,9 @@ const SkillById = ({ data }: { data: Skill }) => {
   const handleSubmit = async (values: InitialValues) => {
     const formData = new FormData();
     formData.append("name", values.name);
+    formData.append("currentImage", values.currentImage);
     if (fileControl && values.image) {
       formData.append("image", values.image);
-    } else {
-      formData.append("image", values.currentImage);
     }
 
     // fetch
@@ -60,7 +61,10 @@ const SkillById = ({ data }: { data: Skill }) => {
       if (responseData.error) {
         return setErrorMessage(responseData.message);
       }
-      return setSuccessMessage(responseData.message);
+      setSuccessMessage(responseData.message);
+      setTimeout(() => {
+        router.replace(`/admin/yetenekler`);
+      }, 3500);
     } catch (error) {
       return setErrorMessage("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
     }
@@ -77,6 +81,7 @@ const SkillById = ({ data }: { data: Skill }) => {
         >
           {({ setFieldValue, errors }) => (
             <Form method="POST" encType="multipart/form-data" className="flex flex-col gap-5">
+              <Field type="hidden" name="currentImage" />
               {errorMessage.length > 0 && (
                 <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
                   {errorMessage}
