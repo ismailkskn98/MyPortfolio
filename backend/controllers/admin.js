@@ -2,6 +2,7 @@ const Hero = require("../models").Hero;
 const About = require("../models").About;
 const Skill = require("../models").Skill;
 const fs = require("fs");
+const path = require("path");
 
 // Hero - Kişisel Bilgiler
 exports.get_hero = async (req, res) => {
@@ -200,19 +201,24 @@ exports.post_skills = async (req, res) => {
 exports.put_skillById = async (req, res) => {
   const { id } = req.params;
   const name = req.body.name;
-  let image = req.body.image;
+  let image = req.body.currentImage;
   if (req.file) {
-    image = req.file.filename;
-    fs.unlink(`public/images/${req.body.image}`);
+    image = "images/" + req.file.filename;
+    const oldImagePath = path.resolve(__dirname, "..", "public", req.body.currentImage);
+    fs.unlink(oldImagePath, (err) => {
+      if (err) {
+        console.error("Eski dosya silinemedi: ", err);
+        return res.status(500).send({
+          message: "Eski dosya silinirken bir hata oluştu.",
+          success: false,
+          error: true,
+        });
+      }
+    });
   }
   try {
     // veritabanında ıd'ye göre image ve name alanlarını güncelle
-    const skill = await Skill.update(
-      { image, name },
-      {
-        where: { id },
-      }
-    );
+    const skill = await Skill.update({ image, name }, { where: { id } });
     // skill yoksa
     if (!skill) {
       return res.status(401).send({
