@@ -12,6 +12,7 @@ router.put("/about/:id", adminController.put_about);
 
 // Skills - Yetenekler
 router.get("/skills", adminController.get_skills);
+router.get("/skills/:id", adminController.get_skillById);
 router.put("/skills/:id", imageUpload.upload.single("image"), adminController.put_skillById);
 router.delete("/skills/:id", adminController.delete_skillById);
 router.post("/skill-create", imageUpload.upload.single("image"), adminController.post_skills);

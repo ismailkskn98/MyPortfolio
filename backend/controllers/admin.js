@@ -1,6 +1,7 @@
 const Hero = require("../models").Hero;
 const About = require("../models").About;
 const Skill = require("../models").Skill;
+const fs = require("fs");
 
 // Hero - Kişisel Bilgiler
 exports.get_hero = async (req, res) => {
@@ -143,6 +144,31 @@ exports.get_skills = async (req, res) => {
     });
   }
 };
+exports.get_skillById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    // veritabanından id'ye göre yeteneği al
+    const skill = await Skill.findOne({ where: { id }, raw: true });
+    // yetenek yok ise
+    if (!skill) {
+      return res.status(401).send({
+        message: "Yetenek bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+    // yetenek bulunduysa
+    return res.send(skill);
+  } catch (error) {
+    // sunucu hatası
+    res.status(500).send({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
+      success: false,
+      error: true,
+    });
+  }
+};
 exports.post_skills = async (req, res) => {
   const image = req.file.filename;
 
@@ -173,8 +199,12 @@ exports.post_skills = async (req, res) => {
 };
 exports.put_skillById = async (req, res) => {
   const { id } = req.params;
-  const image = req.file.filename;
   const name = req.body.name;
+  let image = req.body.image;
+  if (req.file) {
+    image = req.file.filename;
+    fs.unlink(`public/images/${req.body.image}`);
+  }
   try {
     // veritabanında ıd'ye göre image ve name alanlarını güncelle
     const skill = await Skill.update(
@@ -218,6 +248,7 @@ exports.delete_skillById = async (req, res) => {
         error: true,
       });
     }
+    // fs.unlink('public/images/')
     // skill var ise
     return res.send({ message: "Yetenek başarıyla silindi.", success: true, error: false });
   } catch (error) {
