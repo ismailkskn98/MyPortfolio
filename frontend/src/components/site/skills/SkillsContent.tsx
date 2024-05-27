@@ -1,12 +1,9 @@
 import React from "react";
-import SkillsContentServices from "./SkillsContentServices";
-import SkillsContentSkills from "./SkillsContentSkills";
 
-const SkillsContent = () => {
+const SkillsContent = ({ children }: { children: React.ReactNode }) => {
   return (
     <article id="skillsContent" className="flex flex-col items-center gap-[90px]">
-      <SkillsContentServices />
-      <SkillsContentSkills />
+      {children}
     </article>
   );
 };

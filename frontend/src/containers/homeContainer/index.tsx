@@ -1,4 +1,11 @@
 import React from "react";
+// type
+import type { Blog } from "@/components/site/blog/blogColumn/Content";
+import type { Hero as HeroType } from "@/app/(admin)/admin/hero/page";
+import type { AboutType } from "@/app/(admin)/admin/hakkimda/page";
+import type { SkillsType } from "@/app/(admin)/admin/yetenekler/page";
+
+// Components
 import Hero from "@/components/site/hero";
 import Left from "@/components/site/hero/left";
 import Right from "@/components/site/hero/right";
@@ -20,12 +27,21 @@ import MouseArrow from "@/components/site/about/MouseArrow";
 import AboutContent from "@/components/site/about/AboutContent";
 import AboutTitle from "@/components/site/about/AboutTitle";
 import AboutText from "@/components/site/about/AboutText";
-// type
-import type { Blog } from "@/components/site/blog/blogColumn/Content";
-import type { Hero as HeroType } from "@/app/(admin)/admin/hero/page";
-import type { AboutType } from "@/app/(admin)/admin/hakkimda/page";
+import SkillsContent from "@/components/site/skills/SkillsContent";
+import SkillsContentServices from "@/components/site/skills/SkillsContentServices";
+import SkillsContentSkills from "@/components/site/skills/SkillsContentSkills";
 
-const HomeContainer = ({ blog, hero, about }: { blog: Blog; hero: HeroType; about: AboutType }) => {
+const HomeContainer = ({
+  blog,
+  hero,
+  about,
+  skills,
+}: {
+  blog: Blog;
+  hero: HeroType;
+  about: AboutType;
+  skills: SkillsType[];
+}) => {
   return (
     <>
       <NavigationBar />
@@ -44,7 +60,12 @@ const HomeContainer = ({ blog, hero, about }: { blog: Blog; hero: HeroType; abou
           <AboutText about={about} />
         </AboutContent>
       </About>
-      <Skills />
+      <Skills>
+        <SkillsContent>
+          <SkillsContentServices />
+          <SkillsContentSkills skills={skills} />
+        </SkillsContent>
+      </Skills>
       <Works />
       <HomeBlog>
         <ModuleTitle
