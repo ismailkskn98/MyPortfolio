@@ -3,6 +3,7 @@ const Category = require("../models").Category;
 const User = require("../models").User;
 const Hero = require("../models").Hero;
 const About = require("../models").About;
+const Skill = require("../models").Skill;
 
 // Anasayfa
 exports.get_last_blog = async (req, res) => {
@@ -162,5 +163,35 @@ exports.get_blog_by_slug = async (req, res) => {
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
     });
+  }
+};
+
+// skills
+exports.get_skills = async (req, res) => {
+  try {
+    // veritabanından yetenekleri çek
+    const skills = await Skill.findAll({ raw: true });
+    // yetenekler yok ise
+    if (!skills) {
+      res
+        .status(401)
+        .send({
+          message: "Yetenekler bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
+          success: false,
+          error: true,
+        });
+    }
+    // yetenekler var ise
+    res.send(skills);
+  } catch (error) {
+    // sunucu hatası
+    res
+      .status(500)
+      .send({
+        message:
+          "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
+        success: false,
+        error: true,
+      });
   }
 };

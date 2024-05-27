@@ -10,4 +10,6 @@ router.get("/about", userController.get_about);
 router.get("/blogs/:slug", userController.get_blog_by_slug);
 router.get("/blogs", userController.get_blogs);
 
+// skills
+router.get("/skills", userController.get_skills);
 module.exports = router;
