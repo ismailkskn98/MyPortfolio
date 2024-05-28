@@ -1,8 +1,22 @@
 const Hero = require("../models").Hero;
 const About = require("../models").About;
 const Skill = require("../models").Skill;
+const Blog = require("../models").Blog;
 const fs = require("fs");
 const path = require("path");
+
+const errorMessage = (hata) => {
+  return {
+    message: `${hata} Bulunamadı. Lütfen daha sonra tekrar deneyiniz.`,
+    success: false,
+    error: true,
+  };
+};
+const serverErrorMessage = {
+  message: "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+  success: false,
+  error: true,
+};
 
 // Hero - Kişisel Bilgiler
 exports.get_hero = async (req, res) => {
@@ -11,22 +25,13 @@ exports.get_hero = async (req, res) => {
     const hero = await Hero.findOne({ order: [["id", "DESC"]], raw: true });
     // Eğer hero yoksa hata döndür
     if (!hero) {
-      return res.status(401).send({
-        message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin.",
-        success: false,
-        error: true,
-      });
+      return res.status(401).send(errorMessage("Hero"));
     }
     // hero varsa gönder
     return res.send(hero);
   } catch (error) {
     // Sunucu hatası mesajı gönder
-    return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
-      success: false,
-      error: true,
-    });
+    return res.status(500).send(serverErrorMessage);
   }
 };
 exports.put_hero = async (req, res) => {
@@ -53,12 +58,7 @@ exports.put_hero = async (req, res) => {
     return res.send({ message: "Kullanıcı başarıyla güncellendi.", success: true, error: false });
   } catch (error) {
     // Sunucu hatası mesajı gönder
-    return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
-      success: false,
-      error: true,
-    });
+    return res.status(500).send(serverErrorMessage);
   }
 };
 
@@ -73,21 +73,12 @@ exports.get_about = async (req, res) => {
 
     // veritabanında bulunadıysa hata mesajı
     if (!about) {
-      return res.status(401).send({
-        message: "Hakkımda bulunamadı, Lütfen daha sonra tekrar deneyiniz.",
-        success: false,
-        error: true,
-      });
+      return res.status(401).send(errorMessage("Hakkımda"));
     }
     // about var ise
     return res.send(about);
   } catch (error) {
-    return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
-      success: false,
-      error: true,
-    });
+    return res.status(500).send(serverErrorMessage);
   }
 };
 exports.put_about = async (req, res) => {
@@ -106,12 +97,7 @@ exports.put_about = async (req, res) => {
     // başarılı
     return res.send({ message: "Hakkımda başarıyla güncellendi.", success: true, error: false });
   } catch (error) {
-    return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
-      success: false,
-      error: true,
-    });
+    return res.status(500).send(serverErrorMessage);
   }
 };
 
@@ -126,23 +112,14 @@ exports.get_skills = async (req, res) => {
 
     // eğer bulamazsak hata döndürelim
     if (!skills) {
-      return res.status(401).send({
-        message: "Yetenekler bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
-        success: false,
-        error: true,
-      });
+      return res.status(401).send(errorMessage("Yetenek"));
     }
 
     // veritabanında bulunduysa
     return res.send(skills);
   } catch (error) {
     // sunucu hatası
-    return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
-      success: false,
-      error: true,
-    });
+    return res.status(500).send(serverErrorMessage);
   }
 };
 exports.get_skillById = async (req, res) => {
@@ -152,22 +129,13 @@ exports.get_skillById = async (req, res) => {
     const skill = await Skill.findOne({ where: { id }, raw: true });
     // yetenek yok ise
     if (!skill) {
-      return res.status(401).send({
-        message: "Yetenek bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
-        success: false,
-        error: true,
-      });
+      return res.status(401).send(errorMessage("Yetenek"));
     }
     // yetenek bulunduysa
     return res.send(skill);
   } catch (error) {
     // sunucu hatası
-    res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
-      success: false,
-      error: true,
-    });
+    res.status(500).send(serverErrorMessage);
   }
 };
 exports.post_skills = async (req, res) => {
@@ -190,12 +158,7 @@ exports.post_skills = async (req, res) => {
     return res.send({ message: "Yetenek başarıyla eklendi.", success: true, error: false });
   } catch (error) {
     // sunucu hatası
-    return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
-      success: false,
-      error: true,
-    });
+    return res.status(500).send(serverErrorMessage);
   }
 };
 exports.put_skillById = async (req, res) => {
@@ -221,20 +184,13 @@ exports.put_skillById = async (req, res) => {
     const skill = await Skill.update({ image, name }, { where: { id } });
     // skill yoksa
     if (!skill) {
-      return res.status(401).send({
-        message: "Yetenek bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
-        success: false,
-        error: true,
-      });
+      return res.status(401).send(errorMessage("Yetenek"));
     }
     // skill var ise
     return res.send({ message: "Yetenek başarıyla güncellendi.", success: true, error: false });
   } catch (error) {
     // sunucu hatası
-    return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
-    });
+    return res.status(500).send(serverErrorMessage);
   }
 };
 exports.delete_skillById = async (req, res) => {
@@ -248,20 +204,64 @@ exports.delete_skillById = async (req, res) => {
 
     // skill yok ise
     if (!skill) {
-      return res.status(401).send({
-        message: "Yetenek bulunmadı. Lütfen daha sonra tekrar deneyiniz.",
-        success: false,
-        error: true,
-      });
+      return res.status(401).send(errorMessage("Yetenek"));
     }
     // fs.unlink('public/images/')
     // skill var ise
     return res.send({ message: "Yetenek başarıyla silindi.", success: true, error: false });
   } catch (error) {
     // sunucu hatası
-    return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
-    });
+    return res.status(500).send(serverErrorMessage);
+  }
+};
+
+// Blogs
+exports.get_blogs = async (req, res) => {
+  try {
+    // veritabanından blogları getir
+    const blogs = await Blog.findAll({ raw: true });
+    // bloglar bulunamadıysa
+    if (!blogs) {
+      return res.status(401).send(errorMessage("Blog"));
+    }
+    // bloglar bulunduysa
+    return res.send(blogs);
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
+  }
+};
+exports.get_blogById = async (req, res) => {
+  const { id } = req.parms;
+  try {
+    // veritabanından id'ye göre blog'u al
+    const blog = await Blog.findOne({ where: { id } });
+    // blog bulunamadıysa
+    if (!blog) {
+      return res.status(401).send(errorMessage("Blog"));
+    }
+    // blog bulunduysa
+    return res.send(blog);
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
+  }
+};
+exports.post_blog = async (req, res) => {};
+exports.put_blogById = async (req, res) => {};
+exports.delete_blogById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    // veritabanından id'ye göre blog'u sil
+    const blog = await Blog.destroy({ where: { id } });
+    // blog bulunamadıysa
+    if (!blog) {
+      return res.status(401).send(errorMessage("Blog"));
+    }
+    // blog bulunduysa
+    return res.send({ message: "Blog başarıyla silindi.", success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
   }
 };

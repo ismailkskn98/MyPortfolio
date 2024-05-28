@@ -17,4 +17,11 @@ router.put("/skills/:id", imageUpload.upload.single("image"), adminController.pu
 router.delete("/skills/:id", adminController.delete_skillById);
 router.post("/skill-create", imageUpload.upload.single("image"), adminController.post_skills);
 
+// Blogs
+router.get("/blogs", adminController.get_blogs);
+router.get("/blogs/:id", adminController.get_blogById);
+router.post("/blogs", adminController.post_blog);
+router.put("/blogs/:id", adminController.put_blogById);
+router.delete("/blogs/:id", adminController.delete_blogById);
+
 module.exports = router;
