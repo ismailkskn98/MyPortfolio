@@ -22,9 +22,11 @@ const BlogsContainer: React.FC<Props> = ({ blogs }) => {
               title={blog.title}
               subtitle={blog.subtitle}
               slug={blog.slug}
+              description={blog.description}
+              updatedAt={blog.updatedAt}
+              createdAt={blog.createdAt}
               User={blog.User}
               Categories={blog.Categories}
-              createdAt={blog.createdAt}
             />
           </BlogColumn>
         ))}

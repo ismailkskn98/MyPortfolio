@@ -1,5 +1,5 @@
-import type { ErrorMessage } from "@/app/(site)/page";
 import AboutContainer from "@/containers/aboutContainer";
+import { errorMessage } from "@/helper/homeAPI";
 import React from "react";
 
 // http://localhost:7930/api
@@ -13,7 +13,7 @@ const getAbout = async () => {
   try {
     const response = await fetch(`${BASE_URL_API}/admin/about`, { method: "GET" });
     if (!response.ok) {
-      const errorMessage: ErrorMessage = await response.json();
+      const errorMessage: errorMessage = await response.json();
       throw new Error(errorMessage.message);
     }
     const data: AboutType = await response.json();

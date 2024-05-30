@@ -16,7 +16,7 @@ const CustomInput: React.FC<HeroFormItem> = ({ labelText, input }) => {
             : "border-gray-400 focus:outline-gray-500"
         } border border-solid rounded-sm px-3 py-2 focus:outline focus:outline-1 `}
       />
-      <p className="text-red-600 text-sm pl-1">{error && touched && error}</p>
+      {error && touched && <p className="text-red-600 text-sm pl-1">{error}</p>}
     </div>
   );
 };

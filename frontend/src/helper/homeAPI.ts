@@ -1,4 +1,4 @@
-export type FetchMessageType = {
+export type errorMessage = {
   message: string;
   error: boolean;
   success: boolean;
@@ -20,7 +20,7 @@ export const homeAPI = async (
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData: errorMessage = await response.json();
       throw new Error(errorData.message || "Beklenmedik bir hata oluştu.");
     }
 

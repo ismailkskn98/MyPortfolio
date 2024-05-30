@@ -1,5 +1,5 @@
-import type { ErrorMessage } from "@/app/(site)/page";
 import SkillsContainer from "@/containers/skillsContainer";
+import { errorMessage } from "@/helper/homeAPI";
 import React from "react";
 
 // http://localhost:7930/api
@@ -15,7 +15,7 @@ const getSkills = async () => {
   try {
     const response = await fetch(`${BASE_URL_API}/admin/skills`, { method: "GET" });
     if (!response.ok) {
-      const errorMessage: ErrorMessage = await response.json();
+      const errorMessage: errorMessage = await response.json();
       throw new Error(errorMessage.message);
     }
     const data: SkillsType[] = await response.json();

@@ -1,5 +1,5 @@
-import type { ErrorMessage } from "@/app/(site)/page";
 import HeroContainer from "@/containers/heroContainer";
+import { errorMessage } from "@/helper/homeAPI";
 import React from "react";
 
 // http://localhost:7930/api
@@ -19,7 +19,7 @@ const getHero = async () => {
   try {
     const response = await fetch(`${BASE_URL_API}/admin/hero`, { method: "GET" });
     if (!response.ok) {
-      const errorMessage: ErrorMessage = await response.json();
+      const errorMessage: errorMessage = await response.json();
       throw new Error(errorMessage.message);
     }
     const data = await response.json();

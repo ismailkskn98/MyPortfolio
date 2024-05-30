@@ -1,5 +1,5 @@
-import { ErrorMessage } from "@/app/(site)/page";
 import SkillByIdContainer from "@/containers/skillByIdContainer";
+import { errorMessage } from "@/helper/homeAPI";
 import React from "react";
 
 // http://localhost:7930/api
@@ -17,7 +17,7 @@ const getSkillById = async (id: string) => {
       method: "GET",
     });
     if (!response.ok) {
-      const data: ErrorMessage = await response.json();
+      const data: errorMessage = await response.json();
       throw new Error(data.message);
     }
     const data: Skill = await response.json();

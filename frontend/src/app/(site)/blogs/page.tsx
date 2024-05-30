@@ -1,7 +1,7 @@
 import type { Blog } from "@/components/site/blog/blogColumn/Content";
 import BlogsContainer from "@/containers/blogsContainer";
+import { errorMessage } from "@/helper/homeAPI";
 import React from "react";
-import type { ErrorMessage } from "../page";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.BASE_URL_API;
@@ -10,7 +10,7 @@ const getBlogs = async () => {
   try {
     const response = await fetch(`${BASE_URL_API}/blogs`, { method: "GET" });
     if (!response.ok) {
-      const errorMessage: ErrorMessage = await response.json();
+      const errorMessage: errorMessage = await response.json();
       throw new Error(errorMessage.message);
     }
     const data = await response.json();

@@ -106,7 +106,7 @@ const CustomSelect: React.FC<CustomSelectType> = ({ labelText, input }) => {
         <option value="Yozgat">Yozgat</option>
         <option value="Zonguldak">Zonguldak</option>
       </select>
-      <p className="text-red-600 text-sm pl-1">{error && touched && error}</p>
+      {error && touched && <p className="text-red-600 text-sm pl-1">{error}</p>}
     </div>
   );
 };
