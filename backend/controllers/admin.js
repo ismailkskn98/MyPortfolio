@@ -2,6 +2,7 @@ const Hero = require("../models").Hero;
 const About = require("../models").About;
 const Skill = require("../models").Skill;
 const Blog = require("../models").Blog;
+const Category = require("../models").Category;
 const fs = require("fs");
 const path = require("path");
 
@@ -219,7 +220,15 @@ exports.delete_skillById = async (req, res) => {
 exports.get_blogs = async (req, res) => {
   try {
     // veritabanından blogları getir
-    const blogs = await Blog.findAll({ raw: true });
+    const blogs = await Blog.findAll({
+      attributes: ["id", "title", "subtitle", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+        },
+      ],
+    });
     // bloglar bulunamadıysa
     if (!blogs) {
       return res.status(401).send(errorMessage("Blog"));
@@ -263,5 +272,22 @@ exports.delete_blogById = async (req, res) => {
   } catch (error) {
     // sunucu hatası
     return res.status(500).send(serverErrorMessage);
+  }
+};
+
+// Categories
+exports.get_categories = async (req, res) => {
+  try {
+    // veritabanında kategorileri getir
+    const categories = await Category.findAll({ attributes: ["id", "name"], raw: true });
+    // kategori bulunamadıysa
+    if (!categories) {
+      res.status(401).send(errorMessage("Kategori"));
+    }
+    // kategori bulunduysa
+    res.send(categories);
+  } catch (error) {
+    // sunucu hatası
+    res.status(500).send(serverErrorMessage);
   }
 };
