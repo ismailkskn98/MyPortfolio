@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       subtitle: DataTypes.STRING(145),
       slug: DataTypes.STRING,
       description: DataTypes.STRING,
+      image: DataTypes.STRING,
     },
     {
       sequelize,

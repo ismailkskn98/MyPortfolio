@@ -5,6 +5,7 @@ const Blog = require("../models").Blog;
 const Category = require("../models").Category;
 const fs = require("fs");
 const path = require("path");
+const slugField = require("../helpers/slugField");
 
 const errorMessage = (hata) => {
   return {
@@ -140,9 +141,8 @@ exports.get_skillById = async (req, res) => {
   }
 };
 exports.post_skills = async (req, res) => {
-  const image = req.file.filename;
-
   const name = req.body.name;
+  const image = req.file.filename;
   const editImage = "images/" + image;
   try {
     // veritabanına yeni yeteneği ekle
@@ -167,8 +167,8 @@ exports.put_skillById = async (req, res) => {
   const name = req.body.name;
   let image = req.body.currentImage;
   if (req.file) {
-    image = "images/" + req.file.filename;
     const oldImagePath = path.resolve(__dirname, "..", "public", req.body.currentImage);
+    image = "images/" + req.file.filename;
     fs.unlink(oldImagePath, (err) => {
       if (err) {
         console.error("Eski dosya silinemedi: ", err);
@@ -256,7 +256,66 @@ exports.get_blogById = async (req, res) => {
     return res.status(500).send(serverErrorMessage);
   }
 };
-exports.post_blog = async (req, res) => {};
+exports.post_blog = async (req, res) => {
+  // frontend'den verilerin alınması
+  const title = req.body.title;
+  const subtitle = req.body.subtitle;
+  const description = req.body.description;
+  const userId = req.body.userId;
+  const slug = slugField(title);
+
+  // image kontrolü
+  let image = "";
+  if (req.file) {
+    const oldImagePath = path.resolve(__dirname, "..", "public", "images", req.file.filename);
+    image = "images/" + req.file.filename;
+
+    // Dosyanın varlığını kontrol et
+    if (fs.existsSync(oldImagePath)) {
+      // Dosya mevcutsa sil
+      fs.unlink(oldImagePath, (err) => {
+        if (err) {
+          console.log("Eski dosya silinemedi.", err);
+          return res.status(500).send({
+            message: "Eski dosya silinirken bir hata oluştu.",
+            success: false,
+            error: true,
+          });
+        }
+      });
+    } else {
+      console.log("Dosya mevcut değil.");
+    }
+  }
+
+  try {
+    // verilerin veritabanına eklenmesi
+    const newBlog = await Blog.create({ title, subtitle, slug, description, image, userId });
+
+    let categoryIds = JSON.parse(req.body.categoryIds);
+    // kategorilerin kontrolü
+    if (categoryIds !== undefined && categoryIds.length > 0) {
+      // en az 1 kategori seçilmiş ise
+      console.log(categoryIds);
+      console.log(newBlog);
+      await newBlog.addCategories(categoryIds);
+    }
+
+    // eklemesi sırasında bir hata oluştuysa
+    if (!newBlog) {
+      return res.status(401).send({
+        message: "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+
+    return res.send({ message: "Blog başarıyla eklendi.", success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
+  }
+};
 exports.put_blogById = async (req, res) => {};
 exports.delete_blogById = async (req, res) => {
   const { id } = req.params;

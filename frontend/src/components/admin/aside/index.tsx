@@ -3,7 +3,7 @@ import styles from "@/app/(admin)/admin/styles.module.css";
 import Navbar from "./Navbar";
 import { Payload } from "@/hooks/AuthFromClient";
 
-const Aside = ({ payload }: { payload: Payload | null }) => {
+const Aside = () => {
   return (
     <aside
       id="adminAside"

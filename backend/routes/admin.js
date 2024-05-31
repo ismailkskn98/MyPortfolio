@@ -20,7 +20,7 @@ router.delete("/skills/delete/:id", adminController.delete_skillById);
 // Blogs
 router.get("/blogs", adminController.get_blogs);
 router.get("/blogs/:id", adminController.get_blogById);
-router.post("/blogs", adminController.post_blog);
+router.post("/blog-create", imageUpload.upload.single("image"), adminController.post_blog);
 router.put("/blogs/:id", adminController.put_blogById);
 router.delete("/blogs/delete/:id", adminController.delete_blogById);
 

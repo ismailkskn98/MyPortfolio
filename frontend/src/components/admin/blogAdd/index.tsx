@@ -1,10 +1,12 @@
 "use client";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BlogSchema } from "./BlogSchema";
 import { BlogItem, blogItems } from "./BlogItems";
 import CustomInput from "./CustomInput";
 import Tiptap from "./Tiptap";
+import { AuthFromClient } from "@/hooks/AuthFromClient";
+import { ResponseData } from "../hero/HeroForm";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
@@ -19,7 +21,7 @@ type InitialValues = {
   subtitle: string;
   description: string;
   image: File | null;
-  categories: [];
+  categoryIds: (number | string)[];
 };
 
 const initialValues: InitialValues = {
@@ -27,23 +29,86 @@ const initialValues: InitialValues = {
   subtitle: "",
   description: "",
   image: null,
-  categories: [],
+  categoryIds: [],
 };
 
 const BlogAdd = ({ categories }: { categories: Categories[] }) => {
+  const tokenPayload = AuthFromClient();
   const [fileControl, setFileControl] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [successMessage, setSuccessMessage] = useState<string>("");
 
-  const handleSubmit = (values: InitialValues) => {
-    console.log(values);
+  const handleSubmit = async (values: InitialValues) => {
+    // form bilgileri
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("subtitle", values.subtitle);
+    formData.append("description", values.description);
+    formData.append("categoryIds", JSON.stringify(values.categoryIds));
+    console.log(values.categoryIds.toString());
+    // resim kontrolü
+    if (values.image && fileControl) {
+      formData.append("image", values.image);
+    }
+
+    // token kontrolü
+    if (tokenPayload) {
+      formData.append("userId", tokenPayload.id.toString());
+    }
+
+    // fetch isteği
+    try {
+      const response = await fetch(`${BASE_URL_API}/admin/blogs`, {
+        method: "POST",
+        body: formData,
+      });
+      if (!response.ok) {
+        return setErrorMessage("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+      }
+      const data: ResponseData = await response.json();
+      if (data.error) {
+        return setErrorMessage(data.message);
+      }
+      return setSuccessMessage(data.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        return error.message;
+      } else {
+        return "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
+      }
+    }
   };
+
+  // kullanıcı bilgilendirme mesajı
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setErrorMessage("");
+      setSuccessMessage("");
+    }, 4000);
+    return clearTimeout(timer);
+  }, [successMessage, errorMessage]);
 
   return (
     <main className="w-full px-6 flex flex-col gap-5 shadow-md py-8">
       <h1 className="w-full flex items-center justify-center text-4xl">Blog Ekle</h1>
-      <section className="w-full flex items-center justify-center">
+      <section className="w-full flex flex-col">
+        {/* kullanıcı bilgilendirme mesajı */}
+        {errorMessage.length > 0 && (
+          <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
+            {errorMessage}
+          </p>
+        )}
+        {successMessage.length > 0 && (
+          <p className="w-full px-4 py-4 bg-green-500 text-green-900 rounded flex items-center justify-center">
+            {successMessage}
+          </p>
+        )}
         <Formik initialValues={initialValues} validationSchema={BlogSchema} onSubmit={handleSubmit}>
-          {({ isSubmitting, isValid, setFieldValue }) => (
-            <Form className="w-full flex items-start justify-between gap-10 px-16">
+          {({ isSubmitting, isValid, setFieldValue, values }) => (
+            <Form
+              className="w-full flex items-start justify-between gap-10 px-16"
+              encType="multipart/form-data"
+            >
               <article className="w-full flex flex-col gap-5">
                 {blogItems.map((item: BlogItem, i) => (
                   <CustomInput key={i} {...item} />
@@ -53,7 +118,10 @@ const BlogAdd = ({ categories }: { categories: Categories[] }) => {
                 </label>
                 <Tiptap name="description" />
                 {!isValid && (
-                  <p className="-mt-3 text-sm text-red-500">*Lütfen en az 50 karakter giriniz</p>
+                  <p className="-mt-3 text-sm text-red-500">
+                    *Lütfen en az 50 karakter giriniz. Tüm alanları doldurduktan sonra bu uyarı
+                    kaybolur.
+                  </p>
                 )}
                 <div className="flex flex-col items-start gap-2">
                   <label htmlFor="image" className="font-semibold">
@@ -86,10 +154,21 @@ const BlogAdd = ({ categories }: { categories: Categories[] }) => {
                   <div key={category.id} className="flex items-center gap-3">
                     <Field
                       type="checkbox"
-                      name="categories"
-                      value={category.name}
+                      name="categoryIds"
+                      value={category.id}
                       id={category.name}
                       className="w-[14px] h-[14px]"
+                      onChange={() => {
+                        const isChecked = values.categoryIds.includes(category.id);
+                        if (isChecked) {
+                          setFieldValue(
+                            "categoryIds",
+                            values.categoryIds.filter((value) => value !== category.id)
+                          );
+                        } else {
+                          setFieldValue("categoryIds", [...values.categoryIds, category.id]);
+                        }
+                      }}
                     />
                     <label htmlFor={category.name} className="capitalize whitespace-nowrap">
                       {category.name}
@@ -97,7 +176,7 @@ const BlogAdd = ({ categories }: { categories: Categories[] }) => {
                   </div>
                 ))}
                 <ErrorMessage
-                  name="categories"
+                  name="categoryIds"
                   component="p"
                   className="text-red-600 text-sm pl-1"
                 />

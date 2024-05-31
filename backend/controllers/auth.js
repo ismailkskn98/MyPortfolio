@@ -11,7 +11,7 @@ exports.login = async (req, res) => {
     // Veritabanında kullanıcıyı bulma
     const user = await User.findOne({
       where: { username },
-      attributes: ["username", "firstname", "lastname", "password", "email"],
+      attributes: ["id", "username", "firstname", "lastname", "password", "email"],
       include: [
         {
           model: Role,
@@ -19,7 +19,6 @@ exports.login = async (req, res) => {
         },
       ],
     });
-
     // Kullanıcı yoksa hata döndür
     if (!user) {
       return res
@@ -39,6 +38,7 @@ exports.login = async (req, res) => {
     // JWT token oluşturma
     const token = jwt.sign(
       {
+        id: user.id,
         username: user.username,
         firstname: user.firstname,
         lastname: user.lastname,

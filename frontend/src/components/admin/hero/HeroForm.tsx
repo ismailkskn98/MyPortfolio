@@ -10,7 +10,7 @@ import CustomSelect from "./CustomSelect";
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
-type ResponseData = {
+export type ResponseData = {
   message: string;
   success: boolean;
   error: boolean;
@@ -48,6 +48,9 @@ const HeroForm = ({ data }: { data: HeroType }) => {
         },
         body: JSON.stringify(values),
       });
+      if (!response.ok) {
+        return setErrorMessage("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+      }
       const data: ResponseData = await response.json();
       if (data.error) {
         return setErrorMessage(data.message);

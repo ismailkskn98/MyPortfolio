@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 export type Payload = {
+  id: number | string;
   username: string;
   firstname: string;
   lastname: string;
@@ -20,7 +21,7 @@ type ErrorMessage = {
 };
 
 // Client Components
-export const AuthFromClient = (): [Payload | null, string | null] => {
+export const AuthFromClient = (): Payload | null => {
   const [data, setData] = useState<Payload | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -63,5 +64,5 @@ export const AuthFromClient = (): [Payload | null, string | null] => {
     getToken();
   }, []);
 
-  return [data, error];
+  return data;
 };

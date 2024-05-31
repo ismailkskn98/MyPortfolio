@@ -1,10 +1,11 @@
 "use client";
-import { Payload } from "@/hooks/AuthFromClient";
+import { AuthFromClient, Payload } from "@/hooks/AuthFromClient";
 import React from "react";
 import styles from "@/app/(admin)/admin/styles.module.css";
 import Cookies from "js-cookie";
 
-const Header = ({ payload }: { payload: Payload | null }) => {
+const Header = () => {
+  const payload: Payload | null = AuthFromClient();
   const handleLogout = () => {
     Cookies.remove("token");
     window.location.href = "/login";
