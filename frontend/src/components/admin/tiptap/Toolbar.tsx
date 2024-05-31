@@ -108,7 +108,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, editor }) => {
     },
     {
       icon: LuCode,
-      tooltip: "Kod",
+      tooltip: "inline code",
       action: () => editor.chain().focus().toggleCode().run(),
       isActive: "code",
     },
@@ -142,7 +142,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, editor }) => {
         return (
           <button
             key={i}
-            onClick={item.action}
+            onClick={(e) => {
+              e.preventDefault();
+              return item.action();
+            }}
             className={`${
               isActive ? "bg-BG1 text-Brand1" : "bg-BG2 text-White"
             } border-none outline-none px-2 py-1 rounded-sm cursor-pointer hover:bg-gray-400`}

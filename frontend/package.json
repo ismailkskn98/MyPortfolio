@@ -11,6 +11,7 @@
   "dependencies": {
     "@tiptap/extension-blockquote": "^2.4.0",
     "@tiptap/extension-code": "^2.4.0",
+    "@tiptap/extension-code-block": "^2.4.0",
     "@tiptap/extension-color": "^2.4.0",
     "@tiptap/extension-font-family": "^2.4.0",
     "@tiptap/extension-paragraph": "^2.4.0",
