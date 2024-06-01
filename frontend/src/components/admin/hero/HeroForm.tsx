@@ -6,6 +6,7 @@ import { heroSchema } from "./HeroSchema";
 import { HeroFormItem, heroFormItems } from "./HeroFormItems";
 import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
+import InfoMessage from "../infoMessage";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
@@ -82,16 +83,7 @@ const HeroForm = ({ data }: { data: HeroType }) => {
     >
       {({ isSubmitting, isValid }) => (
         <Form className="basis-1/4 flex flex-col items-start mx-auto gap-5">
-          {errorMessage.length > 0 && (
-            <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
-              {errorMessage}
-            </p>
-          )}
-          {successMessage.length > 0 && (
-            <p className="w-full px-4 py-4 bg-green-500 text-green-900 rounded flex items-center justify-center">
-              {successMessage}
-            </p>
-          )}
+          <InfoMessage errorMessage={errorMessage} successMessage={successMessage} />
 
           {heroFormItems.map((item: HeroFormItem, i) => (
             <CustomInput key={i} {...item} />

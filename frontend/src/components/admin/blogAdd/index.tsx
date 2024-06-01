@@ -7,6 +7,7 @@ import CustomInput from "./CustomInput";
 import Tiptap from "./Tiptap";
 import { AuthFromClient } from "@/hooks/AuthFromClient";
 import { ResponseData } from "../hero/HeroForm";
+import InfoMessage from "../infoMessage";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
@@ -101,17 +102,7 @@ const BlogAdd = ({ categories }: { categories: Categories[] }) => {
     <main className="w-full px-6 flex flex-col gap-5 shadow-md py-8">
       <h1 className="w-full flex items-center justify-center text-4xl">Blog Ekle</h1>
       <section className="w-full flex flex-col">
-        {/* kullanıcı bilgilendirme mesajı */}
-        {errorMessage.length > 0 && (
-          <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
-            {errorMessage}
-          </p>
-        )}
-        {successMessage.length > 0 && (
-          <p className="w-full px-4 py-4 bg-green-500 text-green-900 rounded flex items-center justify-center">
-            {successMessage}
-          </p>
-        )}
+        <InfoMessage errorMessage={errorMessage} successMessage={successMessage} />
         <Formik initialValues={initialValues} validationSchema={BlogSchema} onSubmit={handleSubmit}>
           {({ isSubmitting, isValid, setFieldValue, values }) => (
             <Form

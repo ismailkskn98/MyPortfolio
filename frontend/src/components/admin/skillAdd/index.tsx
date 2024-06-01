@@ -2,6 +2,7 @@
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import React, { useEffect, useRef, useState } from "react";
 import { SkillSchema } from "./SkillSchema";
+import InfoMessage from "../infoMessage";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
@@ -83,16 +84,7 @@ const SkillAdd = () => {
         >
           {({ setFieldValue, errors }) => (
             <Form method="POST" encType="multipart/form-data" className="flex flex-col gap-5">
-              {errorMessage.length > 0 && (
-                <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
-                  {errorMessage}
-                </p>
-              )}
-              {successMessage.length > 0 && (
-                <p className="w-full px-4 py-4 bg-green-500 text-green-900 rounded flex items-center justify-center">
-                  {successMessage}
-                </p>
-              )}
+              <InfoMessage errorMessage={errorMessage} successMessage={successMessage} />
               <div className="flex flex-col items-start gap-2">
                 <label htmlFor="name" className="font-semibold">
                   İsim

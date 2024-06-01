@@ -4,8 +4,10 @@ import React, { useEffect, useState } from "react";
 import { SkillSchema } from "../skillAdd/SkillSchema";
 import { Skill } from "@/app/(admin)/admin/yetenekler/[id]/page";
 import Image from "next/image";
-import type { ErrorMessage as errMsg } from "@/app/(site)/page";
+
 import { useRouter } from "next/navigation";
+import { errorMessage } from "@/helper/homeAPI";
+import InfoMessage from "../infoMessage";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
@@ -53,7 +55,7 @@ const SkillById = ({ data }: { data: Skill }) => {
         body: formData,
       });
       if (!response.ok) {
-        const data: errMsg = await response.json();
+        const data: errorMessage = await response.json();
         return setErrorMessage(data.message);
       }
 
@@ -82,16 +84,7 @@ const SkillById = ({ data }: { data: Skill }) => {
           {({ setFieldValue, errors }) => (
             <Form method="POST" encType="multipart/form-data" className="flex flex-col gap-5">
               <Field type="hidden" name="currentImage" />
-              {errorMessage.length > 0 && (
-                <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
-                  {errorMessage}
-                </p>
-              )}
-              {successMessage.length > 0 && (
-                <p className="w-full px-4 py-4 bg-green-500 text-green-900 rounded flex items-center justify-center">
-                  {successMessage}
-                </p>
-              )}
+              <InfoMessage errorMessage={errorMessage} successMessage={successMessage} />
               <div className="flex flex-col items-start gap-2">
                 <label htmlFor="name" className="font-semibold">
                   İsim

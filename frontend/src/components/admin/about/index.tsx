@@ -2,6 +2,7 @@
 import { AboutType } from "@/app/(admin)/admin/hakkimda/page";
 import React, { useEffect, useState } from "react";
 import Tiptap from "../tiptap/Tiptap";
+import InfoMessage from "../infoMessage";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
@@ -45,16 +46,7 @@ const About = ({ data }: { data: AboutType }) => {
     <main className="w-full px-6 flex flex-col gap-5 shadow-md py-8">
       <h1 className="w-full flex items-center justify-center text-4xl">Hakkımda Düzenle</h1>
       <section>
-        {errorMessage.length > 0 && (
-          <p className="w-full px-4 py-4 bg-red-500 text-red-900 rounded flex items-center justify-center">
-            {errorMessage}
-          </p>
-        )}
-        {successMessage.length > 0 && (
-          <p className="w-full px-4 py-4 bg-green-500 text-green-900 rounded flex items-center justify-center">
-            {successMessage}
-          </p>
-        )}
+        <InfoMessage errorMessage={errorMessage} successMessage={successMessage} />
         <Tiptap initialContent={initialContent} onSave={handleSave} />
       </section>
     </main>
