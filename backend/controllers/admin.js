@@ -196,18 +196,34 @@ exports.put_skillById = async (req, res) => {
 };
 exports.delete_skillById = async (req, res) => {
   const { id } = req.params;
-
   try {
-    // veritabanında id'ye göre yeteneği sil
-    const skill = await Skill.destroy({
+    // veritabanında ilgili yeteneğin resmini al
+    const skillImagePathname = await Skill.findOne({
       where: { id },
+      attributes: ["image"],
+      raw: true,
     });
+    // veritabanında id'ye göre yeteneği sil
+    const skill = await Skill.destroy({ where: { id } });
 
     // skill yok ise
     if (!skill) {
       return res.status(401).send(errorMessage("Yetenek"));
     }
-    // fs.unlink('public/images/')
+
+    // image'i klasörden sil
+    const imagePath = path.resolve(__dirname, "..", "public", skillImagePathname.image);
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+        console.log("Resim silinirken bir hata oluştu." + err);
+        return res.status(500).res({
+          message: "dosya silinirken bir hata oluştu.",
+          errorMessage: err,
+          error: true,
+          success: false,
+        });
+      }
+    });
     // skill var ise
     return res.send({ message: "Yetenek başarıyla silindi.", success: true, error: false });
   } catch (error) {
@@ -317,12 +333,34 @@ exports.put_blogById = async (req, res) => {};
 exports.delete_blogById = async (req, res) => {
   const { id } = req.params;
   try {
+    // veritabanından ilgili resmi al
+    const blogImagePathname = await Blog.findOne({
+      where: { id },
+      attributes: ["image"],
+      raw: true,
+    });
+
     // veritabanından id'ye göre blog'u sil
     const blog = await Blog.destroy({ where: { id } });
     // blog bulunamadıysa
     if (!blog) {
       return res.status(401).send(errorMessage("Blog"));
     }
+
+    // image'i klasörden sil
+    const imagePath = path.resolve(__dirname, "..", "public", skillImagePathname.image);
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+        console.log("Resim silinirken bir hata oluştu." + err);
+        return res.status(500).res({
+          message: "dosya silinirken bir hata oluştu.",
+          errorMessage: err,
+          error: true,
+          success: false,
+        });
+      }
+    });
+
     // blog bulunduysa
     return res.send({ message: "Blog başarıyla silindi.", success: true, error: false });
   } catch (error) {
