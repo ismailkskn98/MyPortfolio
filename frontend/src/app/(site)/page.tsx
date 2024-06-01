@@ -9,7 +9,10 @@ const Home = async () => {
     homeAPI("hero", undefined, "GET"),
     homeAPI("about", undefined, "GET"),
   ]);
-
+  console.log(resultGetSkills);
+  console.log(resultLastBlog);
+  console.log(resultGetHero);
+  console.log(resultGetAbout);
   if (
     typeof resultLastBlog === "string" ||
     typeof resultGetHero === "string" ||

@@ -1,6 +1,6 @@
 "use client";
-import { ErrorMessage, Field, Form, Formik } from "formik";
-import React, { useEffect, useState } from "react";
+import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
+import React, { useEffect, useRef, useState } from "react";
 import { BlogSchema } from "./BlogSchema";
 import { BlogItem, blogItems } from "./BlogItems";
 import CustomInput from "./CustomInput";
@@ -37,8 +37,12 @@ const BlogAdd = ({ categories }: { categories: Categories[] }) => {
   const [fileControl, setFileControl] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSubmit = async (values: InitialValues) => {
+  const handleSubmit = async (
+    values: InitialValues,
+    { resetForm }: FormikHelpers<InitialValues>
+  ) => {
     // form bilgileri
     const formData = new FormData();
     formData.append("title", values.title);
@@ -58,7 +62,7 @@ const BlogAdd = ({ categories }: { categories: Categories[] }) => {
 
     // fetch isteği
     try {
-      const response = await fetch(`${BASE_URL_API}/admin/blogs`, {
+      const response = await fetch(`${BASE_URL_API}/admin/blog-create`, {
         method: "POST",
         body: formData,
       });
@@ -68,6 +72,11 @@ const BlogAdd = ({ categories }: { categories: Categories[] }) => {
       const data: ResponseData = await response.json();
       if (data.error) {
         return setErrorMessage(data.message);
+      }
+      setFileControl(false);
+      resetForm();
+      if (fileInputRef && fileInputRef.current) {
+        fileInputRef.current.value = "";
       }
       return setSuccessMessage(data.message);
     } catch (error) {
@@ -85,7 +94,7 @@ const BlogAdd = ({ categories }: { categories: Categories[] }) => {
       setErrorMessage("");
       setSuccessMessage("");
     }, 4000);
-    return clearTimeout(timer);
+    return () => clearTimeout(timer);
   }, [successMessage, errorMessage]);
 
   return (
@@ -131,6 +140,7 @@ const BlogAdd = ({ categories }: { categories: Categories[] }) => {
                     type="file"
                     name="image"
                     id="image"
+                    ref={fileInputRef}
                     className="w-full border border-solid rounded-sm px-3 py-2 focus:outline focus:outline-1 border-gray-400 focus:outline-gray-500"
                     onChange={(event) => {
                       if (event.currentTarget.files) {

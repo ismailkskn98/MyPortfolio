@@ -295,9 +295,6 @@ exports.post_blog = async (req, res) => {
     let categoryIds = JSON.parse(req.body.categoryIds);
     // kategorilerin kontrolü
     if (categoryIds !== undefined && categoryIds.length > 0) {
-      // en az 1 kategori seçilmiş ise
-      console.log(categoryIds);
-      console.log(newBlog);
       await newBlog.addCategories(categoryIds);
     }
 
