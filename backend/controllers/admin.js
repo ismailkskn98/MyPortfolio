@@ -343,12 +343,12 @@ exports.delete_blogById = async (req, res) => {
     // veritabanından id'ye göre blog'u sil
     const blog = await Blog.destroy({ where: { id } });
     // blog bulunamadıysa
+    console.log(blog);
     if (!blog) {
       return res.status(401).send(errorMessage("Blog"));
     }
-
     // image'i klasörden sil
-    const imagePath = path.resolve(__dirname, "..", "public", skillImagePathname.image);
+    const imagePath = path.resolve(__dirname, "..", "public", blogImagePathname.image);
     fs.unlink(imagePath, (err) => {
       if (err) {
         console.log("Resim silinirken bir hata oluştu." + err);
