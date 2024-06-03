@@ -15,7 +15,6 @@ export type JWTPayload = {
 export const fromServer = async () => {
   const cookieList = cookies();
   const { value: token } = cookieList.get("token") ?? { value: null };
-
   const verifiedToken: "" | JWTPayload | null = token && (await jwtTokenVerify(token));
   return verifiedToken;
 };

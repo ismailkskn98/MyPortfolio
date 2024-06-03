@@ -23,7 +23,6 @@ export const homeAPI = async (
       const errorData: errorMessage = await response.json();
       throw new Error(errorData.message || "Beklenmedik bir hata oluştu.");
     }
-
     const data = await response.json();
     return data;
   } catch (error) {

@@ -283,25 +283,7 @@ exports.post_blog = async (req, res) => {
   // image kontrolü
   let image = "";
   if (req.file) {
-    const oldImagePath = path.resolve(__dirname, "..", "public", "images", req.file.filename);
     image = "images/" + req.file.filename;
-
-    // Dosyanın varlığını kontrol et
-    if (fs.existsSync(oldImagePath)) {
-      // Dosya mevcutsa sil
-      fs.unlink(oldImagePath, (err) => {
-        if (err) {
-          console.log("Eski dosya silinemedi.", err);
-          return res.status(500).send({
-            message: "Eski dosya silinirken bir hata oluştu.",
-            success: false,
-            error: true,
-          });
-        }
-      });
-    } else {
-      console.log("Dosya mevcut değil.");
-    }
   }
 
   try {
@@ -340,19 +322,38 @@ exports.delete_blogById = async (req, res) => {
       raw: true,
     });
 
-    // veritabanından id'ye göre blog'u sil
-    const blog = await Blog.destroy({ where: { id } });
-    // blog bulunamadıysa
-    console.log(blog);
-    if (!blog) {
+    // veritabanından ilgili bloğun ait olduğu kategorileri alma
+    const blogCategories = await Blog.findOne({
+      where: { id },
+      include: [
+        {
+          model: Category,
+          attributes: ["id"],
+        },
+      ],
+    });
+
+    // Blog bulunamadıysa
+    if (!blogCategories) {
       return res.status(401).send(errorMessage("Blog"));
     }
+
+    const categoryIds = [];
+    blogCategories.Categories.forEach((category) => {
+      categoryIds.push(category.id);
+    });
+
+    // ilişkileri sil
+    await blogCategories.removeCategories(categoryIds);
+    // veritabanından id'ye göre blog'u sil
+    await Blog.destroy({ where: { id } });
+
     // image'i klasörden sil
     const imagePath = path.resolve(__dirname, "..", "public", blogImagePathname.image);
     fs.unlink(imagePath, (err) => {
       if (err) {
         console.log("Resim silinirken bir hata oluştu." + err);
-        return res.status(500).res({
+        return res.status(500).send({
           message: "dosya silinirken bir hata oluştu.",
           errorMessage: err,
           error: true,
