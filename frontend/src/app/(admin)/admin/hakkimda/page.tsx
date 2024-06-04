@@ -11,7 +11,10 @@ export type AboutType = {
 
 const getAbout = async () => {
   try {
-    const response = await fetch(`${BASE_URL_API}/admin/about`, { method: "GET" });
+    const response = await fetch(`${BASE_URL_API}/admin/about`, {
+      method: "GET",
+      cache: "no-store", // sayfaya her geldiğimizde istek atsın cache'lemesin default: force-cache
+    });
     if (!response.ok) {
       const errorMessage: errorMessage = await response.json();
       throw new Error(errorMessage.message);

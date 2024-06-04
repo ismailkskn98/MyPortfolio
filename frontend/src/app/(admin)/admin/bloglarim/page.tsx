@@ -8,7 +8,10 @@ const BASE_URL_API = process.env.BASE_URL_API;
 
 const getBlogs = async () => {
   try {
-    const response = await fetch(`${BASE_URL_API}/admin/blogs`, { method: "GET" });
+    const response = await fetch(`${BASE_URL_API}/admin/blogs`, {
+      method: "GET",
+      cache: "no-store", // sayfaya her geldiğimizde istek atsın cache'lemesin default: force-cache
+    });
     if (!response.ok) {
       const data: errorMessage = await response.json();
       throw new Error(data.message);

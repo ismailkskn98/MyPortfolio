@@ -2,6 +2,8 @@ import HomeContainer from "@/containers/homeContainer";
 import { homeAPI } from "@/helper/homeAPI";
 import React from "react";
 
+export const revalidate = 60 * 5; // 5 dakika
+
 const Home = async () => {
   const [resultGetSkills, resultLastBlog, resultGetHero, resultGetAbout] = await Promise.all([
     homeAPI("skills", undefined, "GET"),
