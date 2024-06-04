@@ -3,15 +3,10 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
 import React, { useEffect, useRef, useState } from "react";
 import { SkillSchema } from "./SkillSchema";
 import InfoMessage from "../infoMessage";
+import { ResponseData } from "../hero/HeroForm";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
-
-type FetchMessageType = {
-  message: string;
-  error: boolean;
-  success: boolean;
-};
 
 type InitialValues = {
   name: string;
@@ -46,7 +41,7 @@ const SkillAdd = () => {
       if (!response.ok) {
         throw new Error("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz");
       }
-      const data: FetchMessageType = await response.json();
+      const data: ResponseData = await response.json();
       if (data.error) {
         return setErrorMessage(data.message);
       }

@@ -1,5 +1,5 @@
 import SkillsContainer from "@/containers/skillsContainer";
-import { errorMessage } from "@/helper/homeAPI";
+import { error, success } from "@/helper/homeAPI";
 import React from "react";
 
 // http://localhost:7930/api
@@ -18,11 +18,16 @@ const getSkills = async () => {
       cache: "no-store", // sayfaya her geldiğimizde istek atsın cache'lemesin default: force-cache
     });
     if (!response.ok) {
-      const errorMessage: errorMessage = await response.json();
-      throw new Error(errorMessage.message);
+      const responseData: error = await response.json();
+      throw new Error(responseData.message);
     }
-    const data: SkillsType[] = await response.json();
-    return data;
+    const responseData: success = await response.json();
+    if (responseData.error) {
+      throw new Error(
+        "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz."
+      );
+    }
+    return responseData.data;
   } catch (error) {
     if (error instanceof Error) {
       return error.message;

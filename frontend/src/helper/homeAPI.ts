@@ -1,5 +1,10 @@
-export type errorMessage = {
+export type error = {
   message: string;
+  error: boolean;
+  success: boolean;
+};
+export type success = {
+  data: string;
   error: boolean;
   success: boolean;
 };
@@ -20,11 +25,16 @@ export const homeAPI = async (
     });
 
     if (!response.ok) {
-      const errorData: errorMessage = await response.json();
-      throw new Error(errorData.message || "Beklenmedik bir hata oluştu.");
+      const responseData: error = await response.json();
+      throw new Error(responseData.message || "Beklenmedik bir hata oluştu.");
     }
-    const data = await response.json();
-    return data;
+    const responseData: success = await response.json();
+    if (responseData.error) {
+      throw new Error(
+        "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz."
+      );
+    }
+    return responseData.data;
   } catch (error) {
     if (error instanceof Error) {
       return error.message;

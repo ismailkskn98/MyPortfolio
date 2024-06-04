@@ -1,6 +1,6 @@
 import { BlogsType } from "@/components/admin/blogs";
 import AdminBlogsContainer from "@/containers/adminBlogsContainer";
-import { errorMessage } from "@/helper/homeAPI";
+import { error, success } from "@/helper/homeAPI";
 import React from "react";
 
 // http://localhost:7930/api
@@ -13,11 +13,16 @@ const getBlogs = async () => {
       cache: "no-store", // sayfaya her geldiğimizde istek atsın cache'lemesin default: force-cache
     });
     if (!response.ok) {
-      const data: errorMessage = await response.json();
-      throw new Error(data.message);
+      const responseData: error = await response.json();
+      throw new Error(responseData.message);
     }
-    const data: BlogsType[] = await response.json();
-    return data;
+    const responseData: success = await response.json();
+    if (responseData.error) {
+      throw new Error(
+        "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz."
+      );
+    }
+    return responseData.data;
   } catch (error) {
     if (error instanceof Error) {
       return error.message;

@@ -1,4 +1,5 @@
 "use client";
+import { error } from "@/helper/homeAPI";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 
@@ -14,10 +15,6 @@ export type Payload = {
   role: string;
   iat: Date | number;
   exp: Date | number;
-};
-
-type ErrorMessage = {
-  message: string;
 };
 
 // Client Components
@@ -45,8 +42,8 @@ export const AuthFromClient = (): Payload | null => {
 
         if (!response.ok) {
           // error
-          const errorMessage: ErrorMessage = await response.json();
-          return setError(errorMessage.message);
+          const responseData: error = await response.json();
+          return setError(responseData.message);
         }
 
         // payload alma

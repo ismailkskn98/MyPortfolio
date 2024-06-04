@@ -23,7 +23,9 @@ const About = ({ data }: { data: AboutType }) => {
           about: newContent,
         }),
       });
-
+      if (!response.ok) {
+        return setErrorMessage("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+      }
       const data = await response.json();
       if (data.error) {
         return setErrorMessage(data.message);

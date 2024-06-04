@@ -1,26 +1,18 @@
-import HeroContainer from "@/containers/heroContainer";
+import { BlogByIdType } from "@/components/admin/blogById";
+import AdminBlogByIdContainer from "@/containers/adminBlogByIdContainer";
 import { error, success } from "@/helper/homeAPI";
 import React from "react";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.BASE_URL_API;
 
-export type Hero = {
-  id: number;
-  name: string;
-  job: string;
-  email: string;
-  freelancer: string;
-  website: string;
-  city: string;
-};
-
-const getHero = async () => {
+const getBlogById = async (id: string) => {
   try {
-    const response = await fetch(`${BASE_URL_API}/admin/hero`, {
+    const response = await fetch(`${BASE_URL_API}/admin/blogs/${id}`, {
       method: "GET",
-      cache: "no-store", // sayfaya her geldiğimizde istek atsın cache'lemesin default: force-cache
+      cache: "no-store",
     });
+
     if (!response.ok) {
       const responseData: error = await response.json();
       throw new Error(responseData.message);
@@ -41,13 +33,13 @@ const getHero = async () => {
   }
 };
 
-const Hero = async () => {
-  const data: Hero | string = await getHero();
-  if (typeof data === "string") {
-    throw new Error(data);
+const BlogGuncelle = async ({ params }: { params: { id: string } }) => {
+  const blog: BlogByIdType | string = await getBlogById(params.id);
+  if (typeof blog === "string") {
+    throw new Error(blog);
   }
 
-  return <HeroContainer data={data} />;
+  return <AdminBlogByIdContainer blog={blog} />;
 };
 
-export default Hero;
+export default BlogGuncelle;

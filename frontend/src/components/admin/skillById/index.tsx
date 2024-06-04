@@ -6,7 +6,7 @@ import { Skill } from "@/app/(admin)/admin/yetenekler/[id]/page";
 import Image from "next/image";
 
 import { useRouter } from "next/navigation";
-import { errorMessage } from "@/helper/homeAPI";
+import { error } from "@/helper/homeAPI";
 import InfoMessage from "../infoMessage";
 
 // http://localhost:7930/api
@@ -55,7 +55,7 @@ const SkillById = ({ data }: { data: Skill }) => {
         body: formData,
       });
       if (!response.ok) {
-        const data: errorMessage = await response.json();
+        const data: error = await response.json();
         return setErrorMessage(data.message);
       }
 
