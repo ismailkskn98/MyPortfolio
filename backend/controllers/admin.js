@@ -3,6 +3,7 @@ const About = require("../models").About;
 const Skill = require("../models").Skill;
 const Blog = require("../models").Blog;
 const Category = require("../models").Category;
+const User = require("../models").User;
 const fs = require("fs");
 const path = require("path");
 const slugField = require("../helpers/slugField");
@@ -30,7 +31,7 @@ exports.get_hero = async (req, res) => {
       return res.status(401).send(errorMessage("Hero"));
     }
     // hero varsa gönder
-    return res.send(hero);
+    return res.send({ data: hero, success: true, error: false });
   } catch (error) {
     // Sunucu hatası mesajı gönder
     return res.status(500).send(serverErrorMessage);
@@ -78,7 +79,7 @@ exports.get_about = async (req, res) => {
       return res.status(401).send(errorMessage("Hakkımda"));
     }
     // about var ise
-    return res.send(about);
+    return res.send({ data: about, success: true, error: false });
   } catch (error) {
     return res.status(500).send(serverErrorMessage);
   }
@@ -118,7 +119,7 @@ exports.get_skills = async (req, res) => {
     }
 
     // veritabanında bulunduysa
-    return res.send(skills);
+    return res.send({ data: skills, success: true, error: false });
   } catch (error) {
     // sunucu hatası
     return res.status(500).send(serverErrorMessage);
@@ -134,7 +135,7 @@ exports.get_skillById = async (req, res) => {
       return res.status(401).send(errorMessage("Yetenek"));
     }
     // yetenek bulunduysa
-    return res.send(skill);
+    return res.send({ data: skill, success: true, error: false });
   } catch (error) {
     // sunucu hatası
     res.status(500).send(serverErrorMessage);
@@ -250,23 +251,38 @@ exports.get_blogs = async (req, res) => {
       return res.status(401).send(errorMessage("Blog"));
     }
     // bloglar bulunduysa
-    return res.send(blogs);
+    return res.send({ data: blogs, success: true, error: false });
   } catch (error) {
     // sunucu hatası
     return res.status(500).send(serverErrorMessage);
   }
 };
 exports.get_blogById = async (req, res) => {
-  const { id } = req.parms;
+  const { id } = req.params;
+
   try {
-    // veritabanından id'ye göre blog'u al
-    const blog = await Blog.findOne({ where: { id } });
+    // veritabanından id'ye göre blog'u alma
+    const blog = await Blog.findOne({
+      where: { id },
+      attributes: ["id", "title", "subtitle", "slug", "description", "image", "userId"],
+      include: [
+        {
+          model: Category,
+          attributes: ["id", "name"],
+        },
+        {
+          model: User,
+          attributes: ["id", "username", "firstname", "lastname", "email"],
+        },
+      ],
+    });
+
     // blog bulunamadıysa
     if (!blog) {
       return res.status(401).send(errorMessage("Blog"));
     }
-    // blog bulunduysa
-    return res.send(blog);
+
+    return res.send({ data: blog, success: true, error: false });
   } catch (error) {
     // sunucu hatası
     return res.status(500).send(serverErrorMessage);
@@ -380,7 +396,7 @@ exports.get_categories = async (req, res) => {
       res.status(401).send(errorMessage("Kategori"));
     }
     // kategori bulunduysa
-    res.send(categories);
+    return res.send({ data: categories, success: true, error: false });
   } catch (error) {
     // sunucu hatası
     res.status(500).send(serverErrorMessage);

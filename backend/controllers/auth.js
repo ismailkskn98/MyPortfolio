@@ -58,7 +58,7 @@ exports.login = async (req, res) => {
     });
 
     // Başarılı giriş mesajını ve token'i döndürme
-    return res.json({ message: "Giriş başarılı", success: true, error: false, token });
+    return res.send({ message: "Giriş başarılı", success: true, error: false, token });
   } catch (error) {
     // Sunucu hatası mesajı döndürme
     return res.status(500).send({
@@ -73,5 +73,5 @@ exports.login = async (req, res) => {
 // Token doğrulama
 exports.verifyToken = async (req, res) => {
   // Doğrulanmış kullanıcı bilgileri
-  return res.json(req.user);
+  return res.send(req.user);
 };

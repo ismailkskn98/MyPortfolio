@@ -32,7 +32,7 @@ exports.get_last_blog = async (req, res) => {
     }
 
     // Son blogu gönder
-    return res.send(lastBlog);
+    return res.send({ data: lastBlog, success: true, error: false });
   } catch (error) {
     // Sunucu hatası mesajı gönder
     res.status(500).send({
@@ -57,7 +57,7 @@ exports.get_hero = async (req, res) => {
         .send({ message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin." });
     }
     // hero varsa gönder
-    return res.send(hero);
+    return res.send({ data: hero, success: true, error: false });
   } catch (error) {
     // Sunucu hatası mesajı gönder
     return res.status(500).send({
@@ -84,7 +84,7 @@ exports.get_about = async (req, res) => {
       });
     }
     // about var ise
-    return res.send(about);
+    return res.send({ data: about, success: true, error: false });
   } catch (error) {
     return res.status(500).json({
       message:
@@ -120,7 +120,7 @@ exports.get_blogs = async (req, res) => {
     }
 
     // Blogları gönder
-    return res.send(blogs);
+    return res.send({ data: blogs, success: true, error: false });
   } catch (error) {
     // Sunucu hatası mesajı döndürme
     return res.status(500).send({
@@ -156,7 +156,7 @@ exports.get_blog_by_slug = async (req, res) => {
     }
 
     // Blogu yanıt olarak gönder
-    return res.send(blog);
+    return res.send({ data: blog, success: true, error: false });
   } catch (error) {
     // Sunucu hatası mesajı gönder
     res.status(500).send({
@@ -173,25 +173,21 @@ exports.get_skills = async (req, res) => {
     const skills = await Skill.findAll({ raw: true });
     // yetenekler yok ise
     if (!skills) {
-      res
-        .status(401)
-        .send({
-          message: "Yetenekler bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
-          success: false,
-          error: true,
-        });
-    }
-    // yetenekler var ise
-    res.send(skills);
-  } catch (error) {
-    // sunucu hatası
-    res
-      .status(500)
-      .send({
-        message:
-          "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
+      res.status(401).send({
+        message: "Yetenekler bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
         success: false,
         error: true,
       });
+    }
+    // yetenekler var ise
+    return res.send({ data: skills, success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    res.status(500).send({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
+      success: false,
+      error: true,
+    });
   }
 };
