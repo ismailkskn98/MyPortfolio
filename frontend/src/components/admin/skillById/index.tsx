@@ -99,7 +99,12 @@ const SkillById = ({ data }: { data: Skill }) => {
               </div>
               <div className="flex flex-col items-start gap-2">
                 <div className="relative w-44 h-44 bg-BG2 rounded p-3">
-                  <Image src={`${BASE_URL}/${data.image}`} fill={true} alt={data.name} />
+                  <Image
+                    src={`${BASE_URL}/${data.image}`}
+                    fill={true}
+                    alt={data.name}
+                    className="rounded"
+                  />
                 </div>
                 <label htmlFor="image" className="font-semibold">
                   Resim Yükle

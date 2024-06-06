@@ -9,9 +9,14 @@ import Tiptap from "./Tiptap";
 import { BlogSchema } from "./BlogSchema";
 import type { BlogItem } from "../blogAdd/BlogItems";
 import { CategoriesType } from "../blogAdd";
+import Image from "next/image";
+import { error } from "@/helper/homeAPI";
+import { useRouter } from "next/navigation";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
+// http://localhost:7930
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export type BlogByIdType = {
   id: string | number;
@@ -40,7 +45,8 @@ type InitialValues = {
   slug: string;
   subtitle: string;
   description: string;
-  image: string;
+  image: File | null;
+  currentImage: string;
   userId: string | number;
   categoryIds: (string | number)[];
   User: {
@@ -54,6 +60,7 @@ type InitialValues = {
 
 const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: CategoriesType[] }) => {
   const tokenPayload = AuthFromClient();
+  const router = useRouter();
   const [fileControl, setFileControl] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
@@ -64,13 +71,48 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
     slug: blog.slug,
     subtitle: blog.subtitle,
     description: blog.description,
-    image: blog.image,
+    image: null,
+    currentImage: blog.image,
     userId: blog.userId,
     categoryIds: blog.Categories.map((category) => category.id),
     User: blog.User,
   };
 
-  const handleSubmit = async () => {};
+  const handleSubmit = async (values: InitialValues) => {
+    const formData = new FormData();
+    formData.append("id", blog.id.toString());
+    formData.append("title", values.title);
+    formData.append("subtitle", values.subtitle);
+    formData.append("description", values.description);
+    formData.append("userId", values.userId.toString());
+    formData.append("categoryIds", JSON.stringify(values.categoryIds));
+    formData.append("currentImage", values.currentImage);
+    if (fileControl && values.image) {
+      formData.append("image", values.image);
+    }
+
+    try {
+      const response = await fetch(`${BASE_URL_API}/admin/blogs/${blog.id}`, {
+        method: "PUT",
+        body: formData,
+      });
+      if (!response.ok) {
+        const data: error = await response.json();
+        return setErrorMessage(data.message);
+      }
+
+      const responseData = await response.json();
+      if (responseData.error) {
+        return setErrorMessage(responseData.message);
+      }
+      setSuccessMessage(responseData.message);
+      setTimeout(() => {
+        router.replace(`/admin/bloglarim`);
+      }, 3500);
+    } catch (error) {
+      return setErrorMessage("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -111,6 +153,14 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                     </p>
                   )}
                   <div className="flex flex-col items-start gap-2">
+                    <div className="relative w-44 h-44 bg-BG2 p-3 rounded">
+                      <Image
+                        src={`${BASE_URL}/${blog.image}`}
+                        fill={true}
+                        alt={blog.title}
+                        className="rounded"
+                      />
+                    </div>
                     <label htmlFor="image" className="font-semibold">
                       Resim
                     </label>
@@ -132,7 +182,7 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                   <button
                     type="submit"
                     className={`px-4 py-2 mt-3 rounded border-none outline-none bg-BG2 text-white self-center font-semibold hover:bg-BG1 cursor-pointer transition-all disabled:bg-gray-600 disabled:text-white disabled:cursor-not-allowed`}
-                    disabled={!isValid || !fileControl}
+                    disabled={!isValid}
                   >
                     {isSubmitting ? "Kaydediliyor..." : "Kaydet"}
                   </button>
@@ -151,7 +201,7 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                           if (isChecked) {
                             setFieldValue(
                               "categoryIds",
-                              values.categoryIds.filter((value) => value !== category.id)
+                              values.categoryIds.filter((values) => values !== category.id)
                             );
                           } else {
                             setFieldValue("categoryIds", [...values.categoryIds, category.id]);
