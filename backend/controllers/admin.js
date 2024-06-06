@@ -170,6 +170,7 @@ exports.put_skillById = async (req, res) => {
   if (req.file) {
     const oldImagePath = path.resolve(__dirname, "..", "public", req.body.currentImage);
     image = "images/" + req.file.filename;
+
     fs.unlink(oldImagePath, (err) => {
       if (err) {
         console.error("Eski dosya silinemedi: ", err);
@@ -327,7 +328,59 @@ exports.post_blog = async (req, res) => {
     return res.status(500).send(serverErrorMessage);
   }
 };
-exports.put_blogById = async (req, res) => {};
+exports.put_blogById = async (req, res) => {
+  const id = req.body.id;
+  const title = req.body.title;
+  const slug = slugField(title);
+  const subtitle = req.body.subtitle;
+  const description = req.body.description;
+  const userId = req.body.userId;
+  let image = req.body.currentImage;
+  // image dosyası gönderilmiş mi ?
+  if (req.file) {
+    const oldImagePath = path.resolve(__dirname, "..", "public", req.body.currentImage);
+    image = "images/" + req.file.filename;
+
+    // bu dosya eğer var ise
+    if (fs.existsSync(oldImagePath)) {
+      // dosyayı sil
+      fs.unlink(oldImagePath, (err) => {
+        if (err) {
+          console.error("Eski dosya silinemedi: ", err);
+          return res.status(500).send({
+            message: "Eski dosya silinirken bir hata oluştu.",
+            success: false,
+            error: true,
+          });
+        }
+      });
+    }
+  }
+
+  try {
+    // blog güncelle
+    const blog = await Blog.update(
+      { title, slug, subtitle, description, image, userId },
+      { where: { id } }
+    );
+    // blog bulunamadıysa
+    if (!blog) {
+      res.status(401).send(errorMessage("Blog"));
+    }
+
+    // ilişkileri güncelle
+    const blogCategories = await Blog.findByPk(id);
+    const categoryIds = JSON.parse(req.body.categoryIds);
+    await blogCategories.setCategories(categoryIds);
+
+    // blog bulunduysa
+    return res.send({ message: "Blog başarıyla güncellendi.", success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
+  }
+};
+
 exports.delete_blogById = async (req, res) => {
   const { id } = req.params;
   try {
