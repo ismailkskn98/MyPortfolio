@@ -1,4 +1,4 @@
-import { Categories } from "@/components/admin/blogAdd";
+import { CategoriesType } from "@/components/admin/blogAdd";
 import BlogAddContainer from "@/containers/blogAddContainer";
 import { error, success } from "@/helper/homeAPI";
 import React from "react";
@@ -6,7 +6,7 @@ import React from "react";
 // http://localhost:7930/api
 const BASE_URL_API = process.env.BASE_URL_API;
 
-const getCategories = async () => {
+export const getCategories = async () => {
   try {
     const response = await fetch(`${BASE_URL_API}/admin/categories`);
     if (!response.ok) {
@@ -30,7 +30,7 @@ const getCategories = async () => {
 };
 
 const BlogEkle = async () => {
-  const data: Categories[] | string = await getCategories();
+  const data: CategoriesType[] | string = await getCategories();
   if (typeof data === "string") {
     throw new Error(data);
   }

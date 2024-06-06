@@ -5,14 +5,18 @@ import React, { useEffect, useState } from "react";
 import { ResponseData } from "../hero/HeroForm";
 import ConfirmDeleteModal from "../ConfirmDeleteModal";
 import InfoMessage from "../infoMessage";
+import Image from "next/image";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
+// http://localhost:7930
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export type BlogsType = {
   id: number | string;
   title: string;
   subtitle: string;
+  image: string;
   userId: number | string;
   Categories: {
     name: string;
@@ -94,7 +98,15 @@ const Blogs = ({ blogs }: { blogs: BlogsType[] }) => {
             {blogs.map((item) => (
               <tr key={item.id} className="odd:bg-Grey even:bg-BG2 border-b border-gray-700">
                 <td className="px-6 py-4">{item.id}</td>
-                <td className="px-6 py-4">Resim</td>
+                <td className="px-6 py-4">
+                  <Image
+                    src={`${BASE_URL}/${item.image}`}
+                    alt={item.title}
+                    width={65}
+                    height={60}
+                    className="rounded "
+                  />
+                </td>
                 <td className="px-6 py-4">
                   <p className="font-semibold">{item.title}</p>
                   <p className="text-xs">{item.subtitle}</p>

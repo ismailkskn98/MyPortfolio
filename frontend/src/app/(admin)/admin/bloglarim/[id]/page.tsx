@@ -2,6 +2,7 @@ import { BlogByIdType } from "@/components/admin/blogById";
 import AdminBlogByIdContainer from "@/containers/adminBlogByIdContainer";
 import { error, success } from "@/helper/homeAPI";
 import React from "react";
+import { getCategories } from "../../blog-ekle/page";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.BASE_URL_API;
@@ -34,12 +35,15 @@ const getBlogById = async (id: string) => {
 };
 
 const BlogGuncelle = async ({ params }: { params: { id: string } }) => {
-  const blog: BlogByIdType | string = await getBlogById(params.id);
-  if (typeof blog === "string") {
-    throw new Error(blog);
+  const [blogResponse, categoriesResponse] = await Promise.all([
+    getBlogById(params.id),
+    getCategories(),
+  ]);
+  if (typeof blogResponse === "string" || typeof categoriesResponse === "string") {
+    throw new Error(blogResponse || categoriesResponse);
   }
 
-  return <AdminBlogByIdContainer blog={blog} />;
+  return <AdminBlogByIdContainer blog={blogResponse} categories={categoriesResponse} />;
 };
 
 export default BlogGuncelle;

@@ -12,7 +12,7 @@ import InfoMessage from "../infoMessage";
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
-export type Categories = {
+export type CategoriesType = {
   id: number | string;
   name: string;
 };
@@ -33,7 +33,7 @@ const initialValues: InitialValues = {
   categoryIds: [],
 };
 
-const BlogAdd = ({ categories }: { categories: Categories[] }) => {
+const BlogAdd = ({ categories }: { categories: CategoriesType[] }) => {
   const tokenPayload = AuthFromClient();
   const [fileControl, setFileControl] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
