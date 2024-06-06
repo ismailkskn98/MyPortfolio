@@ -238,7 +238,7 @@ exports.get_blogs = async (req, res) => {
   try {
     // veritabanından blogları getir
     const blogs = await Blog.findAll({
-      attributes: ["id", "title", "subtitle", "userId"],
+      attributes: ["id", "title", "subtitle", "image", "userId"],
       include: [
         {
           model: Category,
