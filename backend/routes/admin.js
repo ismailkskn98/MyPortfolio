@@ -2,6 +2,9 @@ const router = require("express").Router();
 const adminController = require("../controllers/admin.js");
 const imageUpload = require("../helpers/image-upload.js");
 
+// Admin - Anasayfa
+router.get("/blogs-count", adminController.get_blogsCount);
+
 // Hero - Kişisel Bilgiler
 router.get("/hero", adminController.get_hero);
 router.put("/hero/:id", adminController.put_hero);
