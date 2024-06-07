@@ -45,14 +45,11 @@ const LoginForm = () => {
       },
       body: JSON.stringify(values),
     });
-    if (!response.ok) {
-      throw new Error("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz");
-    }
     const data: LoginResponse = await response.json();
     if (data.error) {
+      values.password = "";
       return setErrorMessage(data);
     }
-
     return router.replace(next ?? "/admin");
   };
 

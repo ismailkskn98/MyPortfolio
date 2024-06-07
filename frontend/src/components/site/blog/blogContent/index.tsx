@@ -1,4 +1,5 @@
 import React from "react";
+import parse from "html-react-parser";
 
 export type Blog = {
   title: string;
@@ -23,7 +24,7 @@ const BlogContent: React.FC<{ blog: Blog }> = ({ blog }) => {
       <span>{blog.title}</span>
       <span>{blog.slug}</span>
       <span>{blog.subtitle}</span>
-      <span>{blog.description}</span>
+      <span>{parse(blog.description)}</span>
       <span>
         {blog.Categories.map((category, index) => (
           <span key={index}>{category.name}</span>
