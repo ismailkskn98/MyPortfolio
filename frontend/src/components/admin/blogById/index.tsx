@@ -10,7 +10,7 @@ import { BlogSchema } from "./BlogSchema";
 import type { BlogItem } from "../blogAdd/BlogItems";
 import { CategoriesType } from "../blogAdd";
 import Image from "next/image";
-import { error } from "@/helper/homeAPI";
+import { error } from "@/helper/fetchApi";
 import { useRouter } from "next/navigation";
 
 // http://localhost:7930/api
@@ -128,16 +128,9 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
         <h1 className="w-full flex items-center justify-center text-4xl">Blog Ekle</h1>
         <section className="w-full flex flex-col">
           <InfoMessage errorMessage={errorMessage} successMessage={successMessage} />
-          <Formik
-            initialValues={initialValues}
-            validationSchema={BlogSchema}
-            onSubmit={handleSubmit}
-          >
+          <Formik initialValues={initialValues} validationSchema={BlogSchema} onSubmit={handleSubmit}>
             {({ isSubmitting, isValid, setFieldValue, values }) => (
-              <Form
-                className="w-full flex items-start justify-between gap-10 px-16"
-                encType="multipart/form-data"
-              >
+              <Form className="w-full flex items-start justify-between gap-10 px-16" encType="multipart/form-data">
                 <article className="w-full flex flex-col gap-5">
                   {blogItems.map((item: BlogItem, i) => (
                     <CustomInput key={i} {...item} />
@@ -148,18 +141,12 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                   <Tiptap name="description" />
                   {!isValid && (
                     <p className="-mt-3 text-sm text-red-500">
-                      *Lütfen en az 50 karakter giriniz. Tüm alanları doldurduktan sonra bu uyarı
-                      kaybolur.
+                      *Lütfen en az 50 karakter giriniz. Tüm alanları doldurduktan sonra bu uyarı kaybolur.
                     </p>
                   )}
                   <div className="flex flex-col items-start gap-2">
                     <div className="relative w-44 h-44 bg-BG2 p-3 rounded">
-                      <Image
-                        src={`${BASE_URL}/${blog.image}`}
-                        fill={true}
-                        alt={blog.title}
-                        className="rounded"
-                      />
+                      <Image src={`${BASE_URL}/${blog.image}`} fill={true} alt={blog.title} className="rounded" />
                     </div>
                     <label htmlFor="image" className="font-semibold">
                       Resim
@@ -213,11 +200,7 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                       </label>
                     </div>
                   ))}
-                  <ErrorMessage
-                    name="categoryIds"
-                    component="p"
-                    className="text-red-600 text-sm pl-1"
-                  />
+                  <ErrorMessage name="categoryIds" component="p" className="text-red-600 text-sm pl-1" />
                 </article>
               </Form>
             )}

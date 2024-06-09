@@ -2,11 +2,10 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { SkillSchema } from "../skillAdd/SkillSchema";
-import { Skill } from "@/app/(admin)/admin/yetenekler/[id]/page";
 import Image from "next/image";
 
 import { useRouter } from "next/navigation";
-import { error } from "@/helper/homeAPI";
+import { error } from "@/helper/fetchApi";
 import InfoMessage from "../infoMessage";
 
 // http://localhost:7930/api
@@ -14,13 +13,19 @@ const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 // http://localhost:5029
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+export type SkillType = {
+  id: string | number;
+  name: string;
+  image: string;
+};
+
 type InitialValues = {
   name: string;
   image: File | null;
   currentImage: string;
 };
 
-const SkillById = ({ data }: { data: Skill }) => {
+const SkillById = ({ data }: { data: SkillType }) => {
   const router = useRouter();
   const [fileControl, setFileControl] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -76,11 +81,7 @@ const SkillById = ({ data }: { data: Skill }) => {
     <>
       <main className="w-full px-6 flex flex-col items-center gap-5 shadow-md py-8">
         <h1 className="w-full flex items-center justify-center text-4xl">Yetenek Güncelle</h1>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={SkillSchema}
-          onSubmit={handleSubmit}
-        >
+        <Formik initialValues={initialValues} validationSchema={SkillSchema} onSubmit={handleSubmit}>
           {({ setFieldValue, errors }) => (
             <Form method="POST" encType="multipart/form-data" className="flex flex-col gap-5">
               <Field type="hidden" name="currentImage" />
@@ -99,12 +100,7 @@ const SkillById = ({ data }: { data: Skill }) => {
               </div>
               <div className="flex flex-col items-start gap-2">
                 <div className="relative w-44 h-44 bg-BG2 rounded p-3">
-                  <Image
-                    src={`${BASE_URL}/${data.image}`}
-                    fill={true}
-                    alt={data.name}
-                    className="rounded"
-                  />
+                  <Image src={`${BASE_URL}/${data.image}`} fill={true} alt={data.name} className="rounded" />
                 </div>
                 <label htmlFor="image" className="font-semibold">
                   Resim Yükle

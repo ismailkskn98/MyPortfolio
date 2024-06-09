@@ -1,8 +1,7 @@
-import { Skill } from "@/app/(admin)/admin/yetenekler/[id]/page";
-import SkillById from "@/components/admin/skillById";
+import SkillById, { SkillType } from "@/components/admin/skillById";
 import React from "react";
 
-const SkillByIdContainer = ({ data }: { data: Skill }) => {
+const SkillByIdContainer = ({ data }: { data: SkillType }) => {
   return (
     <>
       <SkillById data={data} />

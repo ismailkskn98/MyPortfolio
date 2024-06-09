@@ -1,10 +1,10 @@
 import type { Blog } from "@/components/site/blog/blogColumn/Content";
 import BlogsContainer from "@/containers/blogsContainer";
-import { homeAPI } from "@/helper/homeAPI";
+import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const Blogs = async () => {
-  const blogs: Blog[] | string = await homeAPI("blogs", undefined, "GET");
+  const blogs: Blog[] | string = await fetchApi("blogs", undefined, "GET");
   if (typeof blogs === "string") {
     throw new Error(blogs);
   }

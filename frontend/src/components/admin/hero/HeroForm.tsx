@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import type { Hero as HeroType } from "@/app/(admin)/admin/hero/page";
 import { Formik, Form, FormikHelpers } from "formik";
 import { heroSchema } from "./HeroSchema";
 import { HeroFormItem, heroFormItems } from "./HeroFormItems";
@@ -10,6 +9,16 @@ import InfoMessage from "../infoMessage";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
+
+export type HeroType = {
+  id: number;
+  name: string;
+  job: string;
+  email: string;
+  freelancer: string;
+  website: string;
+  city: string;
+};
 
 export type ResponseData = {
   message: string;
@@ -75,12 +84,7 @@ const HeroForm = ({ data }: { data: HeroType }) => {
   }, [errorMessage, successMessage]);
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={heroSchema}
-      onSubmit={handleSubmit}
-      validateOnMount={true}
-    >
+    <Formik initialValues={initialValues} validationSchema={heroSchema} onSubmit={handleSubmit} validateOnMount={true}>
       {({ isSubmitting, isValid }) => (
         <Form className="basis-1/4 flex flex-col items-start mx-auto gap-5">
           <InfoMessage errorMessage={errorMessage} successMessage={successMessage} />

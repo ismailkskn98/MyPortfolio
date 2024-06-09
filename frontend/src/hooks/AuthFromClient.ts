@@ -1,5 +1,5 @@
 "use client";
-import { error } from "@/helper/homeAPI";
+import { error } from "@/helper/fetchApi";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 

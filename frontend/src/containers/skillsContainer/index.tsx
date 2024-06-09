@@ -1,5 +1,4 @@
-import type { SkillsType } from "@/app/(admin)/admin/yetenekler/page";
-import Skills from "@/components/admin/skills";
+import Skills, { SkillsType } from "@/components/admin/skills";
 import React from "react";
 
 const SkillsContainer = ({ data }: { data: SkillsType[] }) => {

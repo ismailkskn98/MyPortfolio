@@ -1,11 +1,14 @@
 "use client";
-import { AboutType } from "@/app/(admin)/admin/hakkimda/page";
 import React, { useEffect, useState } from "react";
 import Tiptap from "../tiptap/Tiptap";
 import InfoMessage from "../infoMessage";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
+
+export type AboutType = {
+  about: string;
+};
 
 const About = ({ data }: { data: AboutType }) => {
   const [initialContent, setInitialContent] = useState<string>(data.about);

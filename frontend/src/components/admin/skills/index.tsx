@@ -1,5 +1,4 @@
 "use client";
-import type { SkillsType } from "@/app/(admin)/admin/yetenekler/page";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
@@ -11,6 +10,12 @@ import InfoMessage from "../infoMessage";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
+
+export type SkillsType = {
+  id: number | string;
+  name: string;
+  image: string;
+};
 
 const Skills = ({ data }: { data: SkillsType[] }) => {
   const [show, setShow] = useState<boolean>(false);
@@ -84,12 +89,7 @@ const Skills = ({ data }: { data: SkillsType[] }) => {
                   className="odd:bg-white odd:dark:bg-Grey even:bg-gray-50 even:dark:bg-BG2 border-b dark:border-gray-700"
                 >
                   <td className="px-6 py-4">
-                    <Image
-                      src={`${BASE_URL}/${item.image}`}
-                      alt="Yetenek Resmi"
-                      width={130}
-                      height={100}
-                    />
+                    <Image src={`${BASE_URL}/${item.image}`} alt="Yetenek Resmi" width={130} height={100} />
                   </td>
                   <td className="px-6 py-4 text-base font-semibold capitalize">{item.name}</td>
                   <td className="px-6 py-4 max-w-28">
@@ -112,11 +112,7 @@ const Skills = ({ data }: { data: SkillsType[] }) => {
           </tbody>
         </table>
       </section>
-      <ConfirmDeleteModal
-        show={show}
-        onClose={() => setShow((prev) => !prev)}
-        onConfirm={handleConfirmDelete}
-      />
+      <ConfirmDeleteModal show={show} onClose={() => setShow((prev) => !prev)} onConfirm={handleConfirmDelete} />
     </main>
   );
 };

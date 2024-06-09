@@ -1,15 +1,15 @@
 import HomeContainer from "@/containers/homeContainer";
-import { homeAPI } from "@/helper/homeAPI";
+import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 export const revalidate = 60 * 5; // 5 dakika
 
 const Home = async () => {
   const [resultGetSkills, resultLastBlog, resultGetHero, resultGetAbout] = await Promise.all([
-    homeAPI("skills", undefined, "GET"),
-    homeAPI("blogs/lastblog", undefined, "GET"),
-    homeAPI("hero", undefined, "GET"),
-    homeAPI("about", undefined, "GET"),
+    fetchApi("skills", undefined, "GET"),
+    fetchApi("blogs/lastblog", undefined, "GET"),
+    fetchApi("hero", undefined, "GET"),
+    fetchApi("about", undefined, "GET"),
   ]);
 
   if (
@@ -18,18 +18,9 @@ const Home = async () => {
     typeof resultGetAbout === "string" ||
     typeof resultGetSkills === "string"
   ) {
-    throw new Error(
-      "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun."
-    );
+    throw new Error("Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.");
   }
-  return (
-    <HomeContainer
-      blog={resultLastBlog}
-      hero={resultGetHero}
-      about={resultGetAbout}
-      skills={resultGetSkills}
-    />
-  );
+  return <HomeContainer blog={resultLastBlog} hero={resultGetHero} about={resultGetAbout} skills={resultGetSkills} />;
 };
 
 export default Home;
