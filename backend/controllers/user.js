@@ -4,6 +4,7 @@ const User = require("../models").User;
 const Hero = require("../models").Hero;
 const About = require("../models").About;
 const Skill = require("../models").Skill;
+const Work = require("../models").Work;
 
 // Anasayfa
 exports.get_last_blog = async (req, res) => {
@@ -184,6 +185,35 @@ exports.get_skills = async (req, res) => {
   } catch (error) {
     // sunucu hatası
     res.status(500).send({
+      message:
+        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
+      success: false,
+      error: true,
+    });
+  }
+};
+
+// works
+exports.get_works = async (req, res) => {
+  try {
+    // veritabanından work'leri al
+    const works = await Work.findAll({
+      attributes: ["url", "verticalImage", "horizontalImage"],
+      raw: true,
+    });
+    // bulunamadıysa
+    if (!works) {
+      return res.status(401).send({
+        message: "Yetenekler bulunamadı. Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+    // veritabanında var ise
+    return res.send({ data: works, success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send({
       message:
         "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
       success: false,

@@ -30,4 +30,25 @@ router.delete("/blogs/delete/:id", adminController.delete_blogById);
 // Categories
 router.get("/categories", adminController.get_categories);
 
+// Works
+router.get("/works", adminController.get_works);
+router.get("/works/:id", adminController.get_workById);
+router.post(
+  "/work-create",
+  imageUpload.upload.fields([
+    { name: "verticalImage", maxCount: 1 },
+    { name: "horizontalImage", maxCount: 1 },
+  ]),
+  adminController.post_work
+);
+router.put(
+  "/works/:id",
+  imageUpload.upload.fields([
+    { name: "verticalImage", maxCount: 1 },
+    { name: "horizontalImage", maxCount: 1 },
+  ]),
+  adminController.put_workById
+);
+router.delete("/works/delete/:id", adminController.delete_workById);
+
 module.exports = router;

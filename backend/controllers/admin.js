@@ -4,6 +4,7 @@ const Skill = require("../models").Skill;
 const Blog = require("../models").Blog;
 const Category = require("../models").Category;
 const User = require("../models").User;
+const Work = require("../models").Work;
 const fs = require("fs");
 const path = require("path");
 const slugField = require("../helpers/slugField");
@@ -64,9 +65,7 @@ exports.put_hero = async (req, res) => {
 
     // güncellemede bir hata olduysa
     if (!hero) {
-      return res
-        .status(401)
-        .send({ message: "Güncelleme sırasında bir hata oluştu.", success: false, error: true });
+      return res.status(401).send({ message: "Güncelleme sırasında bir hata oluştu.", success: false, error: true });
     }
 
     // başarılı
@@ -105,9 +104,7 @@ exports.put_about = async (req, res) => {
 
     // güncellemede bir hata olduysa
     if (!aboutResponse) {
-      return res
-        .status(401)
-        .send({ message: "Güncelleme sırasında bir hata oluştu.", success: false, error: true });
+      return res.status(401).send({ message: "Güncelleme sırasında bir hata oluştu.", success: false, error: true });
     }
     // başarılı
     return res.send({ message: "Hakkımda başarıyla güncellendi.", success: true, error: false });
@@ -371,10 +368,7 @@ exports.put_blogById = async (req, res) => {
 
   try {
     // blog güncelle
-    const blog = await Blog.update(
-      { title, slug, subtitle, description, image, userId },
-      { where: { id } }
-    );
+    const blog = await Blog.update({ title, slug, subtitle, description, image, userId }, { where: { id } });
     // blog bulunamadıysa
     if (!blog) {
       res.status(401).send(errorMessage("Blog"));
@@ -465,5 +459,209 @@ exports.get_categories = async (req, res) => {
   } catch (error) {
     // sunucu hatası
     res.status(500).send(serverErrorMessage);
+  }
+};
+
+// Works
+exports.get_works = async (req, res) => {
+  try {
+    // veritabanından work'leri al
+    const works = await Work.findAll({
+      attributes: ["id", "url", "verticalImage", "horizontalImage"],
+      raw: true,
+    });
+    // bulunamadıysa
+    if (!works) {
+      return res.status(401).send(errorMessage("İşler"));
+    }
+    // veritabanında var ise
+    return res.send({ data: works, success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
+  }
+};
+exports.get_workById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const work = await findOne({
+      where: { id },
+      attributes: ["id", "url", "verticalImage", "horizontalImage"],
+      raw: true,
+    });
+    // bulunamadıysa
+    if (!work) {
+      return res.status(401).send(errorMessage("İş"));
+    }
+    // veritabanında var ise
+    return res.send({ data: work, success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
+  }
+};
+exports.post_work = async (req, res) => {
+  const url = req.body.url;
+  let verticalImage = "";
+  let horizontalImage = "";
+
+  // resimlerin alınması
+  if (req.file) {
+    const verticalImage = "images/" + req.files["verticalImage"] ? req.files["verticalImage"][0].filename : null;
+    const horizontalImage = "images/" + req.files["horizontalImage"] ? req.files["horizontalImage"][0].filename : null;
+  }
+
+  try {
+    // veritabanına ekle
+    const newWork = await Work.create({ url, verticalImage, horizontalImage });
+    // hata kontrolü
+    if (!newWork) {
+      return res.status(401).send({
+        message: "İş eklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+    return res.send({ message: "İş başarıyla eklendi.", success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
+  }
+};
+exports.put_workById = async (req, res) => {
+  const id = req.body.id;
+  const url = req.body.url;
+  let verticalImage = req.body.currentVerticalImage;
+  let horizontalImage = req.body.currentHorizontalImage;
+  const oldImagePathVerticalImage = path.resolve(__dirname, "..", "public", req.body.currentVerticalImage);
+  const oldImagePathHorizontalImage = path.resolve(__dirname, "..", "public", req.body.currentHorizontalImage);
+  if (req.file) {
+    // image update
+    if (req.files["verticalImage"] && req.files["horizontalImage"]) {
+      // vertical ve horizontal image update
+      verticalImage = "images/" + req.files["verticalImage"][0].filename;
+      horizontalImage = "images/" + req.files["horizontalImage"][0].filename;
+
+      // eski resimleri silme
+      if (fs.existsSync(oldImagePathVerticalImage) || fs.existsSync(oldImagePathHorizontalImage)) {
+        fs.unlink(oldImagePathVerticalImage, (err) => {
+          if (err) {
+            console.error("Eski dosya silinemedi: ", err);
+            return res.status(500).send({
+              message: "Eski dosya silinirken bir hata oluştu.",
+              success: false,
+              error: true,
+            });
+          }
+        });
+        fs.unlink(oldImagePathHorizontalImage, (err) => {
+          if (err) {
+            console.error("Eski dosya silinemedi: ", err);
+            return res.status(500).send({
+              message: "Eski dosya silinirken bir hata oluştu.",
+              success: false,
+              error: true,
+            });
+          }
+        });
+      }
+    } else if (req.files["verticalImage"]) {
+      // verticalImage update
+      verticalImage = "images/" + req.files["verticalImage"][0].filename;
+      // eski resimleri silme
+      if (fs.existsSync(oldImagePathVerticalImage)) {
+        fs.unlink(oldImagePathVerticalImage, (err) => {
+          if (err) {
+            console.error("Eski dosya silinemedi: ", err);
+            return res.status(500).send({
+              message: "Eski dosya silinirken bir hata oluştu.",
+              success: false,
+              error: true,
+            });
+          }
+        });
+      }
+    } else {
+      // horizontalImage update
+      horizontalImage = "images/" + req.files["horizontalImage"][0].filename;
+      // eski resimleri silme
+      if (fs.existsSync(oldImagePathHorizontalImage)) {
+        fs.unlink(oldImagePathHorizontalImage, (err) => {
+          if (err) {
+            console.error("Eski dosya silinemedi: ", err);
+            return res.status(500).send({
+              message: "Eski dosya silinirken bir hata oluştu.",
+              success: false,
+              error: true,
+            });
+          }
+        });
+      }
+    }
+  }
+
+  try {
+    // veritabanını güncelle
+    const work = await Work.update({ url, verticalImage, horizontalImage }, { where: { id } });
+
+    // hata kontrolü
+    if (!work) {
+      return res.status(401).send({
+        message: "Güncelleme sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+        success: false,
+        error: true,
+      });
+    }
+
+    res.send({ message: "İş başarıyla güncellendi.", success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
+  }
+};
+exports.delete_workById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const work = await Work.findOne({ where: { id }, attributes: ["verticalImage", "horizontalImage"], raw: true });
+    // veritabanından id'ye göre sil
+    await Work.destroy({ where: { id } });
+    // hata kontrolü
+    if (!work) {
+      return res.send(401).send(errorMessage("İş"));
+    }
+
+    // resimlerin silinmesi
+    const verticalImagePath = path.resolve(__dirname, "..", "public", work["verticalImage"]);
+    const horizontalImagePath = path.resolve(__dirname, "..", "public", work["horizontalImage"]);
+
+    if (fs.existsSync(verticalImagePath) || fs.existsSync(horizontalImagePath)) {
+      fs.unlink(verticalImagePath, (err) => {
+        if (err) {
+          console.error("Eski dosya silinemedi: ", err);
+          return res.status(500).send({
+            message: "Eski dosya silinirken bir hata oluştu.",
+            success: false,
+            error: true,
+          });
+        }
+      });
+      fs.unlink(horizontalImagePath, (err) => {
+        if (err) {
+          console.error("Eski dosya silinemedi: ", err);
+          return res.status(500).send({
+            message: "Eski dosya silinirken bir hata oluştu.",
+            success: false,
+            error: true,
+          });
+        }
+      });
+    }
+
+    return res.send({ message: "İş başarıyla silindi.", success: true, error: false });
+  } catch (error) {
+    // sunucu hatası
+    return res.status(500).send(serverErrorMessage);
   }
 };

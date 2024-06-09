@@ -12,4 +12,8 @@ router.get("/blogs", userController.get_blogs);
 
 // skills
 router.get("/skills", userController.get_skills);
+
+// Works
+router.get("/works", userController.get_works);
+
 module.exports = router;
