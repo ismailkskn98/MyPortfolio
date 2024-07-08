@@ -26,8 +26,7 @@ const serverErrorMessage = {
 exports.get_blogsCount = async (req, res) => {
   try {
     const blogCount = await Blog.count(); // kaç tane blog var
-    console.log(blogCount);
-    res.send({ data: { count: blogCount }, success: true, error: false });
+    return res.send({ data: { count: blogCount }, success: true, error: false });
   } catch (error) {
     // Sunucu hatası mesajı gönder
     return res.status(500).send(serverErrorMessage);
