@@ -4,7 +4,7 @@ import React from "react";
 
 const BlogGuncelle = async ({ params }: { params: { id: string } }) => {
   const [blogResponse, categoriesResponse] = await Promise.all([
-    fetchApi("/admin/blogs", params.id, "GET", "no-store"),
+    fetchApi("admin/blogs", params.id, "GET", "no-store"),
     fetchApi("admin/categories", undefined, "GET", "force-cache"),
   ]);
   if (typeof blogResponse === "string" || typeof categoriesResponse === "string") {
