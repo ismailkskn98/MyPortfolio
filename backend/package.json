@@ -4,9 +4,8 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "start": "set NODE_ENV=production&& node app.js",
-    "dev": "set NODE_ENV=development&& nodemon app.js",
-    "migrate": "npx sequelize-cli db:migrate"
+    "start": "NODE_ENV=production npx sequelize-cli db:migrate && node app.js",
+    "dev": "set NODE_ENV=development&& nodemon app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
