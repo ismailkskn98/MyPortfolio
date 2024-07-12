@@ -12,7 +12,7 @@ app.use(cookieParser());
 // SET NODE_ENV
 const envFile = process.env.NODE_ENV === "production" ? ".env.production" : ".env.local";
 dotenv.config({ path: path.resolve(__dirname, envFile) });
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 // CORS ayarları
 const corsOptions = {

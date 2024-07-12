@@ -27,9 +27,7 @@ exports.get_last_blog = async (req, res) => {
 
     // Eğer son blog yoksa hata döndür
     if (!lastBlog) {
-      return res
-        .status(404)
-        .send({ message: "blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
+      return res.status(404).send({ message: "blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
     }
 
     // Son blogu gönder
@@ -37,8 +35,7 @@ exports.get_last_blog = async (req, res) => {
   } catch (error) {
     // Sunucu hatası mesajı gönder
     res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      message: "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
     });
   }
 };
@@ -53,17 +50,14 @@ exports.get_hero = async (req, res) => {
 
     // Eğer hero yoksa hata döndür
     if (!hero) {
-      return res
-        .status(401)
-        .send({ message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin." });
+      return res.status(401).send({ message: "Hero Bulunamadı. Lütfen daha sonra tekrar deneyin." });
     }
     // hero varsa gönder
     return res.send({ data: hero, success: true, error: false });
   } catch (error) {
     // Sunucu hatası mesajı gönder
     return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      message: "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
     });
   }
 };
@@ -88,8 +82,7 @@ exports.get_about = async (req, res) => {
     return res.send({ data: about, success: true, error: false });
   } catch (error) {
     return res.status(500).json({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      message: "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
       error: true,
     });
@@ -115,9 +108,7 @@ exports.get_blogs = async (req, res) => {
 
     // Eğer hiç blog yoksa hata döndürür
     if (blogs.length === 0) {
-      return res
-        .status(404)
-        .send({ message: "Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
+      return res.status(404).send({ message: "Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
     }
 
     // Blogları gönder
@@ -125,8 +116,9 @@ exports.get_blogs = async (req, res) => {
   } catch (error) {
     // Sunucu hatası mesajı döndürme
     return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      message: "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      error: true,
+      success: false,
     });
   }
 };
@@ -151,9 +143,7 @@ exports.get_blog_by_slug = async (req, res) => {
 
     // Eğer blog bulunamazsa hata döndür
     if (!blog) {
-      return res
-        .status(404)
-        .send({ message: "Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
+      return res.status(404).send({ message: "Hiç blog bulunamadı. Lütfen daha sonra tekrar deneyin." });
     }
 
     // Blogu yanıt olarak gönder
@@ -161,8 +151,7 @@ exports.get_blog_by_slug = async (req, res) => {
   } catch (error) {
     // Sunucu hatası mesajı gönder
     res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      message: "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
     });
   }
 };
@@ -185,8 +174,7 @@ exports.get_skills = async (req, res) => {
   } catch (error) {
     // sunucu hatası
     res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
+      message: "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
       success: false,
       error: true,
     });
@@ -214,8 +202,7 @@ exports.get_works = async (req, res) => {
   } catch (error) {
     // sunucu hatası
     return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
+      message: "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.",
       success: false,
       error: true,
     });
