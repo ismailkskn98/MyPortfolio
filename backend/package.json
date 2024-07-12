@@ -4,7 +4,7 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "start": "NODE_ENV=production npx sequelize-cli db:migrate && node app.js",
+    "start": "set NODE_ENV=production&& npx sequelize-cli db:migrate&& node app.js",
     "dev": "set NODE_ENV=development&& nodemon app.js"
   },
   "dependencies": {
