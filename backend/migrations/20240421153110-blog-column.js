@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.addColumn("blog", "userId", {
+    return queryInterface.addColumn("Blogs", "userId", {
       type: Sequelize.DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -15,6 +15,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    return queryInterface.removeColumn("blog", "userId");
+    return queryInterface.removeColumn("Blogs", "userId");
   },
 };
