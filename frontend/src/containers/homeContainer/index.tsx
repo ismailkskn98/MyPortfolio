@@ -1,9 +1,6 @@
 import React from "react";
 // type
 import type { Blog } from "@/components/site/blog/blogColumn/Content";
-import type { Hero as HeroType } from "@/app/(admin)/admin/hero/page";
-import type { AboutType } from "@/app/(admin)/admin/hakkimda/page";
-import type { SkillsType } from "@/app/(admin)/admin/yetenekler/page";
 
 // Components
 import Hero from "@/components/site/hero";
@@ -30,6 +27,9 @@ import AboutText from "@/components/site/about/AboutText";
 import SkillsContent from "@/components/site/skills/SkillsContent";
 import SkillsContentServices from "@/components/site/skills/SkillsContentServices";
 import SkillsContentSkills from "@/components/site/skills/SkillsContentSkills";
+import { HeroType } from "@/components/admin/hero/HeroForm";
+import { AboutType } from "@/components/admin/about";
+import { SkillsType } from "@/components/admin/skills";
 
 const HomeContainer = ({
   blog,
