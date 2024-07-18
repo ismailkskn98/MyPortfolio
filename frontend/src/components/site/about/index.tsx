@@ -1,9 +1,5 @@
 import React from "react";
 
-export type AboutType = {
-  about: string;
-};
-
 const About = ({ children }: { children: React.ReactNode }) => {
   return (
     <section id="hakkimda" className="w-full h-min bg-BG2">
