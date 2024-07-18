@@ -1,4 +1,4 @@
-import { AboutType } from "@/app/(admin)/admin/hakkimda/page";
+import { AboutType } from "@/components/admin/about";
 import parse from "html-react-parser";
 import React from "react";
 
