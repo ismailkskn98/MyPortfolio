@@ -3,14 +3,14 @@ import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import { LuLink } from "react-icons/lu";
 import { MdOutlineHomeWork } from "react-icons/md";
 import CardSkills from "./CardSkills";
-import { Hero } from "@/app/(admin)/admin/hero/page";
+import { HeroType } from "@/components/admin/hero/HeroForm";
 
 type CardInfoItem = {
   name: string | number;
   icon: React.ElementType;
 };
 
-const CardInfo = ({ hero }: { hero: Hero }) => {
+const CardInfo = ({ hero }: { hero: HeroType }) => {
   const CardInfoItems: CardInfoItem[] = [
     { name: hero.email, icon: IoMailOutline },
     { name: `Türkiye / ${hero.city}`, icon: IoLocationOutline },
