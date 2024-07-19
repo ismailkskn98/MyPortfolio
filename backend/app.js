@@ -16,10 +16,8 @@ const port = process.env.PORT || 3000;
 
 // CORS ayarları
 const corsOptions = {
-  origin: ["http://localhost:3000", "http://127.0.0.1:5500"], // İzin verilen domainlerin listesi
-  methods: ["GET", "POST", "PUT", "DELETE"], // İzin verilen HTTP metodları
-  credentials: true, // Tarayıcıya çerez gönderme izni
-  secure: false, // Geliştirme aşamasında HTTP bağlantıları için izin ver
+  origin: "*", // Herhangi bir domain
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Tüm HTTP metodları
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"], // İzin verilen başlıklar
 };
 app.use(cors(corsOptions));
