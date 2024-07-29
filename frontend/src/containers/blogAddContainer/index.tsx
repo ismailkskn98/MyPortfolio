@@ -1,7 +1,7 @@
-import BlogAdd, { Categories } from "@/components/admin/blogAdd";
+import BlogAdd, { CategoriesType } from "@/components/admin/blogAdd";
 import React from "react";
 
-const BlogAddContainer = ({ categories }: { categories: Categories[] }) => {
+const BlogAddContainer = ({ categories }: { categories: CategoriesType[] }) => {
   return (
     <>
       <BlogAdd categories={categories} />
