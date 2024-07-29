@@ -18,6 +18,7 @@ const port = process.env.PORT || 3000;
 const corsOptions = {
   origin: "*", // Herhangi bir domain
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Tüm HTTP metodları
+  credentials: true,
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"], // İzin verilen başlıklar
 };
 app.use(cors(corsOptions));

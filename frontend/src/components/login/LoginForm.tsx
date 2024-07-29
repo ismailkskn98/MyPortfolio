@@ -46,6 +46,7 @@ const LoginForm = () => {
       body: JSON.stringify(values),
     });
     const data: LoginResponse = await response.json();
+    console.log(data);
     if (data.error) {
       values.password = "";
       return setErrorMessage(data);
@@ -54,12 +55,7 @@ const LoginForm = () => {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={LoginSchema}
-      onSubmit={handleSubmit}
-      validateOnMount={true}
-    >
+    <Formik initialValues={initialValues} validationSchema={LoginSchema} onSubmit={handleSubmit} validateOnMount={true}>
       {({ isSubmitting, isValid }) => (
         <Form method="POST" className="max-w-[550px] w-full flex flex-col items-center gap-8">
           {errorMessage.error && (

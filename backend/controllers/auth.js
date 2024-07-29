@@ -21,18 +21,14 @@ exports.login = async (req, res) => {
     });
     // Kullanıcı yoksa hata döndür
     if (!user) {
-      return res
-        .status(400)
-        .send({ message: "Hatalı email ya da parola", success: false, error: true });
+      return res.status(400).send({ message: "Hatalı email ya da parola", success: false, error: true });
     }
 
     // Parola kontrolü
     const passwordMatch = await bcryptjs.compare(password, user.password);
     if (!passwordMatch) {
       // şifre eşleşmiyorsa
-      return res
-        .status(400)
-        .send({ message: "Hatalı email ya da parola", success: false, error: true });
+      return res.status(400).send({ message: "Hatalı email ya da parola", success: false, error: true });
     }
 
     // JWT token oluşturma
@@ -62,8 +58,7 @@ exports.login = async (req, res) => {
   } catch (error) {
     // Sunucu hatası mesajı döndürme
     return res.status(500).send({
-      message:
-        "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
+      message: "Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.",
       success: false,
       error: true,
     });
