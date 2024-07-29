@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
 import profilPhoto from "@/../public/images/Profile photo.png";
-import { Hero } from "@/app/(admin)/admin/hero/page";
+import { HeroType } from "@/components/admin/hero/HeroForm";
 
-const ImageName = ({ hero }: { hero: Hero }) => {
+const ImageName = ({ hero }: { hero: HeroType }) => {
   return (
     <div id="photoName" className="w-full flex flex-col items-center gap-4 text-White">
       <Image src={profilPhoto} alt="profil fotoğrafı" />
