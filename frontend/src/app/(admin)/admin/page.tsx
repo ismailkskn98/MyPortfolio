@@ -4,7 +4,7 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const page = async () => {
-  const blogsCount: BlogsCountType | string = await fetchApi("admin/blogs-count", undefined, "GET", "no-store");
+  const blogsCount: BlogsCountType | string = await fetchApi("admin/blogs-count", undefined, "GET", "force-cache");
   if (typeof blogsCount === "string") {
     throw new Error(blogsCount);
   }
