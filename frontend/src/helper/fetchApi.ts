@@ -15,7 +15,7 @@ export const fetchApi = async (
   url: string,
   params?: string | number,
   method: string = "GET",
-  cache?: "force-cache" | "no-cache" | "force-cache",
+  cache?: "force-cache" | "no-cache",
   body?: object
 ) => {
   try {
