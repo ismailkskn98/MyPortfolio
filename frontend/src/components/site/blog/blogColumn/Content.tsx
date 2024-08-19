@@ -6,24 +6,19 @@ import image from "@/../public/images/Image.png";
 import Link from "next/link";
 
 export type Blog = {
-  // image?: string,
+  _id: string | number;
   title: string;
   subtitle: string;
   slug: string;
-  description: string;
   createdAt: string;
-  updatedAt: string;
-  User: {
+  user: {
+    _id: string | number;
     firstname: string;
   };
-  Categories: [
-    {
-      name: string;
-    }
-  ];
+  categories: [{ name: string }];
 };
 
-const Content: React.FC<Blog> = ({ title, subtitle, slug, createdAt, Categories, User }) => {
+const Content: React.FC<Blog> = ({ title, subtitle, slug, createdAt, categories, user }) => {
   return (
     <div className="flex items-center px-6 sm:px-[14px] gap-8 md:gap-16 flex-col md:flex-row">
       <Link href={`blogs/${slug}`}>
@@ -35,7 +30,7 @@ const Content: React.FC<Blog> = ({ title, subtitle, slug, createdAt, Categories,
         </Link>
         <p className="para-u text-White overflow-ellipsis">{subtitle}</p>
         <Readmore slug={slug} />
-        <Info createdAt={createdAt} author={User.firstname} tag={Categories[0].name} />
+        <Info createdAt={createdAt} author={user.firstname} tag={categories[0].name} />
       </div>
     </div>
   );

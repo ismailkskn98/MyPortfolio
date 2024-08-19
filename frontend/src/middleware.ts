@@ -9,7 +9,6 @@ export async function middleware(request: NextRequest) {
 
   const isAuthPage = isAuthPages(nextUrl.pathname); // true or false
   const hasVerifyToken = token && (await jwtTokenVerify(token)); // Payload | null
-  // console.log(hasVerifyToken);
   if (isAuthPage) {
     if (!hasVerifyToken) {
       const response = NextResponse.next();

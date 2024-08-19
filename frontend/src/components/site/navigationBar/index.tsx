@@ -35,7 +35,7 @@ const NavigationBar = () => {
           key={i}
           href={item.href}
           replace={true}
-          className={`relative w-10 h-10 flex items-center justify-center  rounded-full transition-all group ${
+          className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 ease-in will-change-transform group ${
             sectionId === item.sectionId ? "bg-White text-BG1" : "bg-BG2/90 text-White"
           }`}
           onClick={() => handleNavLinkClick(item.sectionId)}

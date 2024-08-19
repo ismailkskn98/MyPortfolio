@@ -2,13 +2,12 @@ import { jwtTokenVerify } from "@/lib/auth";
 import { cookies } from "next/headers";
 
 export type JWTPayload = {
+  _id: string | number;
   username: string;
   firstname: string;
   lastname: string;
   email: string;
   role: string;
-  iat: Date | number;
-  exp: Date | number;
 };
 
 // Server Component

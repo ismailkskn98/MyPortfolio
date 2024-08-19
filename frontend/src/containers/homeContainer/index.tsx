@@ -38,8 +38,8 @@ const HomeContainer = ({
   skills,
 }: {
   blog: Blog;
-  hero: HeroType;
-  about: AboutType;
+  hero: HeroType[];
+  about: AboutType[];
   skills: SkillsType[];
 }) => {
   return (
@@ -75,14 +75,13 @@ const HomeContainer = ({
         />
         <BlogColumn>
           <Content
+            _id={blog._id}
             title={blog.title}
             subtitle={blog.subtitle}
             slug={blog.slug}
-            User={blog.User}
-            description={blog.description}
-            Categories={blog.Categories}
+            user={blog.user}
+            categories={blog.categories}
             createdAt={blog.createdAt}
-            updatedAt={blog.updatedAt}
           />
         </BlogColumn>
       </HomeBlog>

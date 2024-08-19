@@ -28,6 +28,7 @@ export const AuthFromClient = (): Payload | null => {
       const token = Cookies.get("token") ?? null;
       if (!token) {
         // token yok ise
+        console.log("Token is not found!");
         return setError("Token is not found!");
       }
 
@@ -39,7 +40,7 @@ export const AuthFromClient = (): Payload | null => {
             Authorization: `Bearer ${token}`,
           },
         });
-
+        console.log(response);
         if (!response.ok) {
           // error
           const responseData: error = await response.json();

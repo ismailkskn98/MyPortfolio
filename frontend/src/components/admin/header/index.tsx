@@ -12,10 +12,7 @@ const Header = () => {
   };
 
   return (
-    <header
-      id="adminHeader"
-      className={`${styles.adminHeader} flex items-center bg-BG2 text-White py-5 px-6`}
-    >
+    <header id="adminHeader" className={`${styles.adminHeader} flex items-center bg-BG2 text-White py-5 px-6`}>
       <main className="w-full flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-xl text-Brand1">{"<İK>"}</span>

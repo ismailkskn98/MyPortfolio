@@ -40,10 +40,7 @@ const BlogAdd = ({ categories }: { categories: CategoriesType[] }) => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSubmit = async (
-    values: InitialValues,
-    { resetForm }: FormikHelpers<InitialValues>
-  ) => {
+  const handleSubmit = async (values: InitialValues, { resetForm }: FormikHelpers<InitialValues>) => {
     // form bilgileri
     const formData = new FormData();
     formData.append("title", values.title);
@@ -105,10 +102,7 @@ const BlogAdd = ({ categories }: { categories: CategoriesType[] }) => {
         <InfoMessage errorMessage={errorMessage} successMessage={successMessage} />
         <Formik initialValues={initialValues} validationSchema={BlogSchema} onSubmit={handleSubmit}>
           {({ isSubmitting, isValid, setFieldValue, values }) => (
-            <Form
-              className="w-full flex items-start justify-between gap-10 px-16"
-              encType="multipart/form-data"
-            >
+            <Form className="w-full flex items-start justify-between gap-10 px-16" encType="multipart/form-data">
               <article className="w-full flex flex-col gap-5">
                 {blogItems.map((item: BlogItem, i) => (
                   <CustomInput key={i} {...item} />
@@ -119,8 +113,7 @@ const BlogAdd = ({ categories }: { categories: CategoriesType[] }) => {
                 <Tiptap name="description" />
                 {!isValid && (
                   <p className="-mt-3 text-sm text-red-500">
-                    *Lütfen en az 50 karakter giriniz. Tüm alanları doldurduktan sonra bu uyarı
-                    kaybolur.
+                    *Lütfen en az 50 karakter giriniz. Tüm alanları doldurduktan sonra bu uyarı kaybolur.
                   </p>
                 )}
                 <div className="flex flex-col items-start gap-2">
@@ -176,11 +169,7 @@ const BlogAdd = ({ categories }: { categories: CategoriesType[] }) => {
                     </label>
                   </div>
                 ))}
-                <ErrorMessage
-                  name="categoryIds"
-                  component="p"
-                  className="text-red-600 text-sm pl-1"
-                />
+                <ErrorMessage name="categoryIds" component="p" className="text-red-600 text-sm pl-1" />
               </article>
             </Form>
           )}

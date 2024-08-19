@@ -19,14 +19,13 @@ const BlogsContainer: React.FC<Props> = ({ blogs }) => {
         {blogs?.map((blog: Blog, i: number) => (
           <BlogColumn key={i}>
             <Content
+              _id={blog._id}
               title={blog.title}
               subtitle={blog.subtitle}
               slug={blog.slug}
-              description={blog.description}
-              updatedAt={blog.updatedAt}
               createdAt={blog.createdAt}
-              User={blog.User}
-              Categories={blog.Categories}
+              user={blog.user}
+              categories={blog.categories}
             />
           </BlogColumn>
         ))}

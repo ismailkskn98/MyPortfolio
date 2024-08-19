@@ -7,17 +7,19 @@ import InfoMessage from "../infoMessage";
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 export type AboutType = {
+  _id: string | number;
   about: string;
 };
 
-const About = ({ data }: { data: AboutType }) => {
-  const [initialContent, setInitialContent] = useState<string>(data.about);
+const About = ({ data }: { data: AboutType[] }) => {
+  const [initialContent, setInitialContent] = useState<string>(data[0].about);
+  const [id, setId] = useState<string | number>(data[0]._id);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
 
   const handleSave = async (newContent: string) => {
     try {
-      const response = await fetch(`${BASE_URL_API}/admin/about/1`, {
+      const response = await fetch(`${BASE_URL_API}/admin/about/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

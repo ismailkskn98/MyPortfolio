@@ -10,12 +10,12 @@ type CardInfoItem = {
   icon: React.ElementType;
 };
 
-const CardInfo = ({ hero }: { hero: HeroType }) => {
+const CardInfo = ({ hero }: { hero: HeroType[] }) => {
   const CardInfoItems: CardInfoItem[] = [
-    { name: hero.email, icon: IoMailOutline },
-    { name: `Türkiye / ${hero.city}`, icon: IoLocationOutline },
-    { name: hero.freelancer, icon: MdOutlineHomeWork },
-    { name: hero.website, icon: LuLink },
+    { name: hero[0].email, icon: IoMailOutline },
+    { name: `Türkiye / ${hero[0].city}`, icon: IoLocationOutline },
+    { name: hero[0].freelancer, icon: MdOutlineHomeWork },
+    { name: hero[0].website, icon: LuLink },
   ];
   return (
     <div id="cardInfo" className="w-full flex flex-col items-start gap-4 code-m">
