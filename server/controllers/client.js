@@ -104,7 +104,10 @@ exports.get_search = async (req, res) => {
 
   const blogs = await Blog.find({
     $or: [{ title: regex }, { subtitle: regex }],
-  });
+  })
+    .sort({ createdAt: -1 }) // en son eklenen
+    .limit(4) // en fazla 4 tane
+    .select("title subtitle");
 
   if (blogs.length === 0) {
     return res.send({ message: "Blog bulunamadı.", data: [], error: false, success: true });
