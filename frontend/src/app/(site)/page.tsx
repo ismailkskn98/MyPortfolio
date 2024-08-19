@@ -20,7 +20,7 @@ const Home = async () => {
   ) {
     throw new Error("Sunucuda bir hata oluştu. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.");
   }
-  console.log(resultGetHero);
+
   return <HomeContainer blog={resultLastBlog} hero={resultGetHero} about={resultGetAbout} skills={resultGetSkills} />;
 };
 
