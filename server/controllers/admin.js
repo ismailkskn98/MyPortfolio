@@ -17,6 +17,13 @@ exports.get_blog_count = async (req, res) => {
   return res.send({ message: "İşlem başarılı", data: blogCount, error: false, success: true });
 };
 
+exports.post_upload_cv = async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send({ message: "Cv Bulunamadı", data: [], error: true, success: false });
+  }
+  res.status(200).send({ message: "CV başarıyla yüklendi", data: null, error: false, success: true });
+};
+
 // Hero
 exports.get_hero = async (req, res) => {
   const hero = await Hero.find().select("name job email freelancer city website");
@@ -198,7 +205,7 @@ exports.get_blogById = async (req, res) => {
 exports.post_blog = async (req, res) => {
   const { title, subtitle, description, user, categories } = req.body;
   let image = "images/" + req.file.filename;
-  const slug = slugify(title);
+  const slug = slugify(`${title}-${Date.now()}`);
 
   const blog = await Blog.create({
     title,

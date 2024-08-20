@@ -3,6 +3,7 @@ const router = express.Router();
 const clientController = require("../controllers/client.js");
 
 // Anasayfa
+router.get("/download-cv", clientController.get_downloadCv);
 router.get("/blogs/last-blog", clientController.get_last_blog);
 router.get("/hero", clientController.get_hero);
 router.get("/about", clientController.get_about);

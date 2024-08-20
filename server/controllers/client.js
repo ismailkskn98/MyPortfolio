@@ -5,6 +5,11 @@ const Experience = require("../models/experience");
 const User = require("../models/user");
 
 // Anasayfa
+exports.get_downloadCv = async (req, res) => {
+  const file = path.join(__dirname, "public", "ismail-keskin.pdf");
+  res.download(file); // PDF dosyasını indir
+};
+
 exports.get_last_blog = async (req, res, next) => {
   const lastBlog = await Blog.findOne()
     .sort({ createdAt: -1 })
@@ -107,7 +112,7 @@ exports.get_search = async (req, res) => {
   })
     .sort({ createdAt: -1 }) // en son eklenen
     .limit(4) // en fazla 4 tane
-    .select("title subtitle");
+    .select("title subtitle slug");
 
   if (blogs.length === 0) {
     return res.send({ message: "Blog bulunamadı.", data: [], error: false, success: true });

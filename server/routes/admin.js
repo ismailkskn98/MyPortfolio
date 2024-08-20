@@ -2,8 +2,10 @@ const express = require("express");
 const router = express.Router();
 const adminController = require("../controllers/admin");
 const imageUpload = require("../helper/image-upload");
+const cvUpload = require("../helper/cv-upload");
 
 router.get("/blog-count", adminController.get_blog_count);
+router.post("/upload-cv", cvUpload.upload.single("cv"), adminController.post_upload_cv);
 
 // Hero
 router.get("/hero", adminController.get_hero);
