@@ -12,25 +12,25 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 export type SkillsType = {
-  id: number | string;
+  _id: number | string;
   name: string;
   image: string;
 };
 
 const Skills = ({ data }: { data: SkillsType[] }) => {
   const [show, setShow] = useState<boolean>(false);
-  const [selectedSkill, setSelectedSkill] = useState<SkillsType | null>(null);
+  const [selectedSkill, setSelectedSkill] = useState<string | number>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
 
-  const handleDeleteClick = (skill: SkillsType) => {
+  const handleDeleteClick = (skill: string | number) => {
     setSelectedSkill(skill);
     setShow((prev) => !prev);
   };
 
   const handleConfirmDelete = async () => {
     try {
-      const response = await fetch(`${BASE_URL_API}/admin/skills/delete/${selectedSkill?.id}`, {
+      const response = await fetch(`${BASE_URL_API}/admin/skills/${selectedSkill}`, {
         method: "DELETE",
       });
 
@@ -39,13 +39,13 @@ const Skills = ({ data }: { data: SkillsType[] }) => {
         return setErrorMessage("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
       }
 
-      const data: ResponseData = await response.json();
-      if (data.error) {
+      const result: ResponseData = await response.json();
+      if (result.error) {
         setShow(false);
-        return setErrorMessage(data.message);
+        return setErrorMessage(result.message);
       }
       setShow(false);
-      return setSuccessMessage(data.message);
+      return setSuccessMessage(result.message);
     } catch (error) {
       setShow(false);
       if (error instanceof Error) {
@@ -82,33 +82,31 @@ const Skills = ({ data }: { data: SkillsType[] }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item: SkillsType, i) => {
-              return (
-                <tr
-                  key={i}
-                  className="odd:bg-white odd:dark:bg-Grey even:bg-gray-50 even:dark:bg-BG2 border-b dark:border-gray-700"
-                >
-                  <td className="px-6 py-4">
-                    <Image src={`${BASE_URL}/${item.image}`} alt="Yetenek Resmi" width={130} height={100} />
-                  </td>
-                  <td className="px-6 py-4 text-base font-semibold capitalize">{item.name}</td>
-                  <td className="px-6 py-4 max-w-28">
-                    <Link
-                      href={`/admin/yetenekler/${item.id}`}
-                      className="mr-4 px-2 py-2 border-none outline-none rounded bg-JS text-white cursor-pointer hover:opacity-70"
-                    >
-                      Güncelle
-                    </Link>
-                    <button
-                      onClick={() => handleDeleteClick(item)}
-                      className="px-3 py-2 border-none outline-none rounded bg-red-600 text-white cursor-pointer hover:opacity-70"
-                    >
-                      Sil
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+            {data.map((item: SkillsType, i) => (
+              <tr
+                key={i}
+                className="odd:bg-white odd:dark:bg-Grey even:bg-gray-50 even:dark:bg-BG2 border-b dark:border-gray-700"
+              >
+                <td className="px-6 py-4">
+                  <Image src={`${BASE_URL}/${item.image}`} alt="Yetenek Resmi" width={130} height={100} />
+                </td>
+                <td className="px-6 py-4 text-base font-semibold capitalize">{item.name}</td>
+                <td className="px-6 py-4 max-w-28">
+                  <Link
+                    href={`/admin/yetenekler/${item._id}`}
+                    className="mr-4 px-2 py-2 border-none outline-none rounded bg-JS text-white cursor-pointer hover:opacity-70"
+                  >
+                    Güncelle
+                  </Link>
+                  <button
+                    onClick={() => handleDeleteClick(item._id)}
+                    className="px-3 py-2 border-none outline-none rounded bg-red-600 text-white cursor-pointer hover:opacity-70"
+                  >
+                    Sil
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </section>
