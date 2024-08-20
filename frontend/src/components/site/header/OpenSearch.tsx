@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchList from "./SearchList";
 import { IoSearchSharp } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,6 +11,12 @@ type Props = {
 
 const OpenSearch: React.FC<Props> = ({ openSearch, toggleSearch }) => {
   const [search, setSearch] = useState<string>("");
+
+  useEffect(() => {
+    if (!openSearch) {
+      setSearch("");
+    }
+  }, [openSearch]);
 
   return (
     <>
@@ -45,7 +51,7 @@ const OpenSearch: React.FC<Props> = ({ openSearch, toggleSearch }) => {
                 />
               </div>
               <div id="searchLine" className="w-full h-[1px] bg-BG1/5 px-5"></div>
-              <SearchList search={search} />
+              <SearchList search={search} toggleSearch={toggleSearch} />
             </motion.div>
           </motion.div>
         )}

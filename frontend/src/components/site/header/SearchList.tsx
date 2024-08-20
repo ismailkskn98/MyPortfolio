@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import LoadingComponents from "../loading";
 
 // http://localhost:3000/api
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL_API;
@@ -8,10 +9,11 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL_API;
 type SearchBlog = {
   _id: string | number;
   title: string;
+  slug: string;
   subtitle: string;
 };
 
-const SearchList = ({ search }: { search: string }) => {
+const SearchList = ({ search, toggleSearch }: { search: string; toggleSearch: () => void }) => {
   const [blogs, setBlogs] = useState<SearchBlog[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -34,18 +36,7 @@ const SearchList = ({ search }: { search: string }) => {
   }, [search]);
 
   if (loading) {
-    return (
-      <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-        >
-          Yükleniyor...
-        </motion.div>
-      </AnimatePresence>
-    );
+    return <LoadingComponents />;
   }
 
   if (blogs.length === 0) {
@@ -89,7 +80,7 @@ const SearchList = ({ search }: { search: string }) => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="w-full py-4 list-none hover:bg-BG1/5"
             >
-              <Link href="#">
+              <Link href={"/blogs/" + blog.slug} onClick={toggleSearch}>
                 <div className="flex flex-col overflow-hidden gap-1">
                   <h3 className="truncate search-list-h3-u text-BG1">{blog.title}</h3>
                   <p className="truncate search-list-p-u text-BG1/40">{blog.subtitle}</p>

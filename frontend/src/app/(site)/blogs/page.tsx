@@ -5,6 +5,7 @@ import React from "react";
 
 const Blogs = async () => {
   const blogs: Blog[] | string = await fetchApi("blogs", undefined, "GET");
+
   if (typeof blogs === "string") {
     throw new Error(blogs);
   }
