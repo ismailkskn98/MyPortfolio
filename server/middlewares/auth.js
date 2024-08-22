@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
       success: false,
     });
   }
-  console.log(token);
+
   try {
     const decoded = jwt.verify(token[1], process.env.JWTPRIVATEKEY);
     req.user = decoded;

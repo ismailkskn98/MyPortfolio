@@ -52,3 +52,5 @@ router.put(
 router.delete("/works/:id", adminController.delete_workById);
 
 module.exports = router;
+
+router.get("/categories", adminController.get_categories);

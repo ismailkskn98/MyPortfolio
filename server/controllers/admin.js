@@ -26,6 +26,7 @@ exports.get_blog_count = async (req, res) => {
 
 exports.get_hero = async (req, res) => {
   const hero = await Hero.find().select("name job email freelancer city website");
+  console.log("girdi");
   if (hero.length === 0) {
     return res.send({ message: "Hiç blog bulunamadı.", data: [], error: false, success: true });
   }

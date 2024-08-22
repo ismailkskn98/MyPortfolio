@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development PORT=3040 DB_PASSWORD=Cj5J7A2ioiSphRk8 JWTPRIVATEKEY=mysecretkey nodemon app.js",
+    "dev": "cross-env NODE_ENV=development PORT=3050 DB_PASSWORD=Cj5J7A2ioiSphRk8 JWTPRIVATEKEY=mysecretkey nodemon app.js",
     "prod": "cross-env NODE_ENV=production PORT=8080 nodemon app.js"
   },
   "keywords": [],

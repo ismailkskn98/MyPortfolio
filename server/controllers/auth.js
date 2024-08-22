@@ -33,7 +33,7 @@ exports.login = async (req, res) => {
   );
 
   res.cookie("token", token, {
-    httpOnly: true, // client tarafında çerezi kullanabilmek için
+    httpOnly: false, // client tarafında çerezi kullanabilmek için
     path: "/",
     secure: false, // http - https
     sameSite: "Lax", // veya 'strict' olarak ayarlayabilirsiniz
