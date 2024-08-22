@@ -6,15 +6,20 @@ import { useState, useEffect } from "react";
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
-export type Payload = {
+export type User = {
   id: number | string;
   username: string;
   firstname: string;
   lastname: string;
   email: string;
   role: string;
-  iat: Date | number;
-  exp: Date | number;
+};
+
+export type Payload = {
+  message: string;
+  data: User;
+  error: boolean;
+  success: boolean;
 };
 
 // Client Components
@@ -26,6 +31,7 @@ export const AuthFromClient = (): Payload | null => {
     // cookie'den token'ı alma
     const getToken = async () => {
       const token = Cookies.get("token") ?? null;
+
       if (!token) {
         // token yok ise
         console.log("Token is not found!");
@@ -40,7 +46,7 @@ export const AuthFromClient = (): Payload | null => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response);
+
         if (!response.ok) {
           // error
           const responseData: error = await response.json();

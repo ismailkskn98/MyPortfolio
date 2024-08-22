@@ -30,18 +30,18 @@ import SkillsContentSkills from "@/components/site/skills/SkillsContentSkills";
 import { HeroType } from "@/components/admin/hero/HeroForm";
 import { AboutType } from "@/components/admin/about";
 import { SkillsType } from "@/components/admin/skills";
+import type { WorkType } from "@/components/site/works/WorksContent";
+import WorksContent from "@/components/site/works/WorksContent";
 
-const HomeContainer = ({
-  blog,
-  hero,
-  about,
-  skills,
-}: {
+type HomeContainerProps = {
   blog: Blog;
   hero: HeroType[];
   about: AboutType[];
   skills: SkillsType[];
-}) => {
+  works: WorkType[];
+};
+
+const HomeContainer = ({ blog, hero, about, skills, works }: HomeContainerProps) => {
   return (
     <>
       <NavigationBar />
@@ -66,7 +66,9 @@ const HomeContainer = ({
           <SkillsContentSkills skills={skills} />
         </SkillsContent>
       </Skills>
-      <Works />
+      <Works>
+        <WorksContent works={works} />
+      </Works>
       <HomeBlog>
         <ModuleTitle
           title="Blogs"

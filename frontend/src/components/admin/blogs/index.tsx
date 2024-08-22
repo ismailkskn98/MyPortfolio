@@ -13,14 +13,16 @@ const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export type BlogsType = {
-  id: number | string;
+  _id: number | string;
   title: string;
   subtitle: string;
+  slug: string;
+  description: string;
   image: string;
-  userId: number | string;
-  Categories: {
+  user: number | string;
+  categories: {
+    _id: string | number;
     name: string;
-    BlogCategory: { blogId: number; categoryId: number };
   }[];
 };
 
@@ -37,7 +39,7 @@ const Blogs = ({ blogs }: { blogs: BlogsType[] }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      const response = await fetch(`${BASE_URL_API}/admin/blogs/delete/${selectedBlog?.id}`, {
+      const response = await fetch(`${BASE_URL_API}/admin/blogs/${selectedBlog?._id}`, {
         method: "DELETE",
       });
 
@@ -67,7 +69,7 @@ const Blogs = ({ blogs }: { blogs: BlogsType[] }) => {
     const timer = setTimeout(() => {
       setErrorMessage("");
       setSuccessMessage("");
-    }, 4000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, [errorMessage, successMessage]);
 
@@ -91,34 +93,28 @@ const Blogs = ({ blogs }: { blogs: BlogsType[] }) => {
               <td scope="col" className="px-6 py-3">
                 Kategori
               </td>
-              <td scope="col" className="px-6 py-3"></td>
+              <td scope="col" className="px-6 py-3 min-w-56"></td>
             </tr>
           </thead>
           <tbody>
             {blogs.map((item) => (
-              <tr key={item.id} className="odd:bg-Grey even:bg-BG2 border-b border-gray-700">
-                <td className="px-6 py-4">{item.id}</td>
+              <tr key={item._id} className="odd:bg-Grey even:bg-BG2 border-b border-gray-700">
+                <td className="px-6 py-4">{item._id}</td>
                 <td className="px-6 py-4">
-                  <Image
-                    src={`${BASE_URL}/${item.image}`}
-                    alt={item.title}
-                    width={65}
-                    height={60}
-                    className="rounded "
-                  />
+                  <Image src={`${BASE_URL}/${item.image}`} alt={item.title} width={65} height={60} className="rounded " />
                 </td>
                 <td className="px-6 py-4">
                   <p className="font-semibold">{item.title}</p>
                   <p className="text-xs">{item.subtitle}</p>
                 </td>
                 <td className="px-6 py-4">
-                  {item.Categories.map((category, i) => (
+                  {item.categories.map((category, i) => (
                     <p key={i}>{category.name}</p>
                   ))}
                 </td>
                 <td className="px-6 py-4">
                   <Link
-                    href={`/admin/bloglarim/${item.id}`}
+                    href={`/admin/bloglarim/${item._id}`}
                     className="mr-4 px-2 py-2 border-none outline-none rounded bg-JS text-white cursor-pointer hover:opacity-70"
                   >
                     Güncelle
@@ -135,11 +131,7 @@ const Blogs = ({ blogs }: { blogs: BlogsType[] }) => {
           </tbody>
         </table>
       </section>
-      <ConfirmDeleteModal
-        show={show}
-        onClose={() => setShow((prev) => !prev)}
-        onConfirm={handleConfirmDelete}
-      />
+      <ConfirmDeleteModal show={show} onClose={() => setShow((prev) => !prev)} onConfirm={handleConfirmDelete} />
     </main>
   );
 };

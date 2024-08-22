@@ -6,7 +6,7 @@ const CvButton = () => {
   return (
     <div className="w-full flex items-center justify-start">
       <a href="/ismail-keskin.pdf" download>
-        <button className="max-w-56 flex items-center justify-center gap-4 px-8 py-4 bg-White button-u border-none outline-none rounded-[32px] cursor-pointer">
+        <button className="max-w-56 flex items-center justify-center gap-4 px-8 py-4 bg-White button-u border-none outline-none rounded-[32px] cursor-pointer hover:bg-gray-200 transition-all focus:bg-gray-400">
           Download CV <LuDownload />
         </button>
       </a>

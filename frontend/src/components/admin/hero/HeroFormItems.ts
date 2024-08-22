@@ -4,6 +4,7 @@ export type HeroFormItem = {
     id: string;
     name: string;
     type: string;
+    value?: string;
   };
 };
 
@@ -14,6 +15,7 @@ export const heroFormItems: HeroFormItem[] = [
       id: "name",
       name: "name",
       type: "text",
+      value: "",
     },
   },
   {
@@ -22,6 +24,7 @@ export const heroFormItems: HeroFormItem[] = [
       id: "job",
       name: "job",
       type: "text",
+      value: "",
     },
   },
   {
@@ -30,6 +33,7 @@ export const heroFormItems: HeroFormItem[] = [
       id: "email",
       name: "email",
       type: "email",
+      value: "",
     },
   },
   {
@@ -38,6 +42,7 @@ export const heroFormItems: HeroFormItem[] = [
       id: "freelancer",
       name: "freelancer",
       type: "text",
+      value: "",
     },
   },
   {
@@ -46,6 +51,7 @@ export const heroFormItems: HeroFormItem[] = [
       id: "website",
       name: "website",
       type: "text",
+      value: "",
     },
   },
 ];

@@ -4,12 +4,15 @@ import Link from "next/link";
 import { RiExternalLinkLine } from "react-icons/ri";
 import Image from "next/image";
 import styles from "./styles.module.css";
-import { SliderItem } from "./WorksContent";
+import { type WorkType } from "./WorksContent";
 
 type Props = {
-  sliderItems: SliderItem[];
+  sliderItems: WorkType[];
   currentIndex: number;
 };
+
+// http://localhost:8080
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const WorksSlider: React.FC<Props> = ({ sliderItems, currentIndex }) => {
   return (
@@ -18,10 +21,8 @@ const WorksSlider: React.FC<Props> = ({ sliderItems, currentIndex }) => {
         {sliderItems.map((item, i) => (
           <div key={i} className={`w-full absolute top-0 left-0`}>
             <Link
-              href={item.href}
-              className={`${styles.sliderLink} code-m lg:menu-m ${
-                i === currentIndex ? "flex" : "hidden"
-              }`}
+              href={item.url}
+              className={`${styles.sliderLink} code-m lg:menu-m ${i === currentIndex ? "flex" : "hidden"}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -29,20 +30,26 @@ const WorksSlider: React.FC<Props> = ({ sliderItems, currentIndex }) => {
             </Link>
             <div className={styles.sliderVertical}>
               <Image
-                src={item.verticalImage}
+                src={`${BASE_URL}/${item.verticalImage}`}
                 alt="image"
                 className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity ${
                   i === currentIndex ? "opacity-100" : "opacity-0"
                 }`}
+                width={400}
+                height={400}
+                quality={100}
               />
             </div>
             <div className={styles.sliderHorizontal}>
               <Image
-                src={item.horizontalImage}
+                src={`${BASE_URL}/${item.horizontalImage}`}
                 alt="image"
                 className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity ${
                   i === currentIndex ? "opacity-100" : "opacity-0"
                 }`}
+                width={400}
+                height={400}
+                quality={100}
               />
             </div>
           </div>

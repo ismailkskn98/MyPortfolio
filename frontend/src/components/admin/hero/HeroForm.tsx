@@ -11,7 +11,7 @@ import InfoMessage from "../infoMessage";
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 export type HeroType = {
-  id: number;
+  _id: number;
   name: string;
   job: string;
   email: string;
@@ -22,6 +22,7 @@ export type HeroType = {
 
 export type ResponseData = {
   message: string;
+  data: [];
   success: boolean;
   error: boolean;
 };
@@ -35,20 +36,18 @@ type InitialValues = {
   website: string;
 };
 
-const HeroForm = ({ data }: { data: HeroType }) => {
+const HeroForm = ({ data }: { data: HeroType[] }) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string>("");
-  const [id, setId] = useState<number>(data.id);
-
+  const [id, setId] = useState<number | string>(data[0]._id);
   const initialValues: InitialValues = {
-    name: data.name,
-    job: data.job,
-    email: data.email,
-    freelancer: data.freelancer,
-    city: data.city,
-    website: data.website,
+    name: data[0].name,
+    job: data[0].job,
+    email: data[0].email,
+    freelancer: data[0].freelancer,
+    city: data[0].city,
+    website: data[0].website,
   };
-
   const handleSubmit = async (values: InitialValues, actions: FormikHelpers<InitialValues>) => {
     try {
       const response = await fetch(`${BASE_URL_API}/admin/hero/${id}`, {
