@@ -3,12 +3,13 @@ const Hero = require("../models/hero");
 const Skill = require("../models/skill");
 const Experience = require("../models/experience");
 const User = require("../models/user");
+const Contact = require("../models/contact");
 
 // Anasayfa
-exports.get_downloadCv = async (req, res) => {
-  const file = path.join(__dirname, "public", "ismail-keskin.pdf");
-  res.download(file); // PDF dosyasını indir
-};
+// exports.get_downloadCv = async (req, res) => {
+//   const file = path.join(__dirname, "public", "ismail-keskin.pdf");
+//   res.download(file); // PDF dosyasını indir
+// };
 
 exports.get_last_blog = async (req, res, next) => {
   const lastBlog = await Blog.findOne()
@@ -118,4 +119,32 @@ exports.get_search = async (req, res) => {
     return res.send({ message: "Blog bulunamadı.", data: [], error: false, success: true });
   }
   return res.send({ message: "İşlem başarılı", data: blogs, error: false, success: true });
+};
+
+// Contact
+exports.get_contacts = async (req, res) => {
+  let contact = await Contact.find().sort({ createdAt: -1 });
+
+  if (contact.length === 0) {
+    return res.send({ message: "Bilgi bulunamadı", data: [], error: false, success: true });
+  }
+
+  res.status(201).send({
+    message: "İşlem Başarılı",
+    data: contact,
+    error: false,
+    success: true,
+  });
+};
+exports.post_contact = async (req, res) => {
+  const { name, email, message } = req.body;
+  let contact = await Contact.create({ name, email, message });
+  contact = await contact.save();
+
+  res.status(201).send({
+    message: "Bilgiler başarıyla oluşturuldu.",
+    data: contact,
+    error: false,
+    success: true,
+  });
 };

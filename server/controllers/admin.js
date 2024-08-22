@@ -5,8 +5,6 @@ const fs = require("fs");
 const logger = require("../helper/logger");
 const Hero = require("../models/hero");
 const Blog = require("../models/blog");
-const User = require("../models/user");
-const Role = require("../models/role");
 const Category = require("../models/category");
 const Skill = require("../models/skill");
 const ExperienceSchema = require("../models/experience");
@@ -17,14 +15,15 @@ exports.get_blog_count = async (req, res) => {
   return res.send({ message: "İşlem başarılı", data: blogCount, error: false, success: true });
 };
 
-exports.post_upload_cv = async (req, res) => {
-  if (!req.file) {
-    return res.status(400).send({ message: "Cv Bulunamadı", data: [], error: true, success: false });
-  }
-  res.status(200).send({ message: "CV başarıyla yüklendi", data: null, error: false, success: true });
-};
+// exports.post_upload_cv = async (req, res) => {
+//   if (!req.file) {
+//     return res.status(400).send({ message: "Cv Bulunamadı", data: [], error: true, success: false });
+//   }
+//   res.status(200).send({ message: "CV başarıyla yüklendi", data: null, error: false, success: true });
+// };
 
 // Hero
+
 exports.get_hero = async (req, res) => {
   const hero = await Hero.find().select("name job email freelancer city website");
   if (hero.length === 0) {
