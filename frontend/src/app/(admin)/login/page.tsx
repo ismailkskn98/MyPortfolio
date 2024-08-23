@@ -1,8 +1,15 @@
 import LoginContainer from "@/components/login";
-import React from "react";
+import LoadingComponents from "@/components/site/loading";
+import React, { Suspense } from "react";
 
 const Login = () => {
-  return <LoginContainer />;
+  return (
+    <>
+      <Suspense fallback={<LoadingComponents />}>
+        <LoginContainer />
+      </Suspense>
+    </>
+  );
 };
 
 export default Login;

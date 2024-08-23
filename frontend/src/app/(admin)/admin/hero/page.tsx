@@ -4,7 +4,7 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const Hero = async () => {
-  const data: HeroType | string = await fetchApi("admin/hero", undefined, "GET", "force-cache");
+  const data: HeroType | string = await fetchApi("admin/hero", undefined, "GET", "no-cache");
   if (typeof data === "string") {
     throw new Error(data);
   }

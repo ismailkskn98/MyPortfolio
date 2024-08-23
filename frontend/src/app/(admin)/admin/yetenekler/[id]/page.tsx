@@ -4,7 +4,7 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const YetenekGuncelle = async ({ params }: { params: { id: string } }) => {
-  const data: SkillType | string = await fetchApi("admin/skills", params.id, "GET", "force-cache");
+  const data: SkillType | string = await fetchApi("admin/skills", params.id, "GET", "no-cache");
   if (typeof data === "string") {
     throw new Error(data);
   }

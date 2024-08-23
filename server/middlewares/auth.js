@@ -23,7 +23,7 @@ module.exports = (req, res, next) => {
   try {
     const decoded = jwt.verify(token[1], process.env.JWTPRIVATEKEY);
     req.user = decoded;
-    console.log(decoded);
+
     next();
   } catch (error) {
     return res.status(401).send({ message: "Yetkilendirme Başarısız: Geçersiz token." });

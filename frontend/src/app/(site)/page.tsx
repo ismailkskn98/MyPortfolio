@@ -6,11 +6,11 @@ export const revalidate = 60 * 5; // 5 dakika
 
 const Home = async () => {
   const [resultGetSkills, resultLastBlog, resultGetHero, resultGetAbout, resultGetWorks] = await Promise.all([
-    fetchApi("skills", undefined, "GET", "force-cache"),
-    fetchApi("blogs/last-blog", undefined, "GET", "force-cache"),
-    fetchApi("hero", undefined, "GET", "force-cache"),
-    fetchApi("about", undefined, "GET", "force-cache"),
-    fetchApi("works", undefined, "GET", "force-cache"),
+    fetchApi("skills", undefined, "GET", "no-cache"),
+    fetchApi("blogs/last-blog", undefined, "GET", "no-cache"),
+    fetchApi("hero", undefined, "GET", "no-cache"),
+    fetchApi("about", undefined, "GET", "no-cache"),
+    fetchApi("works", undefined, "GET", "no-cache"),
   ]);
 
   if (
