@@ -10,6 +10,9 @@ if (app.get("env") == "production") {
   require("./startup/production")(app);
 }
 
+console.log(app.get("env"));
+console.log(process.env.NODE_ENV);
+
 app.listen(port, () => {
   console.log(`Sunucu ${port} altında çalışıyor.`);
 });
