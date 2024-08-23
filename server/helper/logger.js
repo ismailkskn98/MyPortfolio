@@ -29,7 +29,7 @@ const logger = winston.createLogger({
   // transports ayarı, log mesajlarının nereye gönderileceğini belirler
   transports: [
     new winston.transports.Console(),
-    new winston.transports.File({ filename: "logs.log", level: "error" }),
+    new winston.transports.File({ filename: "logs.log", level: "error", maxFiles: "3d" }),
     new winston.transports.MongoDB({
       level: "error",
       db: `mongodb+srv://${username}:${password}@cluster.845oj.mongodb.net/${database}?retryWrites=true&w=majority&appName=Cluster`,

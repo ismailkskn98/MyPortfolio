@@ -3,4 +3,3 @@ node_modules/
 .env.local
 .env.production
 config/
-logs.log

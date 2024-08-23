@@ -3,6 +3,7 @@ const slugify = require("../helper/slugify");
 const path = require("path");
 const fs = require("fs");
 const logger = require("../helper/logger");
+const Joi = require("joi");
 const Hero = require("../models/hero");
 const Blog = require("../models/blog");
 const Category = require("../models/category");
@@ -126,6 +127,9 @@ exports.get_skillById = async (req, res) => {
   return res.send({ message: "İşlem başarılı", data: skill, error: false, success: true });
 };
 exports.post_skills = async (req, res) => {
+  const schema = Joi.schema({
+    name: Joi.string().min(3).max(10).required(),
+  });
   const name = req.body.name;
   const image = req.file.filename;
   const editImage = "images/" + image;
