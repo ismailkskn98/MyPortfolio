@@ -176,22 +176,22 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                 </article>
                 <article className="flex flex-col gap-2 border-r-0 border-b-0 border-l-0 border-t border-solid border-black-500/50 pt-4 w-40">
                   {categories.map((category) => (
-                    <div key={category.id} className="flex items-center gap-3">
+                    <div key={category._id} className="flex items-center gap-3">
                       <Field
                         type="checkbox"
                         name="categoryIds"
-                        value={category.id}
+                        value={category._id}
                         id={category.name}
                         className="w-[14px] h-[14px]"
                         onChange={() => {
-                          const isChecked = values.categoryIds.includes(category.id);
+                          const isChecked = values.categoryIds.includes(category._id);
                           if (isChecked) {
                             setFieldValue(
                               "categoryIds",
-                              values.categoryIds.filter((values) => values !== category.id)
+                              values.categoryIds.filter((values) => values !== category._id)
                             );
                           } else {
-                            setFieldValue("categoryIds", [...values.categoryIds, category.id]);
+                            setFieldValue("categoryIds", [...values.categoryIds, category._id]);
                           }
                         }}
                       />

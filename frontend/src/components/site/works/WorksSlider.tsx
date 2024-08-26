@@ -30,6 +30,7 @@ const WorksSlider: React.FC<Props> = ({ sliderItems, currentIndex }) => {
             </Link>
             <div className={styles.sliderVertical}>
               <Image
+                crossOrigin="anonymous"
                 src={`${BASE_URL}/${item.verticalImage}`}
                 alt="image"
                 className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity ${
