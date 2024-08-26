@@ -16,16 +16,16 @@ const Header = () => {
       <main className="w-full flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="font-semibold text-xl text-Brand1">{"<İK>"}</span>
-          <span className="font-semibold text-xl tracking-wider">{payload?.username}</span>
+          <span className="font-semibold text-xl tracking-wider">{payload?.data.username}</span>
         </div>
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-5">
             <div className="flex items-center gap-1">
-              <span>{payload?.firstname}</span>
-              <span>{payload?.lastname}</span>
+              <span>{payload?.data.firstname}</span>
+              <span>{payload?.data.lastname}</span>
             </div>
             <span>/</span>
-            <span>{payload?.role}</span>
+            <span>{payload?.data.role}</span>
           </div>
           <button
             onClick={handleLogout}
