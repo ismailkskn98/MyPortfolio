@@ -46,7 +46,7 @@ const LoginForm = () => {
       body: JSON.stringify(values),
     });
     const data: LoginResponse = await response.json();
-    console.log(data);
+
     if (data.error) {
       values.password = "";
       return setErrorMessage(data);

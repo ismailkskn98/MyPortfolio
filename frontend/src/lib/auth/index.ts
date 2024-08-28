@@ -1,6 +1,14 @@
 import { JWTVerifyResult, jwtVerify } from "jose";
 import { getJwtSecretKey } from "@/helper/getJwtSecretKey";
-import { JWTPayload } from "@/hooks/AuthFromServer";
+
+type JWTPayload = {
+  _id: string | number;
+  username: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  role: string;
+};
 
 export const jwtTokenVerify = async (token: string) => {
   try {

@@ -47,12 +47,12 @@ const BlogAdd = ({ categories }: { categories: CategoriesType[] }) => {
     formData.append("subtitle", values.subtitle);
     formData.append("description", values.description);
     formData.append("categories", JSON.stringify(values.categoryIds));
-    console.log(values.categoryIds.toString());
+
     // resim kontrolü
     if (values.image && fileControl) {
       formData.append("image", values.image);
     }
-    console.log(tokenPayload?.data);
+
     // token kontrolü
     if (tokenPayload) {
       formData.append("user", tokenPayload.data.id.toString());

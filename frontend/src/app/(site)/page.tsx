@@ -12,10 +12,6 @@ const Home = async () => {
     fetchApi("about", undefined, "GET", "no-cache"),
     fetchApi("works", undefined, "GET", "no-cache"),
   ]);
-  console.log(resultGetSkills);
-  console.log(resultLastBlog);
-  console.log(resultGetHero);
-  console.log(resultGetAbout);
   if (
     typeof resultLastBlog === "string" ||
     typeof resultGetHero === "string" ||
