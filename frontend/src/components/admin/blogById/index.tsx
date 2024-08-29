@@ -11,8 +11,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 // types
 import type { BlogItem } from "../blogAdd/BlogItems";
-import type { ErrorResponse } from "@/helper/fetchApi";
-import type { BlogByIdType, CategoriesType } from "@/types";
+import type { BlogByIdType, CategoriesType, ErrorResponse } from "@/types";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;

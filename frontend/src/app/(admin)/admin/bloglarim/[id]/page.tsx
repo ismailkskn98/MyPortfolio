@@ -1,8 +1,8 @@
-import type { CategoriesType } from "@/components/admin/blogAdd";
-import type { BlogByIdType } from "@/components/admin/blogById";
-import AdminBlogByIdContainer from "@/containers/adminBlogByIdContainer";
-import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
+import { fetchApi } from "@/helper/fetchApi";
+import AdminBlogByIdContainer from "@/containers/adminBlogByIdContainer";
+// types
+import type { BlogByIdType, CategoriesType } from "@/types";
 
 const BlogGuncelle = async ({ params }: { params: { id: string } }) => {
   const [responseBlog, responseCategories] = await Promise.all([

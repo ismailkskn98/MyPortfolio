@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Tiptap from "../tiptap/Tiptap";
 import InfoMessage from "../infoMessage";
+// types
 import type { AboutType } from "@/types";
 
 // http://localhost:7930/api

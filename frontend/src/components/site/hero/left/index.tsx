@@ -1,7 +1,4 @@
 import React from "react";
-import ImageName from "./ImageName";
-import CardInfo from "./CardInfo";
-import CvButton from "./CvButton";
 
 const Left = ({ children }: { children: React.ReactNode }) => {
   return (

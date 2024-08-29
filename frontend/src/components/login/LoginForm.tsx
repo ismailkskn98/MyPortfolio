@@ -1,7 +1,7 @@
 "use client";
+import React, { useState } from "react";
 import { Form, Formik, FormikHelpers } from "formik";
 import { useSearchParams, useRouter } from "next/navigation";
-import React, { useState } from "react";
 import { LoginSchema } from "./LoginSchema";
 import { LoginFormItem, loginFormItems } from "./LoginFormItems";
 import CustomInput from "./CustomInput";
@@ -58,11 +58,7 @@ const LoginForm = () => {
     <Formik initialValues={initialValues} validationSchema={LoginSchema} onSubmit={handleSubmit} validateOnMount={true}>
       {({ isSubmitting, isValid }) => (
         <Form method="POST" className="max-w-[550px] w-full flex flex-col items-center gap-8">
-          {errorMessage.error && (
-            <p className="w-full px-2 py-3 -mb-5 flex items-center justify-center font-semibold rounded bg-red-500 text-red-900">
-              {errorMessage.message}
-            </p>
-          )}
+          {errorMessage.error && <p className="w-full px-2 py-3 -mb-5 flex items-center justify-center font-semibold rounded bg-red-500 text-red-900">{errorMessage.message}</p>}
 
           {loginFormItems.map((item: LoginFormItem, i) => (
             <CustomInput {...item} key={i} error={errorMessage.error} />

@@ -1,7 +1,8 @@
-import { AboutType } from "@/components/admin/about";
+import React from "react";
 import AboutContainer from "@/containers/aboutContainer";
 import { fetchApi } from "@/helper/fetchApi";
-import React from "react";
+// types
+import type { AboutType } from "@/types";
 
 const Hakkimda = async () => {
   const resultAbouts: AboutType[] | string = await fetchApi<AboutType[]>("admin/about", "no-cache");

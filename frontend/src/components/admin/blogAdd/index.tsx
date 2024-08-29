@@ -8,6 +8,7 @@ import Tiptap from "./Tiptap";
 import { AuthFromClient } from "@/hooks/AuthFromClient";
 import { ResponseData } from "../hero/HeroForm";
 import InfoMessage from "../infoMessage";
+// types
 import type { CategoriesType } from "@/types";
 
 // http://localhost:7930/api

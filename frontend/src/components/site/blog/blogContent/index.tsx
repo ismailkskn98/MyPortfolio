@@ -1,5 +1,6 @@
 import React from "react";
 import parse from "html-react-parser";
+// types
 import type { BlogType } from "@/types";
 
 const BlogContent: React.FC<{ blog: BlogType }> = ({ blog }) => {

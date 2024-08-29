@@ -1,10 +1,11 @@
-import { SkillsType } from "@/components/admin/skills";
-import SkillsContainer from "@/containers/skillsContainer";
-import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
+import { fetchApi } from "@/helper/fetchApi";
+import SkillsContainer from "@/containers/skillsContainer";
+// types
+import type { SkillType } from "@/types";
 
 const Yetenekler = async () => {
-  const resultSkills: SkillsType[] | string = await fetchApi<SkillsType[]>("admin/skills", "no-cache");
+  const resultSkills: SkillType[] | string = await fetchApi<SkillType[]>("admin/skills", "no-cache");
 
   if (typeof resultSkills === "string") throw new Error(`${resultSkills}`);
 

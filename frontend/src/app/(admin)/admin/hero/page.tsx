@@ -1,7 +1,8 @@
-import { HeroType } from "@/components/admin/hero/HeroForm";
+import React from "react";
 import HeroContainer from "@/containers/heroContainer";
 import { fetchApi } from "@/helper/fetchApi";
-import React from "react";
+// types
+import type { HeroType } from "@/types";
 
 const Hero = async () => {
   const resultHeros: HeroType[] | string = await fetchApi<HeroType[]>("admin/hero", "no-cache");

@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React from "react";
 import Readmore from "./Readmore";
 import Info from "./Info";
 import Image from "next/image";

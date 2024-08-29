@@ -1,17 +1,13 @@
 import React from "react";
 import HomeContainer from "@/containers/homeContainer";
 import { fetchApi } from "@/helper/fetchApi";
-// type
-import type { AboutType } from "@/components/admin/about";
-import type { HeroType } from "@/components/admin/hero/HeroForm";
-import type { SkillsType } from "@/components/admin/skills";
-import type { Blog } from "@/components/site/blog/blogColumn/Content";
-import type { WorkType } from "@/components/site/works/WorksContent";
+// types
+import type { AboutType, BlogByIdType, BlogColumnType, HeroType, SkillType, WorkType } from "@/types";
 
 const Home = async () => {
   const [resultGetSkills, resultLastBlog, resultGetHero, resultGetAbout, resultGetWorks] = await Promise.all([
-    fetchApi<SkillsType[]>("skills", "no-cache"),
-    fetchApi<Blog>("blogs/last-blog", "no-cache"),
+    fetchApi<SkillType[]>("skills", "no-cache"),
+    fetchApi<BlogColumnType>("blogs/last-blog", "no-cache"),
     fetchApi<HeroType[]>("hero", "no-cache"),
     fetchApi<AboutType[]>("about", "no-cache"),
     fetchApi<WorkType[]>("works", "no-cache"),

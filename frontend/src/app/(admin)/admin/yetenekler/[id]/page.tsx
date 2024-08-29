@@ -1,7 +1,8 @@
-import { SkillType } from "@/components/admin/skillById";
+import React from "react";
 import SkillByIdContainer from "@/containers/skillByIdContainer";
 import { fetchApi } from "@/helper/fetchApi";
-import React from "react";
+// types
+import type { SkillType } from "@/types";
 
 const YetenekGuncelle = async ({ params }: { params: { id: string } }) => {
   const resultSkill: SkillType | string = await fetchApi<SkillType>(`admin/skills/${params.id}`, "no-cache");

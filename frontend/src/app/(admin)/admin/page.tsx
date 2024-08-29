@@ -1,15 +1,15 @@
-import { BlogsCountType } from "@/components/admin/home/HomeMain";
+import React from "react";
 import AdminContainer from "@/containers/adminContainer";
 import { fetchApi } from "@/helper/fetchApi";
-import React from "react";
+// types
+import type { BlogsCountType } from "@/types";
 
 const page = async () => {
-  const blogsCount: BlogsCountType | string = await fetchApi<BlogsCountType>("admin/blog-count", "no-cache");
-  if (typeof blogsCount === "string") {
-    throw new Error(blogsCount);
-  }
+  const resultBlogsCount: BlogsCountType | string = await fetchApi<BlogsCountType>("admin/blog-count", "no-cache");
 
-  return <AdminContainer blogsCount={blogsCount} />;
+  if (typeof resultBlogsCount === "string") throw new Error(`${resultBlogsCount}`);
+
+  return <AdminContainer blogsCount={resultBlogsCount} />;
 };
 
 export default page;

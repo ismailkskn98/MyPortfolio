@@ -6,8 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import InfoMessage from "../infoMessage";
 // types
-import type { ErrorResponse } from "@/helper/fetchApi";
-import type { SkillType } from "@/types";
+import type { ErrorResponse, SkillType } from "@/types";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;

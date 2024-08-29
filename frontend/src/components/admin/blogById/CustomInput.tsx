@@ -1,5 +1,6 @@
 import React from "react";
 import { useField } from "formik";
+// types
 import type { BlogItem } from "../blogAdd/BlogItems";
 
 const CustomInput: React.FC<BlogItem> = ({ labelText, input }) => {

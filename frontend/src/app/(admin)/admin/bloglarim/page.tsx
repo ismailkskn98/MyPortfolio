@@ -1,7 +1,8 @@
-import { BlogsType } from "@/components/admin/blogs";
+import React from "react";
 import AdminBlogsContainer from "@/containers/adminBlogsContainer";
 import { fetchApi } from "@/helper/fetchApi";
-import React from "react";
+// types
+import type { BlogsType } from "@/types";
 
 const Bloglarim = async () => {
   const responseBlogs: BlogsType[] | string = await fetchApi<BlogsType[]>("admin/blogs", "no-cache");
