@@ -13,7 +13,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <>
       <Header />
-      <main className="w-full min-h-screen bg-BG1">{children}</main>
+      <main className="min-h-full w-full bg-BG1">{children}</main>
       <Footer />
     </>
   );

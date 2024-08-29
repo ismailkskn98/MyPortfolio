@@ -10,7 +10,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 const SearchList = ({ search, toggleSearch }: { search: string; toggleSearch: () => void }) => {
   const [blogs, setBlogs] = useState<SearchBlog[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -18,9 +19,9 @@ const SearchList = ({ search, toggleSearch }: { search: string; toggleSearch: ()
       try {
         const response = await fetch(`${BASE_URL}/search?query=${search}`);
         const result = await response.json();
+        setBlogs(result.data);
         setLoading(false);
-
-        return setBlogs(result.data);
+        setIsInitialLoad(false);
       } catch (error) {
         console.log("Veri çekme hatası:", error);
       }
@@ -34,7 +35,7 @@ const SearchList = ({ search, toggleSearch }: { search: string; toggleSearch: ()
     return <LoadingComponents />;
   }
 
-  if (blogs.length === 0) {
+  if (!isInitialLoad && blogs.length === 0) {
     return (
       <AnimatePresence>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}>
