@@ -4,11 +4,11 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const BlogEkle = async () => {
-  const data: CategoriesType[] | string = await fetchApi("admin/categories", undefined, "GET", "no-cache");
-  if (typeof data === "string") {
-    throw new Error(data);
+  const categories: CategoriesType[] | string = await fetchApi<CategoriesType[]>("admin/categories", "no-cache");
+  if (typeof categories === "string") {
+    throw new Error(categories);
   }
-  return <BlogAddContainer categories={data} />;
+  return <BlogAddContainer categories={categories} />;
 };
 
 export default BlogEkle;

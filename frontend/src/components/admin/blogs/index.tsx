@@ -6,25 +6,13 @@ import { ResponseData } from "../hero/HeroForm";
 import ConfirmDeleteModal from "../ConfirmDeleteModal";
 import InfoMessage from "../infoMessage";
 import Image from "next/image";
+// types
+import type { BlogsType } from "@/types";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 // http://localhost:7930
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
-export type BlogsType = {
-  _id: number | string;
-  title: string;
-  subtitle: string;
-  slug: string;
-  description: string;
-  image: string;
-  user: number | string;
-  categories: {
-    _id: string | number;
-    name: string;
-  }[];
-};
 
 const Blogs = ({ blogs }: { blogs: BlogsType[] }) => {
   const [show, setShow] = useState<boolean>(false);
@@ -113,16 +101,10 @@ const Blogs = ({ blogs }: { blogs: BlogsType[] }) => {
                   ))}
                 </td>
                 <td className="px-6 py-4">
-                  <Link
-                    href={`/admin/bloglarim/${item._id}`}
-                    className="mr-4 px-2 py-2 border-none outline-none rounded bg-JS text-white cursor-pointer hover:opacity-70"
-                  >
+                  <Link href={`/admin/bloglarim/${item._id}`} className="mr-4 px-2 py-2 border-none outline-none rounded bg-JS text-white cursor-pointer hover:opacity-70">
                     Güncelle
                   </Link>
-                  <button
-                    onClick={() => handleDeleteClick(item)}
-                    className="px-3 py-2 border-none outline-none rounded bg-red-600 text-white cursor-pointer hover:opacity-70"
-                  >
+                  <button onClick={() => handleDeleteClick(item)} className="px-3 py-2 border-none outline-none rounded bg-red-600 text-white cursor-pointer hover:opacity-70">
                     Sil
                   </button>
                 </td>

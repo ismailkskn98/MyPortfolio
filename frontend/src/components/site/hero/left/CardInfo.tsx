@@ -3,7 +3,7 @@ import { IoLocationOutline, IoMailOutline } from "react-icons/io5";
 import { LuLink } from "react-icons/lu";
 import { MdOutlineHomeWork } from "react-icons/md";
 import CardSkills from "./CardSkills";
-import { HeroType } from "@/components/admin/hero/HeroForm";
+import type { HeroType } from "@/types";
 
 type CardInfoItem = {
   name: string | number;

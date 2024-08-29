@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import profilPhoto from "@/../public/images/Profile photo.png";
-import { HeroType } from "@/components/admin/hero/HeroForm";
+// types
+import type { HeroType } from "@/types";
 
 const ImageName = ({ hero }: { hero: HeroType[] }) => {
   return (

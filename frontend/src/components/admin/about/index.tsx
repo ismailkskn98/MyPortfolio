@@ -2,14 +2,10 @@
 import React, { useEffect, useState } from "react";
 import Tiptap from "../tiptap/Tiptap";
 import InfoMessage from "../infoMessage";
+import type { AboutType } from "@/types";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
-
-export type AboutType = {
-  _id: string | number;
-  about: string;
-};
 
 const About = ({ data }: { data: AboutType[] }) => {
   const [initialContent, setInitialContent] = useState<string>(data[0].about);

@@ -2,23 +2,16 @@
 import React, { useEffect, useState } from "react";
 import { Formik, Form, FormikHelpers } from "formik";
 import { heroSchema } from "./HeroSchema";
-import { HeroFormItem, heroFormItems } from "./HeroFormItems";
+import { heroFormItems } from "./HeroFormItems";
 import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
 import InfoMessage from "../infoMessage";
+// types
+import type { HeroFormItem } from "./HeroFormItems";
+import type { HeroType } from "@/types";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
-
-export type HeroType = {
-  _id: number;
-  name: string;
-  job: string;
-  email: string;
-  freelancer: string;
-  website: string;
-  city: string;
-};
 
 export type ResponseData = {
   message: string;

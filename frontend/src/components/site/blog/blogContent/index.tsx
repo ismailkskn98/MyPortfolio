@@ -1,25 +1,8 @@
 import React from "react";
 import parse from "html-react-parser";
+import type { BlogType } from "@/types";
 
-export type Blog = {
-  _id: string | number;
-  title: string;
-  slug: string;
-  subtitle: string;
-  description: string;
-  createdAt: Date | string | number;
-  user: {
-    _id: string | number;
-    firstname: string;
-    lastname?: string;
-  };
-  categories: {
-    _id: string | number;
-    name: string;
-  }[];
-};
-
-const BlogContent: React.FC<{ blog: Blog }> = ({ blog }) => {
+const BlogContent: React.FC<{ blog: BlogType }> = ({ blog }) => {
   return (
     <div className="flex flex-col items-center gap-8">
       <span>{blog.title}</span>

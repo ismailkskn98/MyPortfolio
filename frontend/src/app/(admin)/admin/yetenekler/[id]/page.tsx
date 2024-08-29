@@ -4,12 +4,11 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const YetenekGuncelle = async ({ params }: { params: { id: string } }) => {
-  const data: SkillType | string = await fetchApi("admin/skills", params.id, "GET", "no-cache");
-  if (typeof data === "string") {
-    throw new Error(data);
-  }
+  const resultSkill: SkillType | string = await fetchApi<SkillType>(`admin/skills/${params.id}`, "no-cache");
 
-  return <SkillByIdContainer data={data} />;
+  if (typeof resultSkill === "string") throw new Error(`${resultSkill}`);
+
+  return <SkillByIdContainer data={resultSkill} />;
 };
 
 export default YetenekGuncelle;

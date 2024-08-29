@@ -4,21 +4,10 @@ import Info from "./Info";
 import Image from "next/image";
 import image from "@/../public/images/Image.png";
 import Link from "next/link";
+// types
+import type { BlogColumnType } from "@/types";
 
-export type Blog = {
-  _id: string | number;
-  title: string;
-  subtitle: string;
-  slug: string;
-  createdAt: string;
-  user: {
-    _id: string | number;
-    firstname: string;
-  };
-  categories: [{ name: string }];
-};
-
-const Content: React.FC<Blog> = ({ title, subtitle, slug, createdAt, categories, user }) => {
+const Content: React.FC<BlogColumnType> = ({ title, subtitle, slug, createdAt, categories, user }) => {
   return (
     <div className="flex items-center px-6 sm:px-[14px] gap-8 md:gap-16 flex-col md:flex-row">
       <Link href={`blogs/${slug}`}>

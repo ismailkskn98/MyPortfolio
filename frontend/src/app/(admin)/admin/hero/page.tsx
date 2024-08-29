@@ -4,12 +4,11 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const Hero = async () => {
-  const data: HeroType | string = await fetchApi("admin/hero", undefined, "GET", "no-cache");
-  if (typeof data === "string") {
-    throw new Error(data);
-  }
+  const resultHeros: HeroType[] | string = await fetchApi<HeroType[]>("admin/hero", "no-cache");
 
-  return <HeroContainer data={data} />;
+  if (typeof resultHeros === "string") throw new Error(`${resultHeros}`);
+
+  return <HeroContainer data={resultHeros} />;
 };
 
 export default Hero;

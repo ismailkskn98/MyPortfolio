@@ -5,19 +5,15 @@ import Link from "next/link";
 import ConfirmDeleteModal from "../ConfirmDeleteModal";
 import { ResponseData } from "../hero/HeroForm";
 import InfoMessage from "../infoMessage";
+// types
+import type { SkillType } from "@/types";
 
 // http://localhost:5029
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
-export type SkillsType = {
-  _id: number | string;
-  name: string;
-  image: string;
-};
-
-const Skills = ({ data }: { data: SkillsType[] }) => {
+const Skills = ({ data }: { data: SkillType[] }) => {
   const [show, setShow] = useState<boolean>(false);
   const [selectedSkill, setSelectedSkill] = useState<string | number>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -82,26 +78,17 @@ const Skills = ({ data }: { data: SkillsType[] }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item: SkillsType, i) => (
-              <tr
-                key={i}
-                className="odd:bg-white odd:dark:bg-Grey even:bg-gray-50 even:dark:bg-BG2 border-b dark:border-gray-700"
-              >
+            {data.map((item: SkillType, i) => (
+              <tr key={i} className="odd:bg-white odd:dark:bg-Grey even:bg-gray-50 even:dark:bg-BG2 border-b dark:border-gray-700">
                 <td className="px-6 py-4">
                   <Image src={`${BASE_URL}/${item.image}`} alt="Yetenek Resmi" width={130} height={100} />
                 </td>
                 <td className="px-6 py-4 text-base font-semibold capitalize">{item.name}</td>
                 <td className="px-6 py-4 max-w-28">
-                  <Link
-                    href={`/admin/yetenekler/${item._id}`}
-                    className="mr-4 px-2 py-2 border-none outline-none rounded bg-JS text-white cursor-pointer hover:opacity-70"
-                  >
+                  <Link href={`/admin/yetenekler/${item._id}`} className="mr-4 px-2 py-2 border-none outline-none rounded bg-JS text-white cursor-pointer hover:opacity-70">
                     Güncelle
                   </Link>
-                  <button
-                    onClick={() => handleDeleteClick(item._id)}
-                    className="px-3 py-2 border-none outline-none rounded bg-red-600 text-white cursor-pointer hover:opacity-70"
-                  >
+                  <button onClick={() => handleDeleteClick(item._id)} className="px-3 py-2 border-none outline-none rounded bg-red-600 text-white cursor-pointer hover:opacity-70">
                     Sil
                   </button>
                 </td>

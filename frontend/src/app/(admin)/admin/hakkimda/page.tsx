@@ -4,13 +4,11 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const Hakkimda = async () => {
-  const data: AboutType | string = await fetchApi("admin/about", undefined, "GET", "no-cache");
+  const resultAbouts: AboutType[] | string = await fetchApi<AboutType[]>("admin/about", "no-cache");
 
-  if (typeof data === "string") {
-    throw new Error(data);
-  }
+  if (typeof resultAbouts === "string") throw new Error(`${resultAbouts}`);
 
-  return <AboutContainer data={data} />;
+  return <AboutContainer data={resultAbouts} />;
 };
 
 export default Hakkimda;

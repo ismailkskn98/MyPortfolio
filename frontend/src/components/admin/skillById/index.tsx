@@ -3,21 +3,16 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { SkillSchema } from "../skillAdd/SkillSchema";
 import Image from "next/image";
-
 import { useRouter } from "next/navigation";
-import { error } from "@/helper/fetchApi";
 import InfoMessage from "../infoMessage";
+// types
+import type { ErrorResponse } from "@/helper/fetchApi";
+import type { SkillType } from "@/types";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 // http://localhost:5029
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
-export type SkillType = {
-  id: string | number;
-  name: string;
-  image: string;
-};
 
 type InitialValues = {
   name: string;
@@ -55,12 +50,12 @@ const SkillById = ({ data }: { data: SkillType }) => {
 
     // fetch
     try {
-      const response = await fetch(`${BASE_URL_API}/admin/skills/${data.id}`, {
+      const response = await fetch(`${BASE_URL_API}/admin/skills/${data._id}`, {
         method: "PUT",
         body: formData,
       });
       if (!response.ok) {
-        const data: error = await response.json();
+        const data: ErrorResponse = await response.json();
         return setErrorMessage(data.message);
       }
 
@@ -121,10 +116,7 @@ const SkillById = ({ data }: { data: SkillType }) => {
                 />
                 {errors.image && <div className="text-red-500">{errors.image}</div>}
               </div>
-              <button
-                type="submit"
-                className={`px-4 py-2 rounded border-none outline-none bg-BG2 text-white self-end font-semibold hover:bg-BG1 cursor-pointer transition-all`}
-              >
+              <button type="submit" className={`px-4 py-2 rounded border-none outline-none bg-BG2 text-white self-end font-semibold hover:bg-BG1 cursor-pointer transition-all`}>
                 Kaydet
               </button>
             </Form>

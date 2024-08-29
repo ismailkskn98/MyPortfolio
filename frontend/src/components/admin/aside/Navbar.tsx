@@ -41,9 +41,7 @@ const Navbar = () => {
           } w-full flex items-center gap-2 px-6 py-3 text-lg text-white tracking-wider hover:bg-BG1 transition-all cursor-pointer whitespace-nowrap`}
         >
           <item.icon className="min-w-4 min-h-4" />
-          <span className="md:invisible md:opacity-0 transition-all xl:visible xl:opacity-100">
-            {item.name}
-          </span>
+          <span className="md:invisible md:opacity-0 transition-all xl:visible xl:opacity-100">{item.name}</span>
         </Link>
       ))}
     </nav>

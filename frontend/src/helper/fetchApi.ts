@@ -1,45 +1,23 @@
-export type error = {
-  message: string;
-  error: boolean;
-  success: boolean;
-};
-export type success = {
-  data: string;
-  error: boolean;
-  success: boolean;
-};
+import type { ErrorResponse, SuccessResponse } from "@/types";
 
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
-export const fetchApi = async (
-  url: string,
-  params?: string | number,
-  method: string = "GET",
-  cache?: "force-cache" | "no-cache",
-  body?: object
-) => {
+export const fetchApi = async <T>(url: string, cache: "force-cache" | "no-cache" = "force-cache", method: string = "GET"): Promise<T | string> => {
   try {
-    const response = await fetch(`${BASE_URL_API}/${url}${params ? `/${params}` : ""}`, {
-      method,
-      cache,
-      body: body ? JSON.stringify(body) : undefined,
-      headers: body ? { "Content-Type": "application/json" } : {},
-    });
+    const response = await fetch(`${BASE_URL_API}/${url}`, { method, cache });
 
     if (!response.ok) {
-      const responseData: error = await response.json();
-      throw new Error(responseData.message || "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+      const responseData: ErrorResponse = await response.json();
+      console.log(responseData);
+      return `Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz. ${responseData.message}`;
     }
-    const responseData: success = await response.json();
+    const responseData: SuccessResponse<T> = await response.json();
     if (responseData.error) {
-      throw new Error("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.");
+      console.log(responseData);
+      return "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.";
     }
     return responseData.data;
   } catch (error) {
-    if (error instanceof Error) {
-      return error.message;
-    } else {
-      return "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.";
-    }
+    return "Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz veya yöneticiye başvurunuz.";
   }
 };

@@ -4,12 +4,11 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const Blogs = async () => {
-  const blogs: Blog[] | string = await fetchApi("blogs", undefined, "GET");
+  const responseBlogs: Blog[] | string = await fetchApi<Blog[]>("blogs");
 
-  if (typeof blogs === "string") {
-    throw new Error(blogs);
-  }
-  return <BlogsContainer blogs={blogs} />;
+  if (typeof responseBlogs === "string") throw new Error(`${responseBlogs}`);
+
+  return <BlogsContainer blogs={responseBlogs} />;
 };
 
 export default Blogs;

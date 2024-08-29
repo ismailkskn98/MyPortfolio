@@ -4,12 +4,11 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const Yetenekler = async () => {
-  const data: SkillsType[] | string = await fetchApi("admin/skills", undefined, "GET", "no-cache");
-  if (typeof data === "string") {
-    throw new Error(data);
-  }
+  const resultSkills: SkillsType[] | string = await fetchApi<SkillsType[]>("admin/skills", "no-cache");
 
-  return <SkillsContainer data={data} />;
+  if (typeof resultSkills === "string") throw new Error(`${resultSkills}`);
+
+  return <SkillsContainer data={resultSkills} />;
 };
 
 export default Yetenekler;

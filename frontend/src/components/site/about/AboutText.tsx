@@ -1,6 +1,7 @@
-import { AboutType } from "@/components/admin/about";
 import parse from "html-react-parser";
 import React from "react";
+// types
+import type { AboutType } from "@/types";
 
 const AboutText = ({ about }: { about: AboutType[] }) => {
   return (

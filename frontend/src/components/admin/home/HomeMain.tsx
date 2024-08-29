@@ -1,8 +1,6 @@
 import React from "react";
-
-export type BlogsCountType = {
-  count: number;
-};
+// types
+import type { BlogsCountType } from "@/types";
 
 const HomeMain = ({ blogsCount }: { blogsCount: BlogsCountType }) => {
   return (

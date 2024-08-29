@@ -5,15 +5,14 @@ import { fetchApi } from "@/helper/fetchApi";
 import React from "react";
 
 const Blog = async ({ params }: { params: { slug: string } }) => {
-  const blog: Blog | string = await fetchApi("blogs", params.slug, "GET");
+  const responseBlog: Blog | string = await fetchApi<Blog>(`blogs/${params.slug}`);
 
-  if (typeof blog === "string") {
-    throw new Error(blog);
-  }
+  if (typeof responseBlog === "string") throw new Error(`${responseBlog}`);
+
   return (
     <div className="text-White">
       <BlogContainer>
-        <BlogContent blog={blog} />
+        <BlogContent blog={responseBlog} />
       </BlogContainer>
     </div>
   );

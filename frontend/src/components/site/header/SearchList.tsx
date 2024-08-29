@@ -2,16 +2,11 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LoadingComponents from "../loading";
+// types
+import type { SearchBlog } from "@/types";
 
 // http://localhost:3000/api
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL_API;
-
-type SearchBlog = {
-  _id: string | number;
-  title: string;
-  slug: string;
-  subtitle: string;
-};
 
 const SearchList = ({ search, toggleSearch }: { search: string; toggleSearch: () => void }) => {
   const [blogs, setBlogs] = useState<SearchBlog[]>([]);
@@ -42,12 +37,7 @@ const SearchList = ({ search, toggleSearch }: { search: string; toggleSearch: ()
   if (blogs.length === 0) {
     return (
       <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}>
           Sonuç bulunamadı.
         </motion.div>
       </AnimatePresence>

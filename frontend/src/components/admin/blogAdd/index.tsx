@@ -8,14 +8,10 @@ import Tiptap from "./Tiptap";
 import { AuthFromClient } from "@/hooks/AuthFromClient";
 import { ResponseData } from "../hero/HeroForm";
 import InfoMessage from "../infoMessage";
+import type { CategoriesType } from "@/types";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
-
-export type CategoriesType = {
-  _id: number | string;
-  name: string;
-};
 
 type InitialValues = {
   title: string;
@@ -111,11 +107,7 @@ const BlogAdd = ({ categories }: { categories: CategoriesType[] }) => {
                   Açıklama
                 </label>
                 <Tiptap name="description" />
-                {!isValid && (
-                  <p className="-mt-3 text-sm text-red-500">
-                    *Lütfen en az 50 karakter giriniz. Tüm alanları doldurduktan sonra bu uyarı kaybolur.
-                  </p>
-                )}
+                {!isValid && <p className="-mt-3 text-sm text-red-500">*Lütfen en az 50 karakter giriniz. Tüm alanları doldurduktan sonra bu uyarı kaybolur.</p>}
                 <div className="flex flex-col items-start gap-2">
                   <label htmlFor="image" className="font-semibold">
                     Resim

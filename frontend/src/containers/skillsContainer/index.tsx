@@ -1,7 +1,9 @@
-import Skills, { SkillsType } from "@/components/admin/skills";
+import Skills from "@/components/admin/skills";
 import React from "react";
+// types
+import type { SkillType } from "@/types";
 
-const SkillsContainer = ({ data }: { data: SkillsType[] }) => {
+const SkillsContainer = ({ data }: { data: SkillType[] }) => {
   return (
     <>
       <Skills data={data} />

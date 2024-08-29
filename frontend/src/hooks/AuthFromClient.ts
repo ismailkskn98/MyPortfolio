@@ -1,7 +1,8 @@
 "use client";
-import { error } from "@/helper/fetchApi";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
+// types
+import type { ErrorResponse } from "@/types";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
@@ -49,7 +50,7 @@ export const AuthFromClient = (): Payload | null => {
 
         if (!response.ok) {
           // error
-          const responseData: error = await response.json();
+          const responseData: ErrorResponse = await response.json();
           return setError(responseData.message);
         }
 

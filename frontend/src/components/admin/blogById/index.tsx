@@ -7,38 +7,17 @@ import { blogItems } from "./blogItems";
 import CustomInput from "./CustomInput";
 import Tiptap from "./Tiptap";
 import { BlogSchema } from "./BlogSchema";
-import type { BlogItem } from "../blogAdd/BlogItems";
-import { CategoriesType } from "../blogAdd";
 import Image from "next/image";
-import { error } from "@/helper/fetchApi";
 import { useRouter } from "next/navigation";
+// types
+import type { BlogItem } from "../blogAdd/BlogItems";
+import type { ErrorResponse } from "@/helper/fetchApi";
+import type { BlogByIdType, CategoriesType } from "@/types";
 
 // http://localhost:7930/api
 const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 // http://localhost:7930
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-
-export type BlogByIdType = {
-  id: string | number;
-  title: string;
-  slug: string;
-  subtitle: string;
-  description: string;
-  image: string;
-  userId: string | number;
-  Categories: {
-    id: string | number;
-    name: string;
-    BlogCategory: { blogId: number; categoryId: number };
-  }[];
-  User: {
-    id: string | number;
-    username: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-  };
-};
 
 type InitialValues = {
   title: string;
@@ -97,7 +76,7 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
         body: formData,
       });
       if (!response.ok) {
-        const data: error = await response.json();
+        const data: ErrorResponse = await response.json();
         return setErrorMessage(data.message);
       }
 
@@ -139,11 +118,7 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                     Açıklama
                   </label>
                   <Tiptap name="description" />
-                  {!isValid && (
-                    <p className="-mt-3 text-sm text-red-500">
-                      *Lütfen en az 50 karakter giriniz. Tüm alanları doldurduktan sonra bu uyarı kaybolur.
-                    </p>
-                  )}
+                  {!isValid && <p className="-mt-3 text-sm text-red-500">*Lütfen en az 50 karakter giriniz. Tüm alanları doldurduktan sonra bu uyarı kaybolur.</p>}
                   <div className="flex flex-col items-start gap-2">
                     <div className="relative w-44 h-44 bg-BG2 p-3 rounded">
                       <Image src={`${BASE_URL}/${blog.image}`} fill={true} alt={blog.title} className="rounded" />

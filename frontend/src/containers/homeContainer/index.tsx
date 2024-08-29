@@ -1,7 +1,4 @@
 import React from "react";
-// type
-import type { Blog } from "@/components/site/blog/blogColumn/Content";
-
 // Components
 import Hero from "@/components/site/hero";
 import Left from "@/components/site/hero/left";
@@ -27,17 +24,15 @@ import AboutText from "@/components/site/about/AboutText";
 import SkillsContent from "@/components/site/skills/SkillsContent";
 import SkillsContentServices from "@/components/site/skills/SkillsContentServices";
 import SkillsContentSkills from "@/components/site/skills/SkillsContentSkills";
-import { HeroType } from "@/components/admin/hero/HeroForm";
-import { AboutType } from "@/components/admin/about";
-import { SkillsType } from "@/components/admin/skills";
-import type { WorkType } from "@/components/site/works/WorksContent";
 import WorksContent from "@/components/site/works/WorksContent";
+// types
+import type { AboutType, BlogColumnType, HeroType, SkillType, WorkType } from "@/types";
 
 type HomeContainerProps = {
-  blog: Blog;
+  blog: BlogColumnType;
   hero: HeroType[];
   about: AboutType[];
-  skills: SkillsType[];
+  skills: SkillType[];
   works: WorkType[];
 };
 
@@ -70,21 +65,9 @@ const HomeContainer = ({ blog, hero, about, skills, works }: HomeContainerProps)
         <WorksContent works={works} />
       </Works>
       <HomeBlog>
-        <ModuleTitle
-          title="Blogs"
-          description="Teknoloji ve iş dünyası hakkındaki düşüncelerim, takip edebilirsiniz"
-          isHome={true}
-        />
+        <ModuleTitle title="Blogs" description="Teknoloji ve iş dünyası hakkındaki düşüncelerim, takip edebilirsiniz" isHome={true} />
         <BlogColumn>
-          <Content
-            _id={blog._id}
-            title={blog.title}
-            subtitle={blog.subtitle}
-            slug={blog.slug}
-            user={blog.user}
-            categories={blog.categories}
-            createdAt={blog.createdAt}
-          />
+          <Content _id={blog._id} title={blog.title} subtitle={blog.subtitle} slug={blog.slug} user={blog.user} categories={blog.categories} createdAt={blog.createdAt} />
         </BlogColumn>
       </HomeBlog>
       <Contact>
