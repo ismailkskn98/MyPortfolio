@@ -1,32 +1,39 @@
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 import { jwtTokenVerify } from "./lib/auth";
 import { isAuthPages } from "./helper/isAuthPages";
 
 export async function middleware(request: NextRequest) {
-  const { url, nextUrl, cookies } = request;
-  const { value: token } = cookies.get("token") ?? { value: null }; // token or null
-
+  const { cookies, nextUrl, url } = request;
   const isAuthPage = isAuthPages(nextUrl.pathname); // true or false
-  const hasVerifyToken = token && (await jwtTokenVerify(token)); // Payload | null
+  /* {
+    name: 'token',
+    value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
+  } */
+  const { value: token } = cookies.get("token") ?? { value: null }; // token or null
+  const verifyToken = token && (await jwtTokenVerify(token)); // Token var mı? Token doğru mu?
+
   if (isAuthPage) {
-    if (!hasVerifyToken) {
+    if (!verifyToken) {
+      // token yok ise veya geçerli değilse
       const response = NextResponse.next();
       response.cookies.delete("token");
       return response;
     }
+    // Token var ve geçerli ise
+    // url: http://localhost:3000/login
+    // new URL("/admin", url): http://localhost:3000/admin
     const response = NextResponse.redirect(new URL("/admin", url));
     return response;
   }
 
-  if (!hasVerifyToken) {
-    // token yok veya yanlış ise
-    const searchParams = new URLSearchParams(nextUrl.searchParams); // /admin?deneme=baslik
-    searchParams.set("next", nextUrl.pathname); // /admin?deneme=baslik&next=/admin
+  if (!verifyToken) {
+    const searchParams = new URLSearchParams(nextUrl.searchParams); // /admin?title=baslik&deneme=deneme2 ['baslik', 'deneme2']
+    searchParams.set("next", nextUrl.pathname);
     return NextResponse.redirect(new URL(`/login?${searchParams}`, url));
   }
 
-  return NextResponse.next();
+  NextResponse.next();
 }
 
 export const config = {

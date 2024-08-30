@@ -1,4 +1,5 @@
 "use client";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { Form, Formik } from "formik";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -11,7 +12,7 @@ const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 type LoginResponse = {
   message: string;
-  data?: string;
+  data: string;
   error: boolean;
   success: boolean;
 };
@@ -35,6 +36,7 @@ const LoginForm = () => {
   const next: string | null = searchParams.get("next") ?? null;
   const [errorMessage, setErrorMessage] = useState<LoginResponse>({
     message: "",
+    data: "",
     error: false,
     success: false,
   });
@@ -53,8 +55,10 @@ const LoginForm = () => {
     const data: LoginResponse = await response.json();
     if (data.error) {
       values.password = "";
+      setIsLoading(false);
       return setErrorMessage(data);
     }
+    Cookies.set("token", data.data);
     setIsLoading(false);
     router.push(next ?? "/admin");
   };
