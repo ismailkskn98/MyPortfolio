@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Form, Formik, FormikHelpers } from "formik";
+import { Form, Formik } from "formik";
 import { useSearchParams, useRouter } from "next/navigation";
 import { LoginSchema } from "./LoginSchema";
 import { LoginFormItem, loginFormItems } from "./LoginFormItems";
@@ -11,9 +11,9 @@ const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 type LoginResponse = {
   message: string;
+  data?: string;
   error: boolean;
   success: boolean;
-  token?: string;
 };
 
 type InitialValues = {
@@ -27,8 +27,11 @@ const initialValues: InitialValues = {
 };
 
 const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  // URL -> `/dashboard?next=my-project`
+  // `next` -> 'my-project'
   const next: string | null = searchParams.get("next") ?? null;
   const [errorMessage, setErrorMessage] = useState<LoginResponse>({
     message: "",
@@ -37,6 +40,7 @@ const LoginForm = () => {
   });
 
   const handleSubmit = async (values: InitialValues) => {
+    setIsLoading(true);
     const response = await fetch(`${BASE_URL_API}/auth/login`, {
       method: "POST",
       credentials: "include",
@@ -45,13 +49,14 @@ const LoginForm = () => {
       },
       body: JSON.stringify(values),
     });
-    const data: LoginResponse = await response.json();
 
+    const data: LoginResponse = await response.json();
     if (data.error) {
       values.password = "";
       return setErrorMessage(data);
     }
-    return router.replace(next ?? "/admin");
+    setIsLoading(false);
+    router.push(next ?? "/admin");
   };
 
   return (
@@ -68,7 +73,7 @@ const LoginForm = () => {
             className={`px-7 py-2 rounded-sm search-u bg-[#FBAE3C] text-BG1 outline-none border border-solid border-[#FBAE3C] cursor-pointer uppercase font-semibold disabled:bg-gray-600 disabled:text-white disabled:cursor-not-allowed disabled:border-gray-600`}
             disabled={!isValid || isSubmitting}
           >
-            {isSubmitting ? "Giriş yapılıyor..." : "Giriş Yap"}
+            {isSubmitting || isLoading ? "Giriş yapılıyor..." : "Giriş Yap"}
           </button>
         </Form>
       )}

@@ -15,10 +15,11 @@ module.exports = (app) => {
   app.use(express.urlencoded({ extended: true }));
 
   const corsOptions = {
-    origin: ["http://localhost:3000", "https://your-production-domain.com"], // Herhangi bir domain
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Tüm HTTP metodları
-    credentials: true,
-    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"], // İzin verilen başlıklar
+    origin: ["http://localhost:3000", "https://hismailkeskin.vercel.app", "https://www.hismailkeskin.net"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    credentials: true, // Cookie'lerin cross-origin isteklerde gönderilmesini sağlar
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
+    exposedHeaders: ["set-cookie"], // 'set-cookie' header'ını erişilebilir yapar
   };
   app.use(cors(corsOptions));
 

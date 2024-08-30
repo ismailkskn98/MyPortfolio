@@ -7,15 +7,9 @@ const HomeBlog = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <section id="blogs" className="bg-BG1">
-      <main className="flex flex-col items-center gap-16 px-6 py-16 md:p-16 xl:px-32 xl:py-24">
+      <main className="flex flex-col items-center gap-16 px-6 py-16 md:p-16 xl:px-32 xl:p-16">
         {children}
-        <SolidButton
-          bgColor="bg-BG1"
-          border={true}
-          buttonFc={viewMore}
-          buttonText="Devamını Oku"
-          textColor="text-White"
-        />
+        <SolidButton bgColor="bg-BG1" border={true} buttonFc={viewMore} buttonText="Devamını Oku" textColor="text-White" />
       </main>
     </section>
   );

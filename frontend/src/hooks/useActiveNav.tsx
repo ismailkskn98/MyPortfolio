@@ -17,10 +17,7 @@ export const useActiveNav = (): ActiveNav => {
       const sectionOffsetTop = section.offsetTop - 10; // section'nın üst kenarı window üst kenardan olan uzaklığı
       const sectionClientHight = section.clientHeight; // section'nın yüksekliği
       currentSection = section.id;
-      if (
-        window.scrollY >= sectionOffsetTop &&
-        window.scrollY < sectionClientHight + sectionOffsetTop
-      ) {
+      if (window.scrollY >= sectionOffsetTop && window.scrollY < sectionClientHight + sectionOffsetTop) {
         // window scroll eğer section'nın topdan yüksekliğinden büyük ve section'nın yüksekliği + section'nın topdan yükseliği den küçük ise o section'nın içerisinde olmuş oluyoruz
         setSectionId(currentSection);
       }
