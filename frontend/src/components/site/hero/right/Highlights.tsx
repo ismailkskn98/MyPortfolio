@@ -1,30 +1,31 @@
 import React from "react";
 
-const Highlights = () => {
+type HighlightsProps = {
+  public_repos: number;
+  followers: number;
+  following: number;
+};
+
+const Highlights: React.FC<HighlightsProps> = ({ public_repos, followers, following }) => {
   return (
-    <div
-      id="highlights"
-      className="flex flex-col gap-12 px-8 py-12 rounded-[80px] text-White bg-BG2"
-    >
+    <div id="highlights" className="flex flex-col gap-12 px-8 py-12 rounded-[80px] text-White bg-BG2">
       <div id="rightLanguage" className="flex items-center gap-4">
-        <span className="number-m text-Brand1">4</span>
+        <span className="number-m text-Brand1">{public_repos}</span>
         <div className="flex flex-col para-m">
-          <p>Programlama</p>
-          <p>Dilleri</p>
+          <p>Github Repositories</p>
+          <p></p>
         </div>
       </div>
       <div id="rightTools" className="flex items-center gap-4">
-        <span className="number-m text-Brand1">6</span>
+        <span className="number-m text-Brand1">{followers}</span>
         <div className="flex flex-col para-m">
-          <p>Geliştirme</p>
-          <p>Araçları</p>
+          <p>Github Takipçi</p>
         </div>
       </div>
       <div id="rightExperience" className="flex items-center gap-4">
-        <span className="number-m text-Brand1">8</span>
+        <span className="number-m text-Brand1">{following}</span>
         <div className="flex flex-col para-m">
-          <p>Deneyim</p>
-          <p>Yılı</p>
+          <p>Github Takip</p>
         </div>
       </div>
     </div>

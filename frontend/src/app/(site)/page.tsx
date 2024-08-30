@@ -4,16 +4,7 @@ import { fetchApi } from "@/helper/fetchApi";
 // types
 import type { AboutType, BlogColumnType, HeroType, SkillType, WorkType } from "@/types";
 
-const timer = async (time: number) => {
-  return new Promise<void>((resolve) =>
-    setTimeout(() => {
-      resolve();
-    }, time)
-  );
-};
-
 const Home = async () => {
-  await timer(2000);
   const [resultGetSkills, resultLastBlog, resultGetHero, resultGetAbout, resultGetWorks] = await Promise.all([
     fetchApi<SkillType[]>("skills", "no-cache"),
     fetchApi<BlogColumnType>("blogs/last-blog", "no-cache"),
