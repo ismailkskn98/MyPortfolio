@@ -1,5 +1,5 @@
 @import "./reset.css";
-
+@import "~highlight.js/styles/default.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -59,12 +59,33 @@ blockquote::before {
   left: 10px;
 }
 
-code {
+/* code {
   display: inline-block;
   background-color: #1a1e23;
   color: #75b4d4;
-  padding: 0.4rem 0.5rem;
-  margin: 0.2rem 0.2rem;
+  padding: 1rem;
   border-radius: 5px;
+  font-family: "Fira Code", monospace; 
+  overflow-x: auto;
   font-size: 14px;
+} */
+
+.tiptap pre {
+  display: block;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  padding: 1rem 1.8rem;
+  border-radius: 0.5rem;
+  font-family: "JetBrainsMono", monospace;
+  color: #57c0d7;
+  background: #1a1e23;
+}
+
+.tiptap pre code {
+  padding: 0;
+  font-size: 0.9rem;
+  letter-spacing: 0.07rem;
+  line-height: 1.8rem;
+  color: inherit;
+  background: none;
 }

@@ -1,19 +1,7 @@
 import { Editor } from "@tiptap/react";
 import React from "react";
 import { GrRedo, GrUndo } from "react-icons/gr";
-import {
-  LuBold,
-  LuCode,
-  LuHeading2,
-  LuHeading3,
-  LuHeading4,
-  LuItalic,
-  LuList,
-  LuListOrdered,
-  LuQuote,
-  LuStrikethrough,
-  LuUnderline,
-} from "react-icons/lu";
+import { LuBold, LuCode, LuHeading2, LuHeading3, LuHeading4, LuItalic, LuList, LuListOrdered, LuQuote, LuStrikethrough, LuUnderline } from "react-icons/lu";
 import { TfiParagraph } from "react-icons/tfi";
 
 type ToolbarProps = {
@@ -108,9 +96,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, editor }) => {
     },
     {
       icon: LuCode,
-      tooltip: "inline code",
-      action: () => editor.chain().focus().toggleCode().run(),
-      isActive: "code",
+      tooltip: "Kod Bloğu",
+      action: () => editor.chain().focus().toggleCodeBlock().run(),
+      isActive: "codeBlock",
     },
     {
       icon: TfiParagraph,
@@ -133,11 +121,9 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, editor }) => {
   ];
 
   return (
-    <section id="buttons" className="w-full flex items-center gap-2 p-2">
+    <section id="buttons" className="w-full flex items-center gap-2 p-2 sticky top-0 bg-slate-200 z-10">
       {toolbarItems.map((item: ToolbarItem, i) => {
-        const isActive: boolean = Array.isArray(item.isActive)
-          ? editor.isActive(item.isActive[0], item.isActive[1])
-          : editor.isActive(item.isActive);
+        const isActive: boolean = Array.isArray(item.isActive) ? editor.isActive(item.isActive[0], item.isActive[1]) : editor.isActive(item.isActive);
         const icon = typeof item.icon === "string" ? item.icon : <item.icon className="w-6 h-6" />;
         return (
           <button
@@ -146,9 +132,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ content, editor }) => {
               e.preventDefault();
               return item.action();
             }}
-            className={`${
-              isActive ? "bg-BG1 text-Brand1" : "bg-BG2 text-White"
-            } border-none outline-none px-2 py-1 rounded-sm cursor-pointer hover:bg-gray-400`}
+            className={`${isActive ? "bg-BG1 text-Brand1" : "bg-BG2 text-White"} border-none outline-none px-2 py-1 rounded-sm cursor-pointer hover:bg-gray-400`}
           >
             {icon}
           </button>
