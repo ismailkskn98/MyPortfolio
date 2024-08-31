@@ -33,10 +33,10 @@ exports.login = async (req, res) => {
   );
 
   res.cookie("token", token, {
-    httpOnly: false, // client tarafında çerezi kullanabilmek için
+    httpOnly: true, // client tarafında çerezi kullanabilmek için
     path: "/",
-    secure: false, // http - https
-    sameSite: "Lax", // veya 'strict' olarak ayarlayabilirsiniz
+    secure: true, // http - https
+    sameSite: "Nano", // veya 'strict' olarak ayarlayabilirsiniz
     maxAge: 1000 * 60 * 60, // 1 saat süresince geçerli olacak
   });
 

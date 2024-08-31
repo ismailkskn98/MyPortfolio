@@ -10,7 +10,7 @@ const client = require("../routes/client");
 
 module.exports = (app) => {
   app.use(cookieParser());
-  app.use(express.static(path.join(__dirname, "public")));
+  app.use(express.static(path.join(__dirname, "..", "public")));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
