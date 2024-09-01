@@ -1,5 +1,5 @@
 "use client";
-import { useEditor, EditorContent, Editor, ReactNodeViewRenderer } from "@tiptap/react";
+import { useEditor, EditorContent, Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useEffect, useState } from "react";
 import Toolbar from "./Toolbar";
@@ -10,8 +10,6 @@ import TextStyle from "@tiptap/extension-text-style";
 import Paragraph from "@tiptap/extension-paragraph";
 import FontFamily from "@tiptap/extension-font-family";
 import Document from "@tiptap/extension-document";
-// kod bloğu
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 
 type TiptapProps = {
   initialContent: string;
@@ -22,7 +20,7 @@ const Tiptap: React.FC<TiptapProps> = ({ initialContent, onSave }) => {
   const [content, setContent] = useState(initialContent);
 
   const editor = useEditor({
-    extensions: [Document, StarterKit, Underline, Blockquote, TextStyle, Color, Paragraph, FontFamily, CodeBlockLowlight],
+    extensions: [Document, StarterKit, Underline, Blockquote, TextStyle, Color, Paragraph, FontFamily],
     content: content,
     onUpdate: ({ editor }: { editor: Editor }) => {
       setContent(editor.getHTML());

@@ -113,6 +113,9 @@ export type SkillType = {
   _id: string | number;
   name: string;
   image: string;
+  language: [];
+  createdAt: string | Date;
+  updatedAt: string | Date;
 };
 
 export type WorkType = {
