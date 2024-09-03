@@ -73,8 +73,8 @@ const SearchList = ({ search, toggleSearch }: { search: string; toggleSearch: ()
             >
               <Link href={"/blogs/" + blog.slug} onClick={toggleSearch}>
                 <div className="flex flex-col overflow-hidden gap-1">
-                  <h3 className="truncate search-list-h3-u text-BG1">{blog.title}</h3>
-                  <p className="truncate search-list-p-u text-BG1/40">{blog.subtitle}</p>
+                  <h3 className="truncate text-sm md:text-base search-list-h3-u text-BG1">{blog.title}</h3>
+                  <p className="truncate text-sm md:text-base search-list-p-u text-BG1/40">{blog.subtitle}</p>
                 </div>
               </Link>
             </motion.li>
