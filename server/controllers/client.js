@@ -39,7 +39,7 @@ exports.get_hero = async (req, res) => {
 };
 
 exports.get_about = async (req, res) => {
-  const about = await Hero.find().select("about -_id");
+  const about = await Hero.find().select("about");
   if (about.length === 0) {
     return res.send({ message: "Hakkımda bulunamadı.", data: [], error: false, success: true });
   }
@@ -79,7 +79,7 @@ exports.get_blog_by_slug = async (req, res) => {
   const blog = await Blog.findOne({ slug })
     .populate({ path: "user", select: "firstname lastname" })
     .populate({ path: "categories", select: "name" })
-    .select("title slug subtitle description createdAt");
+    .select("title slug subtitle description image createdAt");
 
   if (!blog) {
     return res.status(404).send({ message: "Blog bulunamadı.", data: null, error: true, success: false });
