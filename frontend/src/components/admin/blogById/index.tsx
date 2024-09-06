@@ -25,10 +25,9 @@ type InitialValues = {
   description: string;
   image: File | null;
   currentImage: string;
-  userId: string | number;
-  categoryIds: (string | number)[];
-  User: {
-    id: string | number;
+  categories: (string | number)[];
+  user: {
+    _id: string | number;
     username: string;
     firstname: string;
     lastname: string;
@@ -51,26 +50,24 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
     description: blog.description,
     image: null,
     currentImage: blog.image,
-    userId: blog.userId,
-    categoryIds: blog.Categories.map((category) => category.id),
-    User: blog.User,
+    categories: blog.categories.map((category) => category._id),
+    user: blog.user,
   };
 
   const handleSubmit = async (values: InitialValues) => {
     const formData = new FormData();
-    formData.append("id", blog.id.toString());
+    formData.append("id", blog._id.toString());
     formData.append("title", values.title);
     formData.append("subtitle", values.subtitle);
     formData.append("description", values.description);
-    formData.append("userId", values.userId.toString());
-    formData.append("categoryIds", JSON.stringify(values.categoryIds));
+    formData.append("categories", JSON.stringify(values.categories));
     formData.append("currentImage", values.currentImage);
     if (fileControl && values.image) {
       formData.append("image", values.image);
     }
 
     try {
-      const response = await fetch(`${BASE_URL_API}/admin/blogs/${blog.id}`, {
+      const response = await fetch(`${BASE_URL_API}/admin/blogs/${blog._id}`, {
         method: "PUT",
         body: formData,
       });
@@ -153,19 +150,19 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                     <div key={category._id} className="flex items-center gap-3">
                       <Field
                         type="checkbox"
-                        name="categoryIds"
+                        name="categories"
                         value={category._id}
                         id={category.name}
                         className="w-[14px] h-[14px]"
                         onChange={() => {
-                          const isChecked = values.categoryIds.includes(category._id);
+                          const isChecked = values.categories.includes(category._id);
                           if (isChecked) {
                             setFieldValue(
-                              "categoryIds",
-                              values.categoryIds.filter((values) => values !== category._id)
+                              "categories",
+                              values.categories.filter((values) => values !== category._id)
                             );
                           } else {
-                            setFieldValue("categoryIds", [...values.categoryIds, category._id]);
+                            setFieldValue("categories", [...values.categories, category._id]);
                           }
                         }}
                       />
@@ -174,7 +171,7 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                       </label>
                     </div>
                   ))}
-                  <ErrorMessage name="categoryIds" component="p" className="text-red-600 text-sm pl-1" />
+                  <ErrorMessage name="categories" component="p" className="text-red-600 text-sm pl-1" />
                 </article>
               </Form>
             )}
