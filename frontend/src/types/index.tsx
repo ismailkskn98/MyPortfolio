@@ -41,6 +41,7 @@ export type BlogType = {
   slug: string;
   subtitle: string;
   description: string;
+  image: string;
   createdAt: Date | string | number;
   user: {
     _id: string | number;

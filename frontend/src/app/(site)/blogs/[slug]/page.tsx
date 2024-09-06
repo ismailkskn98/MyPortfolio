@@ -11,11 +11,9 @@ const Blog = async ({ params }: { params: { slug: string } }) => {
   if (typeof responseBlog === "string") throw new Error(`${responseBlog}`);
 
   return (
-    <div className="text-White">
-      <BlogContainer>
-        <BlogContent blog={responseBlog} />
-      </BlogContainer>
-    </div>
+    <BlogContainer>
+      <BlogContent blog={responseBlog} />
+    </BlogContainer>
   );
 };
 

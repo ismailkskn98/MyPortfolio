@@ -11,9 +11,9 @@ const BlogColumn = ({ children }: { children: React.ReactNode }) => {
       className="max-w-[80rem] flex items-center justify-center"
     >
       <article className="w-full relative py-8 md:py-16">
-        <div id="line" className="w-full absolute -top-[1px] left-0 h-[1px] bg-[#848484]"></div>
+        <div id="line" className="w-full absolute -top-[1px] left-0 h-[1px] bg-Grey/70"></div>
         {children}
-        <div id="line" className="w-full absolute bottom-0 left-0 h-[1px] bg-[#848484]"></div>
+        <div id="line" className="w-full absolute bottom-0 left-0 h-[1px] bg-Grey/70"></div>
       </article>
     </motion.div>
   );
