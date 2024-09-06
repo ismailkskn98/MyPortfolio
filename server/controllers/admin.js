@@ -197,9 +197,7 @@ exports.get_blogs = async (req, res) => {
   return res.send({ message: "İşlem başarılı", data: blogs, error: false, success: true });
 };
 exports.get_blogById = async (req, res) => {
-  const blog = await Blog.findById(req.params.id)
-    .populate({ path: "user", select: "-password" })
-    .populate({ path: "categories", select: "name" });
+  const blog = await Blog.findById(req.params.id).populate({ path: "user", select: "-password" }).populate({ path: "categories", select: "name" });
 
   if (!blog) {
     return res.status(404).send({ message: "Blog bulunamadı.", data: null, error: true, success: false });

@@ -41,6 +41,7 @@ export type BlogType = {
   slug: string;
   subtitle: string;
   description: string;
+  image: string;
   createdAt: Date | string | number;
   user: {
     _id: string | number;
@@ -88,25 +89,28 @@ export type BlogsCountType = {
 };
 
 export type BlogByIdType = {
-  id: string | number;
+  _id: string | number;
   title: string;
-  slug: string;
   subtitle: string;
+  slug: string;
   description: string;
   image: string;
-  userId: string | number;
-  Categories: {
-    id: string | number;
-    name: string;
-    BlogCategory: { blogId: number; categoryId: number };
-  }[];
-  User: {
-    id: string | number;
+  user: {
+    _id: string;
     username: string;
     firstname: string;
     lastname: string;
     email: string;
+    role: string;
+    createdAt: string | Date;
+    updatedAt: string | Date;
   };
+  categories: {
+    _id: string | number;
+    name: string;
+  }[];
+  createdAt: string | Date;
+  updatedAt: string | Date;
 };
 
 export type SkillType = {
