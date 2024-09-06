@@ -7,7 +7,7 @@ type ContentProps = {
 
 const Content: React.FC<ContentProps> = ({ description }) => {
   return (
-    <article className="article-u">
+    <article id="blog-content" className="article-u">
       <div>{parse(description)}</div>
     </article>
   );
