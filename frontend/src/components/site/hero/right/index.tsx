@@ -10,18 +10,6 @@ const Right = () => {
   const [followersCount, setFollowersCount] = useState<number>(0);
   const [followingCount, setFollowingCount] = useState<number>(0);
 
-  const animate = (target: number, setState: React.Dispatch<React.SetStateAction<number>>) => {
-    let count = 0;
-    const increment = target / 20;
-    const interval = setInterval(() => {
-      count += increment;
-      if (count >= target) {
-        clearInterval(interval);
-      }
-      setState(Math.floor(count));
-    }, 20);
-  };
-
   const githubFetch = useCallback(async () => {
     try {
       const response = await fetch(`https://api.github.com/users/${username}`);
@@ -30,9 +18,9 @@ const Right = () => {
         throw new Error("Beklenmedik bir hata oluştu");
       }
       const data = await response.json();
-      animate(data.public_repos, setRepoCount);
-      animate(data.followers, setFollowersCount);
-      animate(data.following, setFollowingCount);
+      setRepoCount(data.public_repos);
+      setFollowersCount(data.followers);
+      setFollowingCount(data.following);
     } catch (error) {
       console.log("Beklenmedik bir hata oluştu", error);
     }

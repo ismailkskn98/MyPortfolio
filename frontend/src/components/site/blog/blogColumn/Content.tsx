@@ -17,7 +17,7 @@ const Content: React.FC<BlogColumnType> = ({ title, subtitle, slug, createdAt, c
         <Link href={`blogs/${slug}`}>
           <h2 className="h2-u text-Brand1">{title}</h2>
         </Link>
-        <p className="para-u text-White overflow-ellipsis">{subtitle}</p>
+        <p className="para-u text-White overflow-ellipsis leading-6">{subtitle}</p>
         <Readmore slug={slug} />
         <Info createdAt={createdAt} author={user.firstname} tag={categories[0].name} />
       </div>
