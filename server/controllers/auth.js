@@ -36,7 +36,7 @@ exports.login = async (req, res) => {
     httpOnly: true, // client tarafında çerezi kullanabilmek için
     path: "/",
     secure: true, // http - https
-    sameSite: "Nano", // veya 'strict' olarak ayarlayabilirsiniz
+    sameSite: "None", // veya 'strict' olarak ayarlayabilirsiniz
     maxAge: 1000 * 60 * 60, // 1 saat süresince geçerli olacak
   });
 
