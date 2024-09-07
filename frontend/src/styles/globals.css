@@ -61,33 +61,17 @@ blockquote::before {
 
 code {
   display: block;
+  margin: 1.5rem 0;
+  padding: 2rem 2rem;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  font-family: "JetBrainsMono", monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  line-height: 1.8rem;
   background-color: #1a1e23;
   color: #57c0d7;
-  overflow-x: auto;
-  margin: 1.5rem 0;
-  padding: 1rem 1.8rem;
-  border-radius: 0.5rem;
-  font-family: "JetBrainsMono", monospace;
-}
-
-.tiptap pre {
-  display: block;
-  overflow-x: auto;
-  margin: 1.5rem 0;
-  padding: 1rem 1.8rem;
-  border-radius: 0.5rem;
-  font-family: "JetBrainsMono", monospace;
-  color: #57c0d7;
-  background: #1a1e23;
-}
-
-.tiptap pre code {
-  padding: 0;
-  font-size: 0.9rem;
-  letter-spacing: 0.07rem;
-  line-height: 1.8rem;
-  color: inherit;
-  background: none;
 }
 
 .skills {
@@ -113,4 +97,17 @@ h5 {
 
 #blog-content p {
   line-height: 2.1rem;
+}
+
+@media only screen and (max-width: 640px) {
+  code {
+    margin: 1.2rem 0;
+    padding: 1.5rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.6rem;
+    background-color: #1a1e23;
+    color: #57c0d7;
+  }
 }

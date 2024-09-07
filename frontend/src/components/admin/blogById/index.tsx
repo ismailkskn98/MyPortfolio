@@ -2,7 +2,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React, { useEffect, useRef, useState } from "react";
 import InfoMessage from "../infoMessage";
-import { AuthFromClient } from "@/hooks/AuthFromClient";
 import { blogItems } from "./blogItems";
 import CustomInput from "./CustomInput";
 import Tiptap from "./Tiptap";
@@ -25,18 +24,11 @@ type InitialValues = {
   description: string;
   image: File | null;
   currentImage: string;
+  user: string | number;
   categories: (string | number)[];
-  user: {
-    _id: string | number;
-    username: string;
-    firstname: string;
-    lastname: string;
-    email: string;
-  };
 };
 
 const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: CategoriesType[] }) => {
-  const tokenPayload = AuthFromClient();
   const router = useRouter();
   const [fileControl, setFileControl] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -50,11 +42,12 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
     description: blog.description,
     image: null,
     currentImage: blog.image,
+    user: blog.user._id,
     categories: blog.categories.map((category) => category._id),
-    user: blog.user,
   };
 
   const handleSubmit = async (values: InitialValues) => {
+    console.log(values);
     const formData = new FormData();
     formData.append("id", blog._id.toString());
     formData.append("title", values.title);
@@ -81,9 +74,10 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
         return setErrorMessage(responseData.message);
       }
       setSuccessMessage(responseData.message);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setTimeout(() => {
         router.replace(`/admin/bloglarim`);
-      }, 3500);
+      }, 3000);
     } catch (error) {
       return setErrorMessage("Beklenmedik bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
     }
@@ -128,10 +122,10 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                       id="image"
                       ref={fileInputRef}
                       className="w-full border border-solid rounded-sm px-3 py-2 focus:outline focus:outline-1 border-gray-400 focus:outline-gray-500"
-                      onChange={(event) => {
-                        if (event.currentTarget.files) {
+                      onChange={(e) => {
+                        if (e.currentTarget.files) {
                           setFileControl(true);
-                          return setFieldValue("image", event.currentTarget.files[0]);
+                          return setFieldValue("image", e.currentTarget.files[0]);
                         }
                         setFileControl(false);
                       }}
@@ -146,7 +140,7 @@ const BlogById = ({ blog, categories }: { blog: BlogByIdType; categories: Catego
                   </button>
                 </article>
                 <article className="flex flex-col gap-2 border-r-0 border-b-0 border-l-0 border-t border-solid border-black-500/50 pt-4 w-40">
-                  {categories.map((category) => (
+                  {categories?.map((category) => (
                     <div key={category._id} className="flex items-center gap-3">
                       <Field
                         type="checkbox"

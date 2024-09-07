@@ -64,9 +64,7 @@ exports.get_works = async (req, res) => {
 
 // Blogs
 exports.get_blogs = async (req, res) => {
-  const blogs = await Blog.find()
-    .populate({ path: "user", select: "firstname" })
-    .populate({ path: "categories", select: "name" });
+  const blogs = await Blog.find().populate({ path: "user", select: "firstname" }).populate({ path: "categories", select: "name" });
 
   if (blogs.length === 0) {
     return res.send({ message: "Blog bulunamadı.", data: [], error: false, success: true });
@@ -88,9 +86,7 @@ exports.get_blog_by_slug = async (req, res) => {
 };
 
 exports.get_users = async (req, res) => {
-  const user = await User.find()
-    .select("username firstname lastname password email")
-    .populate({ path: "role", select: "name -_id" });
+  const user = await User.find().select("username firstname lastname password email").populate({ path: "role", select: "name -_id" });
   if (user.length === 0) {
     return res.send({ message: "Hero bulunamadı.", data: [], error: false, success: true });
   }

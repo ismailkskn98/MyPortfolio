@@ -38,7 +38,7 @@ const Tiptap: React.FC<TiptapProps> = ({ initialContent, onSave }) => {
   return (
     <div className="flex flex-col gap-1">
       <Toolbar content={content} editor={editor} />
-      <EditorContent editor={editor as Editor | null} className="tiptap border-[3px] border-solid border-BG2 outline-none rounded mb-3 px-10 py-4 bg-gray-500" />
+      <EditorContent editor={editor as Editor | null} className="w-full min-h-14 mb-3 px-10 py-4 rounded border-[3px] border-solid border-gray-600 outline-none bg-BG1" />
       <button onClick={handleSave} className="self-center mt-2 px-4 py-2 rounded border-none outline-none bg-BG2 text-white font-semibold hover:bg-BG1 cursor-pointer">
         Kaydet
       </button>

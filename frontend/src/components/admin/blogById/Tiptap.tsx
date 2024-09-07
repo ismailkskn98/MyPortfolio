@@ -37,7 +37,7 @@ const Tiptap: React.FC<TiptapProps> = ({ name }) => {
       <Toolbar content={value} editor={editor} />
       <EditorContent
         editor={editor as Editor | null}
-        className="w-full border border-solid rounded-sm px-8 py-2 focus:outline focus:outline-1 border-gray-400 focus:outline-gray-500 min-h-14"
+        className="w-full min-h-14 mb-3 px-10 py-4 rounded border-[3px] border-solid border-gray-600 outline-none bg-BG1 text-White"
       />
     </div>
   );

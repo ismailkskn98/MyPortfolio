@@ -12,7 +12,6 @@ const BlogGuncelle = async ({ params }: { params: { id: string } }) => {
 
   if (typeof responseBlog === "string") throw new Error(`${responseBlog}`);
   if (typeof responseCategories === "string") throw new Error(`${responseCategories}`);
-
   return <AdminBlogByIdContainer blog={responseBlog} categories={responseCategories} />;
 };
 

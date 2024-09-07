@@ -2,10 +2,8 @@ const express = require("express");
 const router = express.Router();
 const adminController = require("../controllers/admin");
 const imageUpload = require("../helper/image-upload");
-// const cvUpload = require("../helper/cv-upload");
 
 router.get("/blog-count", adminController.get_blog_count);
-// router.post("/upload-cv", cvUpload.upload.single("cv"), adminController.post_upload_cv);
 
 // Hero
 router.get("/hero", adminController.get_hero);
@@ -27,7 +25,7 @@ router.delete("/skills/:id", adminController.delete_skillById);
 router.get("/blogs", adminController.get_blogs);
 router.get("/blogs/:id", adminController.get_blogById);
 router.post("/blog-create", imageUpload.upload.single("image"), adminController.post_blog);
-router.put("/blogs/:id", adminController.put_blogById);
+router.put("/blogs/:id", imageUpload.upload.single("image"), adminController.put_blogById);
 router.delete("/blogs/:id", adminController.delete_blogById);
 
 // Works
