@@ -61,6 +61,7 @@ blockquote::before {
 
 code {
   display: block;
+  word-wrap: break-word;
   margin: 1.5rem 0;
   padding: 2rem 2rem;
   overflow-x: auto;
@@ -99,8 +100,9 @@ h5 {
   line-height: 2.1rem;
 }
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 700px) {
   code {
+    max-width: 550px;
     margin: 1.2rem 0;
     padding: 1.5rem 1.2rem;
     font-size: 0.8rem;
@@ -109,5 +111,16 @@ h5 {
     line-height: 1.6rem;
     background-color: #1a1e23;
     color: #57c0d7;
+  }
+}
+@media only screen and (max-width: 600px) {
+  code {
+    max-width: 450px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  code {
+    max-width: 350px;
   }
 }

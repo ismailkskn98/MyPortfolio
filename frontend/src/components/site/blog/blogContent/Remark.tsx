@@ -19,7 +19,7 @@ const Remark: React.FC<RemarkProps> = ({ createdAt, description, firstname }) =>
     <article id="remark" className="flex flex-col gap-4">
       <div id="line" className="w-full h-[1px] bg-Grey/70"></div>
       <div className="flex items-center justify-between px-6">
-        <Link href={"/blogs"} className="flex items-center justify-center w-8 h-8 rounded-full p-2 bg-Brand2 transition-all hover:bg-Brand1">
+        <Link href={"/blogs"} className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full p-2 bg-Brand2 transition-all hover:bg-Brand1">
           <IoChevronBack className="w-4 h-4 text-BG1" />
         </Link>
         <div className="flex items-center gap-6 text-White">

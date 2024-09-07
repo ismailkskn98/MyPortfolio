@@ -18,7 +18,7 @@ const Home = async () => {
   if (typeof resultGetAbout === "string") throw new Error(`${resultGetAbout}`);
   if (typeof resultGetSkills === "string") throw new Error(`${resultGetSkills}`);
   if (typeof resultGetWorks === "string") throw new Error(`${resultGetWorks}`);
-  console.log(resultLastBlog);
+
   return <HomeContainer blog={resultLastBlog} hero={resultGetHero} about={resultGetAbout} skills={resultGetSkills} works={resultGetWorks} />;
 };
 
