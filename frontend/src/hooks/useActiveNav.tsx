@@ -14,7 +14,7 @@ export const useActiveNav = (): ActiveNav => {
     const sections = document.querySelectorAll("section");
     let currentSection: string;
     sections.forEach((section) => {
-      const sectionOffsetTop = section.offsetTop - 60; // section'nın üst kenarı window üst kenardan olan uzaklığı
+      const sectionOffsetTop = section.offsetTop - 10; // section'nın üst kenarı window üst kenardan olan uzaklığı
       const sectionClientHight = section.clientHeight; // section'nın yüksekliği
       currentSection = section.id;
       if (window.scrollY >= sectionOffsetTop && window.scrollY < sectionClientHight + sectionOffsetTop) {
@@ -35,11 +35,7 @@ export const useActiveNav = (): ActiveNav => {
   const handleNavLinkClick = (sectionId: string): void => {
     setSectionId(sectionId);
     const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-      const offset = 50; // Adjust this value to set the offset from the top
-      const top = targetSection.getBoundingClientRect().top + window.scrollY + offset;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
+    targetSection?.scrollIntoView({ behavior: "smooth" });
   };
 
   return { handleNavLinkClick, sectionId };
