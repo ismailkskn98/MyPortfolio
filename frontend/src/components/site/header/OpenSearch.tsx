@@ -37,7 +37,7 @@ const OpenSearch: React.FC<Props> = ({ openSearch, toggleSearch }) => {
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               id="searchListWrapper"
-              className="bg-White rounded-[32px] px-5 py-3 max-w-[22rem] min-w-0 md:min-w-[25rem] md:max-w-[32rem] flex flex-col items-center justify-center"
+              className="bg-White rounded-[32px] px-5 py-3 max-w-[22rem] min-w-0 md:min-w-[33rem] md:max-w-[33rem] flex flex-col items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
               <div id="search" className="w-full relative h-12 flex items-center justify-center gap-3">
@@ -47,7 +47,7 @@ const OpenSearch: React.FC<Props> = ({ openSearch, toggleSearch }) => {
                   placeholder="Ara..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full border-none outline-none search-u text-BG1/70 tracking-wider"
+                  className="w-full h-full border-none outline-none search-u text-BG1/70 tracking-wider"
                 />
               </div>
               <div id="searchLine" className="w-full h-[1px] bg-BG1/5 px-5"></div>

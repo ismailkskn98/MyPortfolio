@@ -31,8 +31,8 @@ const Right = () => {
   }, [githubFetch]);
 
   return (
-    <div id="right" className="w-full flex items-center flex-col lg:flex-row gap-16 lg:gap-0">
-      <div id="rightInfo" className="w-full flex flex-col gap-8 items-center lg:items-start">
+    <div id="right" className="w-full flex items-center flex-col xl:flex-row gap-16 xl:gap-0">
+      <div id="rightInfo" className="w-full flex flex-col gap-8 items-center xl:items-start">
         <RightTitle />
         <RightDescription />
       </div>

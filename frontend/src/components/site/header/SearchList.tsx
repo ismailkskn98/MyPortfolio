@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LoadingComponents from "../loading";
+import { FaAnglesRight } from "react-icons/fa6";
 // types
 import type { SearchBlog } from "@/types";
 
@@ -46,14 +47,7 @@ const SearchList = ({ search, toggleSearch }: { search: string; toggleSearch: ()
   }
 
   return (
-    <motion.div
-      id="list"
-      className="w-full overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-    >
+    <motion.div className="w-full overflow-hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease: "easeInOut" }}>
       <motion.ul
         className="w-full flex flex-col gap-[1px]"
         initial={{ opacity: 0, y: -20 }}
@@ -72,9 +66,12 @@ const SearchList = ({ search, toggleSearch }: { search: string; toggleSearch: ()
               className="w-full py-4 list-none hover:bg-BG1/5"
             >
               <Link href={"/blogs/" + blog.slug} onClick={toggleSearch}>
-                <div className="flex flex-col overflow-hidden gap-1">
-                  <h3 className="truncate text-sm md:text-base search-list-h3-u text-BG1">{blog.title}</h3>
-                  <p className="truncate text-sm md:text-base search-list-p-u text-BG1/40">{blog.subtitle}</p>
+                <div className="flex items-center gap-2">
+                  <FaAnglesRight className="text-BG1/40 min-w-3" />
+                  <div className="flex flex-col overflow-hidden gap-1">
+                    <h3 className="truncate text-sm md:search-list-h3-u text-BG1 p-0">{blog.title}</h3>
+                    <p className="truncate text-sm md:search-list-p-u text-BG1/40 ">{blog.subtitle}</p>
+                  </div>
                 </div>
               </Link>
             </motion.li>

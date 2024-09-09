@@ -15,20 +15,20 @@ type NavItem = {
   icon: React.ElementType;
 };
 
+const navItems: NavItem[] = [
+  { name: "Anasayfa", href: "/admin", icon: FaHome },
+  { name: "Hero", href: "/admin/hero", icon: IoPersonSharp },
+  { name: "Hakkımda", href: "/admin/hakkimda", icon: MdOutlineRoundaboutRight },
+  { name: "Yetenekler", href: "/admin/yetenekler", icon: GiSkills },
+  { name: "Yetenek Ekle", href: "/admin/yetenek-ekle", icon: GiSkills },
+  { name: "İşler", href: "/admin/isler", icon: IoGitNetworkSharp },
+  { name: "Bloglarım", href: "/admin/bloglarim", icon: BiLogoBlogger },
+  { name: "Blog Ekle", href: "/admin/blog-ekle", icon: BiLogoBlogger },
+  { name: "Mesajlar", href: "/admin/mesajlar", icon: RiMessage2Fill },
+];
+
 const Navbar = () => {
   const pathname = usePathname();
-
-  const navItems: NavItem[] = [
-    { name: "Anasayfa", href: "/admin", icon: FaHome },
-    { name: "Hero", href: "/admin/hero", icon: IoPersonSharp },
-    { name: "Hakkımda", href: "/admin/hakkimda", icon: MdOutlineRoundaboutRight },
-    { name: "Yetenekler", href: "/admin/yetenekler", icon: GiSkills },
-    { name: "Yetenek Ekle", href: "/admin/yetenek-ekle", icon: GiSkills },
-    { name: "İşler", href: "/admin/isler", icon: IoGitNetworkSharp },
-    { name: "Bloglarım", href: "/admin/bloglarim", icon: BiLogoBlogger },
-    { name: "Blog Ekle", href: "/admin/blog-ekle", icon: BiLogoBlogger },
-    { name: "Mesajlar", href: "/admin/mesajlar", icon: RiMessage2Fill },
-  ];
 
   return (
     <nav className="w-full h-full flex flex-col gap-3">
@@ -37,7 +37,7 @@ const Navbar = () => {
           key={i}
           href={item.href}
           className={`${
-            pathname === item.href && "bg-Brand1 text-BG2 "
+            pathname === item.href ? "bg-Brand1 text-BG2" : ""
           } w-full flex items-center gap-2 px-6 py-3 text-lg text-white tracking-wider hover:bg-BG1 transition-all cursor-pointer whitespace-nowrap`}
         >
           <item.icon className="min-w-4 min-h-4" />

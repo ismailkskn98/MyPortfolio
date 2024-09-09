@@ -11,12 +11,12 @@ type RemarkProps = {
 const Remark: React.FC<RemarkProps> = ({ createdAt, description, firstname }) => {
   const date = `${new Date(createdAt).getDate().toString().padStart(2, "0")}/${new Date(createdAt).getMonth() + 1}/${new Date(createdAt).getFullYear()}`;
 
-  const wordsPerMunite = 900; // dakikada 900 karakter
+  const wordsPerMinute = 900; // dakikada 900 karakter
   const wordCount = description.trim().length;
-  const read = Math.ceil(wordCount / wordsPerMunite);
+  const read = Math.ceil(wordCount / wordsPerMinute);
 
   return (
-    <article id="remark" className="flex flex-col gap-4">
+    <article id="remark" className="w-full flex flex-col gap-4">
       <div id="line" className="w-full h-[1px] bg-Grey/70"></div>
       <div className="flex items-center justify-between px-6">
         <Link href={"/blogs"} className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full p-2 bg-Brand2 transition-all hover:bg-Brand1">
@@ -24,15 +24,15 @@ const Remark: React.FC<RemarkProps> = ({ createdAt, description, firstname }) =>
         </Link>
         <div className="flex items-center gap-6 text-White">
           <div className="flex items-center gap-2">
-            <span className="Label-u-m">Text </span>
+            <span className="Label-u-m">Yazar </span>
             <span className="Label-u-l">{firstname}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="Label-u-m">Date </span>
+            <span className="Label-u-m">Tarih </span>
             <span className="Label-u-l">{date}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="Label-u-m">Read </span>
+            <span className="Label-u-m">Okuma Süresi </span>
             <span className="Label-u-l">{read} Dk</span>
           </div>
         </div>

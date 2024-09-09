@@ -64,10 +64,10 @@ const HomeContainer = ({ blog, hero, about, skills, works }: HomeContainerProps)
       <Works>
         <WorksContent works={works} />
       </Works>
-      <HomeBlog>
+      <HomeBlog slug={blog.slug}>
         <ModuleTitle title="Blogs" description="Teknoloji ve iş dünyası hakkındaki düşüncelerim, takip edebilirsiniz" isHome={true} />
-        <BlogColumn>
-          <Content _id={blog._id} title={blog.title} subtitle={blog.subtitle} slug={blog.slug} user={blog.user} categories={blog.categories} createdAt={blog.createdAt} />
+        <BlogColumn isHome={true}>
+          <Content {...blog} />
         </BlogColumn>
       </HomeBlog>
       <Contact>

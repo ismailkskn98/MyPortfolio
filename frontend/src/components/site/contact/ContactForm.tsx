@@ -33,27 +33,21 @@ const ContactForm = () => {
     console.log("send message");
   };
   return (
-    <form className="w-full flex flex-col items-center px-6 md:px-16 xl:px-[400px] gap-16">
+    <form className="w-full max-w-[1300px] flex flex-col items-center px-2 gap-16">
       <div className="w-full grid grid-cols-1 grid-rows-3 lg:grid-cols-2 lg:grid-rows-2 gap-16 lx:gap-x-32 lg:gap-y-16">
         {formItems.map((item, i) => (
-          <div key={i} className="flex flex-col gap-6">
+          <div key={i} className="w-full flex flex-col gap-6">
             <label htmlFor={item.id} className="text-Brand1 para-u">
               {item.text}
             </label>
             <input
               {...item}
-              className="border-t-0 border-l-0 border-r-0 border-b border-solid border-Brand2 outline-none py-2 bg-[#ffffff00] text-White para-u placeholder-White"
+              className="w-full border-t-0 border-l-0 border-r-0 border-b border-solid border-Brand2 outline-none py-2 bg-[#ffffff00] text-White para-u placeholder-White"
             />
           </div>
         ))}
       </div>
-      <SolidButton
-        bgColor="bg-Brand1"
-        border={false}
-        textColor="text-BG1"
-        buttonText="Mesaj Gönder"
-        buttonFc={sendMessage}
-      />
+      <SolidButton bgColor="bg-Brand1" border={false} textColor="text-BG1" buttonText="Mesaj Gönder" buttonFc={sendMessage} />
     </form>
   );
 };

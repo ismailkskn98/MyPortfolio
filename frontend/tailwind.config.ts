@@ -39,6 +39,22 @@ const config: Config = {
       Mysql: "#00608C",
       ...colors,
     },
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1124px",
+      "2xl": "1440px",
+      "3xl": "1664px",
+    },
+    container: {
+      center: true,
+      screens: {
+        xl: "1124px",
+        "2xl": "1440px",
+        "3xl": "1664px",
+      },
+    },
   },
   plugins: [],
 };

@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import blogImage from "@/../public/images/Image.png";
 
 type BlogImageProps = {
   title: string;
@@ -10,7 +9,6 @@ type BlogImageProps = {
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const BlogImage: React.FC<BlogImageProps> = ({ title, image }) => {
-  console.log(image);
   return (
     <div className="relative w-full h-96 rounded-sm shadow-lg">
       <Image

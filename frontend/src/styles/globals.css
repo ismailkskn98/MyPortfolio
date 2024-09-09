@@ -59,22 +59,6 @@ blockquote::before {
   left: 10px;
 }
 
-code {
-  display: block;
-  word-wrap: break-word;
-  margin: 1.5rem 0;
-  padding: 2rem 2rem;
-  overflow-x: auto;
-  border-radius: 0.5rem;
-  font-family: "JetBrainsMono", monospace;
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.6px;
-  line-height: 1.8rem;
-  background-color: #1a1e23;
-  color: #57c0d7;
-}
-
 .skills {
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
     rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
@@ -100,17 +84,35 @@ h5 {
   line-height: 2.1rem;
 }
 
+code {
+  display: block;
+  word-wrap: break-word;
+  margin: 1.5rem 0;
+  padding: 2rem;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  font-family: "JetBrainsMono", monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  line-height: 1.8rem;
+  background-color: #1a1e23;
+  color: #57c0d7;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 @media only screen and (max-width: 700px) {
   code {
     max-width: 550px;
     margin: 1.2rem 0;
-    padding: 1.5rem 1.2rem;
+    padding: 1.5rem;
     font-size: 0.8rem;
     font-weight: 400;
     letter-spacing: 0.5px;
     line-height: 1.6rem;
     background-color: #1a1e23;
     color: #57c0d7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 }
 @media only screen and (max-width: 600px) {
