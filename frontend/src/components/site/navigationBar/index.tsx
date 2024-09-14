@@ -29,14 +29,14 @@ const NavigationBar = () => {
   const { handleNavLinkClick, sectionId } = useActiveNav();
 
   return (
-    <nav className="hidden xl:flex fixed z-50 top-56 left-12 2xl:left-16 flex-col items-center gap-6 px-3 py-2 rounded-[40px] bg-BG2/90 border border-solid border-White">
+    <nav className="hidden xl:flex fixed z-50 top-56 left-12 2xl:left-16 flex-col items-center gap-6 px-3 py-2 rounded-[40px] bg-BG2/30 2xl:bg-BG2/90 border border-solid border-White">
       {navItems.map((item, i) => (
         <Link
           key={i}
           href={item.href}
           replace={true}
           className={`relative w-10 h-10 flex items-center justify-center rounded-full transition-all duration-300 ease-in will-change-transform group ${
-            sectionId === item.sectionId ? "bg-White text-BG1" : "bg-BG2/90 text-White"
+            sectionId === item.sectionId ? "bg-White text-BG1" : "bg-BG2/30 2xl:bg-BG2/90 text-White"
           }`}
           onClick={() => handleNavLinkClick(item.sectionId)}
         >

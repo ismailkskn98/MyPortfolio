@@ -34,7 +34,6 @@ const Highlights: React.FC<HighlightsProps> = ({ public_repos, followers, follow
       </div>
       <div id="rightTools" className="w-44 flex items-center gap-4">
         <span className="number-m text-Brand1">
-          {" "}
           {
             <CountUp
               end={followers > 99 ? 99 : followers}
@@ -48,12 +47,11 @@ const Highlights: React.FC<HighlightsProps> = ({ public_repos, followers, follow
           {showPlusFollowers ? "+" : ""}
         </span>
         <div className="flex flex-col para-m">
-          <p>Github Takipçi</p>
+          <p className="whitespace-nowrap">Github Takipçi</p>
         </div>
       </div>
       <div id="rightExperience" className="w-44 flex items-center gap-4">
         <span className="number-m text-Brand1">
-          {" "}
           {
             <CountUp
               end={following > 99 ? 99 : following}
@@ -67,7 +65,7 @@ const Highlights: React.FC<HighlightsProps> = ({ public_repos, followers, follow
           {showPlusFollowing ? "+" : ""}
         </span>
         <div className="flex flex-col para-m">
-          <p>Github Takip</p>
+          <p className="whitespace-nowrap">Github Takip</p>
         </div>
       </div>
     </div>

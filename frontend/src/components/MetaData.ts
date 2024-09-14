@@ -13,6 +13,6 @@ export const metadata: Metadata = {
     url: "https://hismailkeskin.net",
   },
   icons: {
-    icon: [{ rel: "icon", url: "/favicon.ico", sizes: "64x64" }],
+    icon: [{ rel: "icon", url: "/favicon.ico", sizes: "128x128" }],
   },
 };
