@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SearchList from "./SearchList";
 import { IoSearchSharp } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,12 +11,19 @@ type Props = {
 
 const OpenSearch: React.FC<Props> = ({ openSearch, toggleSearch }) => {
   const [search, setSearch] = useState<string>("");
+  const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!openSearch) {
       setSearch("");
+      return;
     }
+    searchRef.current?.focus();
   }, [openSearch]);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
 
   return (
     <>
@@ -45,8 +52,9 @@ const OpenSearch: React.FC<Props> = ({ openSearch, toggleSearch }) => {
                 <input
                   type="search"
                   placeholder="Ara..."
+                  ref={searchRef}
                   value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={handleSearch}
                   className="w-full h-full border-none outline-none search-u text-BG1/70 tracking-wider"
                 />
               </div>
