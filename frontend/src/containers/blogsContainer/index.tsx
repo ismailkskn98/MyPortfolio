@@ -11,9 +11,9 @@ type Props = {
 
 const BlogsContainer: React.FC<Props> = ({ blogs }) => {
   return (
-    <section className="py-16 md:py-32 px-6 lg:px-8 xl:px-32 flex flex-col items-center gap-16">
+    <section className="fluid container-fluid flex flex-col items-center justify-items-center gap-16 py-16 md:py-32 ">
       <ModuleTitle title="Blogs" description="Teknoloji ve iş dünyası hakkındaki düşüncelerim, takip edebilirsin" isHome={false} />
-      <main className="max-w-[80rem] h-min flex flex-col items-center">
+      <main className="w-full h-min flex flex-col items-center">
         {blogs?.map((blog: BlogColumnType, i: number) => (
           <BlogColumn isHome={false} key={i}>
             <Content _id={blog._id} title={blog.title} subtitle={blog.subtitle} slug={blog.slug} createdAt={blog.createdAt} user={blog.user} categories={blog.categories} />

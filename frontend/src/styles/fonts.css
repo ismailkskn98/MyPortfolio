@@ -1,49 +1,154 @@
 @tailwind components;
 
 @layer components {
-  /* Ubuntu */
-  .bg-text-u, .h1-u, .h2-u, .button-u, .search-u, .search-list-h3-u, .search-list-p-u {
-    font-family: var(--font-ubuntu-reguler);
+  /* ======================= Ubuntu Font Family ======================= */
+
+  /* Genel Stil ve Ağırlıklar */
+  .bg-text-u,
+  .h1-u,
+  .h2-u,
+  .button-u,
+  .search-u,
+  .search-list-h3-u,
+  .search-list-p-u {
+    font-family: var(--font-ubuntu-sans);
     font-style: normal;
-    font-weight: 400;
+    font-weight: 400; /* Regular */
   }
-  .bg-text-u { font-size: 117px; line-height: 134px; }
-  .h1-u { font-size: 64px; line-height: 72px; }
-  .h2-u { font-size: 32px; line-height: 36px; }
-  .button-u { font-size: 20px; line-height: 24px; }
-  .search-u {font-size: 16px;}
-  .search-list-h3-u {font-size: 15px;}
-  .search-list-p-u {font-size: 13px;}
-  .article-u, .para-u, .Label-u-l { 
+
+  /* Font Boyutları ve Satır Yüksekliği */
+  .bg-text-u {
+    font-size: 117px;
+    line-height: 134px;
+  }
+  .h1-u {
+    font-size: 64px;
+    line-height: 72px;
+  }
+  .h2-u {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  .button-u {
+    font-size: 20px;
+    line-height: 24px;
+  }
+  .search-u {
+    font-size: 16px;
+  }
+  .search-list-h3-u {
+    font-size: 15px;
+  }
+  .search-list-p-u {
+    font-size: 13px;
+  }
+
+  /* Daha Hafif Ağırlıklar */
+  .article-u,
+  .para-u,
+  .Label-u-l {
     font-family: var(--font-ubuntu-light);
     font-style: normal;
-    font-weight: 300;
+    font-weight: 300; /* Light */
   }
-  .article-u { font-size: 16px; line-height: 32px; }
-  .para-u { font-size: 16px; line-height: 18px; }
-  .Label-u-m { 
-    font-family: var(--font-ubuntu-medium);
-    font-size: 14px; 
-    line-height: 16px;
-    font-weight: 500;
+  .article-u {
+    font-size: 16px;
+    line-height: 32px;
   }
-  .Label-u-l { font-size: 14px; line-height: 16px }
+  .para-u {
+    font-size: 16px;
+    line-height: 18px;
+  }
 
-  /* IBM Plex Mono */
-  .number-m, .h2-m, .logo-m { 
-    font-family: var(--font-plexMono-medium);
-    font-style: normal;
-    font-weight: 500;
+  /* Orta Ağırlık ve Etiketler */
+  .Label-u-m {
+    font-family: var(--font-ubuntu-medium);
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 500; /* Medium */
   }
-  .menu-m, .media-m, .para-m, .code-m, .nav-m {
-    font-family: var(--font-plexMono-reguler);
-    font-style: normal;
-    font-weight: 400;
+
+  /* ======================= IBM Plex Mono Font Family ======================= */
+
+  /* Orta Ağırlık ve Başlıklar */
+  .number-m,
+  .h2-m,
+  .logo-m {
+    font-family: var(--font-plex-mono);
+    font-weight: 500; /* Medium */
   }
-  .number-m { font-size: 48px; line-height: 62px; }
-  .h2-m, .logo-m { font-size: 32px; line-height: 42px; }
-  .menu-m { font-size: 24px; line-height: 32px; }
-  .para-m, .media-m { font-size: 16px; line-height: 20px; }
-  .nav-m { font-size: 14px; line-height: 20px; }
-  .code-m { font-size: 14px; line-height: 18px; }
+  .number-m {
+    font-size: 48px;
+    line-height: 62px;
+  }
+  .h2-m,
+  .logo-m {
+    font-size: 32px;
+    line-height: 42px;
+  }
+
+  /* Menü, Paragraf, Kod ve Diğer İçerik */
+  .menu-m,
+  .media-m,
+  .para-m,
+  .code-m,
+  .nav-m {
+    font-family: var(--font-plex-mono);
+    font-weight: 400; /* Regular */
+  }
+  .menu-m {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .para-m,
+  .media-m {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .nav-m {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .code-m {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+/* Font Family Tanımlamaları */
+:root {
+  --font-ubuntu-sans: "Ubuntu", sans-serif;
+  --font-plex-mono: "IBM Plex Mono", monospace;
+}
+
+/* Ubuntu Font Ağırlıkları */
+.font-ubuntu-regular {
+  font-family: var(--font-ubuntu-sans);
+  font-weight: 400; /* Regular */
+}
+
+.font-ubuntu-medium {
+  font-family: var(--font-ubuntu-sans);
+  font-weight: 500; /* Medium */
+}
+
+.font-ubuntu-bold {
+  font-family: var(--font-ubuntu-sans);
+  font-weight: 700; /* Bold */
+}
+
+.font-ubuntu-light {
+  font-family: var(--font-ubuntu-sans);
+  font-weight: 300; /* Light */
+}
+
+/* IBM Plex Mono Ağırlıkları */
+.font-plex-mono-regular {
+  font-family: var(--font-plex-mono);
+  font-weight: 400; /* Regular */
+}
+
+.font-plex-mono-medium {
+  font-family: var(--font-plex-mono);
+  font-weight: 500; /* Medium */
 }

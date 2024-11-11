@@ -10,11 +10,13 @@ const BASE_URL_API = process.env.NEXT_PUBLIC_BASE_URL_API;
 
 type InitialValues = {
   name: string;
+  link: string;
   image: File | null;
 };
 
 const initialValues: InitialValues = {
   name: "",
+  link: "",
   image: null,
 };
 
@@ -24,13 +26,11 @@ const SkillAdd = () => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleSubmit = async (
-    values: InitialValues,
-    { resetForm }: FormikHelpers<InitialValues>
-  ) => {
+  const handleSubmit = async (values: InitialValues, { resetForm }: FormikHelpers<InitialValues>) => {
     const formData = new FormData();
     if (values.image) {
       formData.append("name", values.name);
+      formData.append("link", values.link);
       formData.append("image", values.image);
     }
     try {
@@ -72,11 +72,7 @@ const SkillAdd = () => {
     <>
       <main className="w-full px-6 flex flex-col items-center gap-5 shadow-md py-8">
         <h1 className="w-full flex items-center justify-center text-4xl">Yetenek Ekle</h1>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={SkillSchema}
-          onSubmit={handleSubmit}
-        >
+        <Formik initialValues={initialValues} validationSchema={SkillSchema} onSubmit={handleSubmit}>
           {({ setFieldValue, errors }) => (
             <Form method="POST" encType="multipart/form-data" className="flex flex-col gap-5">
               <InfoMessage errorMessage={errorMessage} successMessage={successMessage} />
@@ -91,6 +87,18 @@ const SkillAdd = () => {
                   className="border border-solid rounded-sm px-3 py-2 focus:outline focus:outline-1 border-gray-400 focus:outline-gray-500"
                 />
                 <ErrorMessage name="name" component="div" className="text-red-500" />
+              </div>
+              <div className="flex flex-col items-start gap-2">
+                <label htmlFor="link" className="font-semibold">
+                  Link
+                </label>
+                <Field
+                  type="text"
+                  id="link"
+                  name="link"
+                  className="border border-solid rounded-sm px-3 py-2 focus:outline focus:outline-1 border-gray-400 focus:outline-gray-500"
+                />
+                <ErrorMessage name="link" component="div" className="text-red-500" />
               </div>
               <div className="flex flex-col items-start gap-2">
                 <label htmlFor="image" className="font-semibold">

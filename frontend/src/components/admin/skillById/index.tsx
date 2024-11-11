@@ -15,6 +15,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 type InitialValues = {
   name: string;
+  link: string;
   image: File | null;
   currentImage: string;
 };
@@ -27,6 +28,7 @@ const SkillById = ({ data }: { data: SkillType }) => {
 
   const initialValues: InitialValues = {
     name: data.name,
+    link: data.link,
     image: null,
     currentImage: data.image,
   };
@@ -42,6 +44,7 @@ const SkillById = ({ data }: { data: SkillType }) => {
   const handleSubmit = async (values: InitialValues) => {
     const formData = new FormData();
     formData.append("name", values.name);
+    formData.append("link", values.link);
     formData.append("currentImage", values.currentImage);
     if (fileControl && values.image) {
       formData.append("image", values.image);
@@ -91,6 +94,18 @@ const SkillById = ({ data }: { data: SkillType }) => {
                   className="border border-solid rounded-sm px-3 py-2 focus:outline focus:outline-1 border-gray-400 focus:outline-gray-500"
                 />
                 <ErrorMessage name="name" component="div" className="text-red-500" />
+              </div>
+              <div className="flex flex-col items-start gap-2">
+                <label htmlFor="link" className="font-semibold">
+                  Link
+                </label>
+                <Field
+                  type="text"
+                  id="link"
+                  name="link"
+                  className="border border-solid rounded-sm px-3 py-2 focus:outline focus:outline-1 border-gray-400 focus:outline-gray-500"
+                />
+                <ErrorMessage name="link" component="div" className="text-red-500" />
               </div>
               <div className="flex flex-col items-start gap-2">
                 <div className="relative w-44 h-44 bg-BG2 rounded p-3">

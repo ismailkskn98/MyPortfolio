@@ -11,7 +11,7 @@ const Content: React.FC<BlogColumnType> = ({ title, subtitle, slug, createdAt, c
   return (
     <div className="flex items-center px-6 sm:px-[14px] gap-8 md:gap-16 flex-col md:flex-row">
       <Link href={`blogs/${slug}`}>
-        <Image src={image} alt="blog image" className="max-w-60 max-h-60" />
+        <Image src={image} alt="blog image" className="max-w-60 max-h-60" width={240} height={240} />
       </Link>
       <div id="content" className="flex flex-col gap-6">
         <Link href={`blogs/${slug}`}>

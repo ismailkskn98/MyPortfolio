@@ -13,6 +13,20 @@ html {
   overflow: hidden;
 }
 
+.container-fluid {
+  display: grid;
+  grid-template-columns: 1fr min(1600px, 90%) 1fr;
+  grid-template-rows: auto auto auto;
+}
+
+.container-fluid > * {
+  grid-column: 2;
+}
+
+.container-fluid > .fluid {
+  grid-column: 1 / -1;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

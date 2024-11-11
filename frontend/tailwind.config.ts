@@ -55,7 +55,11 @@ const config: Config = {
         "3xl": "1664px",
       },
     },
+    fontFamily: {
+      "ubuntu-sans": ["var(--font-ubuntu-sans)"],
+      "plex-mono-sans": ["var(--font-plex-mono)"],
+    },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
 export default config;

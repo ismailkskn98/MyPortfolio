@@ -39,7 +39,7 @@ const WorksSlider: React.FC<Props> = ({ sliderItems, currentIndex }) => {
               <Image
                 src={`${BASE_URL}/${item.horizontalImage}`}
                 alt="image"
-                className={`w-full h-full object-cover absolute top-0 left-0 transition-opacity ${i === currentIndex ? "opacity-100" : "opacity-0"}`}
+                className={`w-full h-full object-cover absolute -top-[1px] left-0 transition-opacity ${i === currentIndex ? "opacity-100" : "opacity-0"}`}
                 width={400}
                 height={400}
                 quality={100}
@@ -47,7 +47,7 @@ const WorksSlider: React.FC<Props> = ({ sliderItems, currentIndex }) => {
             </div>
           </div>
         ))}
-        <Image src={dualScreen} alt="yapılan işler" className="w-[263px] h-[198px] md:w-[480px] md:h-[320px] lg:w-[650px] lg:h-[432px]" />
+        <Image src={dualScreen} alt="yapılan işler" className="w-[263px] h-[198px] md:w-[480px] md:h-[320px] lg:w-[650px] lg:h-[432px]" width={650} height={432} />
       </div>
     </div>
   );

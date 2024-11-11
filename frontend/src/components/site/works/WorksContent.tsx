@@ -20,11 +20,11 @@ const WorksContent = ({ works }: { works: WorkType[] }) => {
   return (
     <div id="islerContent" className="flex items-center gap-0 lg:gap-16">
       <div id="islerContentButtonLeft" className={styles.sliderBtnLeft} onClick={handleClickLeft}>
-        <IoIosArrowBack className="w-3 h-3 md:w-10 md:h-10" />
+        <IoIosArrowBack className="w-3 h-3 md:w-9 md:h-9" />
       </div>
       <WorksSlider sliderItems={works} currentIndex={currentIndex} />
       <div id="islerContentButtonRight" className={styles.sliderBtnRight} onClick={handleClickRight}>
-        <IoIosArrowForward className="w-3 h-3 md:w-10 md:h-10" />
+        <IoIosArrowForward className="w-3 h-3 md:w-9 md:h-9" />
       </div>
     </div>
   );

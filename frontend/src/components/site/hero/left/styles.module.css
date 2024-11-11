@@ -1,0 +1,25 @@
+.left {
+  min-width: 320px;
+  height: 520px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  border: 4px solid white;
+  border-radius: 160px 0 160px 0;
+  box-shadow: -5px -5px 5px 0px #12f7d6;
+  transition: box-shadow 0.3s ease-in-out;
+  animation: smooth-shadow 3s ease-in-out infinite;
+}
+
+/* Yalnızca gölge için animasyon */
+@keyframes smooth-shadow {
+  0%,
+  100% {
+    box-shadow: -5px -5px 5px 0px #12f7d6;
+  }
+  50% {
+    box-shadow: -5px -5px 15px 0px rgba(18, 247, 214, 0.4);
+  }
+}

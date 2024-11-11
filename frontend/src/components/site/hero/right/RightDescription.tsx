@@ -10,9 +10,9 @@ const RightDescription = () => {
         Harika web deneyimleri oluşturarak işletmelerin büyümesine yardımcı oluyorum. Eğer iş bitirmeyi seven bir geliştirici arıyorsanız,
       </p>
       <p className="code-m text-Brand2">{"</p>"}</p>
-      <Link href="#iletisim" className="flex items-center gap-4 md:pl-6">
+      <Link href="#iletisim" className="flex items-center gap-4">
         <span className="h2-m text-Brand1 whitespace-nowrap">Hadi Konuşalım</span>
-        <div className="bg-Grey p-2 rounded-full flex items-center justify-center text-Brand1 border-none outline-none cursor-pointer">
+        <div className="bg-Grey p-2 rounded-full flex items-center justify-center text-Brand1 border-none outline-none cursor-pointer animate-bounce">
           <IoMailOutline className="w-6 h-6" />
         </div>
       </Link>

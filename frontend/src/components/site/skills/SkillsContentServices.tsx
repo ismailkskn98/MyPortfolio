@@ -10,13 +10,13 @@ type ContentItem = {
 
 const contentItems: ContentItem[] = [
   {
-    title: "Front-End Developer",
+    title: "Front End Developer",
     text: "HTML·CSS·JS·REACT",
     icon: RiComputerLine,
   },
   {
     title: "Backend Developer",
-    text: "Express.js·MySQL·Sequelize",
+    text: "Node.js·Express.js·MongoDB",
     icon: IoCode,
   },
 ];

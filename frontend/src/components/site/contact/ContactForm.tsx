@@ -33,7 +33,7 @@ const ContactForm = () => {
     console.log("send message");
   };
   return (
-    <form className="w-full max-w-[1300px] flex flex-col items-center px-2 gap-16">
+    <form className="w-full flex flex-col items-center px-2 gap-16">
       <div className="w-full grid grid-cols-1 grid-rows-3 lg:grid-cols-2 lg:grid-rows-2 gap-16 lx:gap-x-32 lg:gap-y-16">
         {formItems.map((item, i) => (
           <div key={i} className="w-full flex flex-col gap-6">

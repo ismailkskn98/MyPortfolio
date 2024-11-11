@@ -2,10 +2,10 @@
 
 @layer components {
   .sliderBtnLeft {
-    @apply w-6 h-6 md:w-16 md:h-16 rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer;
+    @apply w-6 h-6 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer;
   }
   .sliderBtnRight {
-    @apply w-6 h-6 md:w-16 md:h-16 rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer;
+    @apply w-6 h-6 md:w-14 md:h-14 rounded-full flex items-center justify-center bg-BG1 text-White hover:bg-Grey transition-all cursor-pointer;
   }
   .sliderLink {
     @apply absolute top-5 -right-3 md:top-11 md:right-12 lg:top-16 lg:right-16 items-end gap-1 md:gap-2 text-Brand1 underline underline-offset-8 decoration-White hover:text-Brand2 transition-colors;

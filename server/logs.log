@@ -18,3 +18,5 @@
 {"level":"error","message":"slugify: string argument expected","timestamp":"09-07-2024 22:05:38"}
 {"level":"error","message":"Unexpected token ''', \"['66b879e47\"... is not valid JSON","timestamp":"09-07-2024 22:06:12"}
 {"level":"error","message":"Unexpected token ''', \"['66b879e47\"... is not valid JSON","timestamp":"09-07-2024 22:07:42"}
+{"level":"error","message":"Joi.schema is not a function","timestamp":"11-12-2024 01:49:36"}
+{"level":"error","message":"Joi.schema is not a function","timestamp":"11-12-2024 01:52:48"}

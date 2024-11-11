@@ -117,6 +117,7 @@ export type SkillType = {
   _id: string | number;
   name: string;
   image: string;
+  link: string;
   language: [];
   createdAt: string | Date;
   updatedAt: string | Date;

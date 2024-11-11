@@ -101,7 +101,7 @@ exports.put_about = async (req, res) => {
 
 // Skills
 exports.get_skills = async (req, res) => {
-  const skills = await Skill.find().select("name image");
+  const skills = await Skill.find().select("name image link");
 
   if (skills.length === 0) {
     return res.send({
@@ -131,10 +131,11 @@ exports.post_skills = async (req, res) => {
     name: Joi.string().min(3).max(10).required(),
   });
   const name = req.body.name;
+  const link = req.file.link;
   const image = req.file.filename;
   const editImage = "images/" + image;
 
-  const skill = await Skill.create({ name, image: editImage });
+  const skill = await Skill.create({ name, link, image: editImage });
   const newSkill = await skill.save();
 
   res.status(201).send({
@@ -147,6 +148,7 @@ exports.post_skills = async (req, res) => {
 exports.put_skillById = async (req, res) => {
   const { id } = req.params;
   const name = req.body.name;
+  const link = req.body.link;
   let image = req.body.currentImage;
 
   // yeni dosya geldiyse eskisini siliyoruz
@@ -174,6 +176,7 @@ exports.put_skillById = async (req, res) => {
   }
 
   skill.name = name ?? skill.name;
+  skill.link = link ?? skill.link;
   skill.image = image ?? skill.image;
   const updatedSkill = await skill.save();
   return res.send({ message: "İşlem başarılı", data: updatedSkill, error: false, success: true });
