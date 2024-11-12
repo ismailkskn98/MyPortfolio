@@ -33,6 +33,7 @@ const SkillAdd = () => {
       formData.append("link", values.link);
       formData.append("image", values.image);
     }
+    console.log(values);
     try {
       const response = await fetch(`${BASE_URL_API}/admin/skill-create`, {
         method: "POST",

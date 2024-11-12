@@ -14,6 +14,7 @@ const SkillsContentSkills = ({ skills }: { skills: SkillType[] }) => {
       {skills.map((item: SkillType, i) => (
         <Link
           href={item.link ? item.link : "#"}
+          target="_blank"
           key={i}
           className="flex flex-col items-center gap-6 cursor-pointer group transition-transform duration-300 ease-out hover:scale-105 hover:text-Brand1"
         >

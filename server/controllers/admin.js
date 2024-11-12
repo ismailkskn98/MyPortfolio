@@ -27,7 +27,6 @@ exports.get_blog_count = async (req, res) => {
 
 exports.get_hero = async (req, res) => {
   const hero = await Hero.find().select("name job email freelancer city website");
-  console.log("girdi");
   if (hero.length === 0) {
     return res.send({ message: "Hiç blog bulunamadı.", data: [], error: false, success: true });
   }
@@ -127,11 +126,8 @@ exports.get_skillById = async (req, res) => {
   return res.send({ message: "İşlem başarılı", data: skill, error: false, success: true });
 };
 exports.post_skills = async (req, res) => {
-  const schema = Joi.schema({
-    name: Joi.string().min(3).max(10).required(),
-  });
   const name = req.body.name;
-  const link = req.file.link;
+  const link = req.body.link;
   const image = req.file.filename;
   const editImage = "images/" + image;
 
@@ -390,14 +386,12 @@ exports.put_workById = async (req, res) => {
         });
       }
     } else if (req.files["verticalImage"]) {
-      console.log("girdi");
       // verticalImage update
       work.verticalImage = "images/" + req.files["verticalImage"][0].filename;
       console.log(work.verticalImage);
       console.log(oldImagePathVerticalImage);
       // eski resimleri silme
       if (fs.existsSync(oldImagePathVerticalImage)) {
-        console.log("burada girdi");
         fs.unlink(oldImagePathVerticalImage, (err) => {
           if (err) {
             logger.error(`Eski dosya silinemedi: ${err}`);
@@ -415,7 +409,6 @@ exports.put_workById = async (req, res) => {
 
       // eski resimleri silme
       if (fs.existsSync(oldImagePathHorizontalImage)) {
-        console.log("burada girdi");
         fs.unlink(oldImagePathHorizontalImage, (err) => {
           if (err) {
             logger.error(`Eski dosya silinemedi: ${err}`);

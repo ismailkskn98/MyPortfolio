@@ -10,7 +10,7 @@ const RightTitle = () => {
           Ben <span className="text-Brand1">İsmail</span>,
         </p>
         <div className="flex flex-col items-start md:items-end md:flex-row gap-4">
-          <p className="xl:w-full h2-u md:h1-u text-White whitespace-nowrap lg:whitespace-normal 2xl:whitespace-nowrap">Front-End Developer</p>
+          <p className="xl:w-full h2-u md:text-5xl 3xl:text-6xl text-White whitespace-nowrap lg:whitespace-normal 2xl:whitespace-nowrap">Front-End Developer</p>
           <p className="xl:w-full code-m text-Brand2 -ml-6 md:mr-0">{"</h1>"}</p>
         </div>
       </div>
